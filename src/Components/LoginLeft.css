@@ -1,0 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap");
+
+.login-image {
+  background-image: url(../assets/background-image.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 110vh;
+}
+
+.heading-text {
+  font-family: "Open Sans", sans-serif;
+}
+
+.login-left-heading {
+  font-weight: 500;
+  letter-spacing: 2px;
+  font-size: 28px;
+}
+
+.medium-button {
+  padding: 8px;
+  font-size: 16px;
+}
+
+@media screen and (min-width: 1300px) {
+  .login-image {
+    height: 100vh;
+  }
+
+  .medium-button {
+    padding: 8px;
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .login-image {
+    display: none;
+  }
+
+  .login-page,
+  .signup-page {
+    justify-content: center;
+  }
+}

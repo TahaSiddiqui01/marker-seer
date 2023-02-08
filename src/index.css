@@ -1,13 +1,50 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn-primary {
+    @apply py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
+  }
+
+  .custom-input {
+    @apply my-4 rounded-[26px]  focus-visible:border-transparent shadow-md focus:border-none px-16 p-4 w-[435px] max-[640px]:w-11/12 max-[370px]:w-[260px];
+  }
+
+  .custom-input-signup {
+    @apply my-4 rounded-[26px] focus-visible:border-transparent shadow-md focus:border-none px-16 p-4 w-[435px] max-[640px]:w-11/12 max-[370px]:w-[260px];
+  }
+
+  .input-logo {
+    @apply relative top-[-59px] left-4;
+  }
+
+  .input-logo-right {
+    @apply relative top-[-86px] right-[-387px] max-[640px]:right-[-235px] max-[370px]:right-[-217px];
+  }
+
+  .btn-login {
+    @apply w-[435px] font-bold  text-white rounded-[26px] text-[20px] bg-[#1994a1] h-[59px] mt-36 mb-1 max-[640px]:w-11/12;
+  }
+
+  .btn-signup {
+    @apply w-[435px] font-bold text-white rounded-[26px] text-[20px] bg-[#1994a1] h-[59px] max-[640px]:w-11/12 mb-1;
+  }
 }
