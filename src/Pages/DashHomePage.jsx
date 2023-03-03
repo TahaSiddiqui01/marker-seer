@@ -6,7 +6,7 @@ import "./Pages.css";
 function DashHomePage() {
   return (
     <>
-      <div className="DashboardHomePage">
+      <div style={{ height: "100%" }} className="DashboardHomePage">
         <DashboardRight />
         <DashboardHome />
       </div>

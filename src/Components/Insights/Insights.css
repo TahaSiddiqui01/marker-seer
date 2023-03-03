@@ -1,0 +1,41 @@
+.signal-circle {
+  height: 15px;
+  width: 15px;
+  background-color: #ef4782;
+  display: block;
+  border-radius: 8rem;
+}
+
+.signal-text {
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.signal-highlight {
+  font-weight: 400;
+  font-size: 22px;
+}
+
+.insight-child {
+  border: 2px dotted #e5e6e8;
+  border-radius: 16px;
+  padding: 8px;
+}
+
+.insight-child-arrow {
+  border: 2px dotted #e5e6e8;
+  border-radius: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+}
+
+.insight-arrow-div {
+  height: 100%;
+  width: 58px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}

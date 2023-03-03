@@ -14,33 +14,35 @@ function DashboardRight() {
   return (
     <>
       <div className="dashboardLeft">
-        <img src={Logo} alt="" />
+        <div className="d-flex justify-items-center justify-content-center">
+          <img className="web-logo" src={Logo} alt="" />
+        </div>
         <div className="navigation-text"> NAVIGATIONS</div>
-        <div>
+        <div className="navigation-table-left">
           {" "}
-          <img src={Dashboard} alt="logo" /> Dashboard
+          <img src={Dashboard} alt="logo" /> <span>Dashboard</span> 
         </div>
-        <div>
+        <div className="navigation-table-left">
           {" "}
-          <img src={TopGainer} alt="logo" /> Top Gainers
+          <img src={TopGainer} alt="logo" /> <span>Top Gainers</span> 
         </div>
-        <div>
+        <div className="navigation-table-left">
           {" "}
-          <img src={TopLoser} alt="logo" /> Top Losers
+          <img src={TopLoser} alt="logo" /> <span>Top Losers</span> 
         </div>
-        <div>
+        <div className="navigation-table-left">
           {" "}
-          <img src={TopBuys} alt="logo" /> Top Buys
+          <img src={TopBuys} alt="logo" /> <span>Top Buys</span> 
         </div>
-        <div>
+        <div className="navigation-table-left">
           {" "}
-          <img src={TopSells} alt="logo" /> Top Sells
+          <img src={TopSells} alt="logo" /> <span>Top Sells</span> 
         </div>
-        <div>
+        <div className="navigation-table-left">
           {" "}
           <img src={Setting} alt="logo" /> Settings
         </div>
-        <div>
+        <div className="navigation-table-left">
           {" "}
           <img src={LogOut} alt="logo" /> Log out
         </div>

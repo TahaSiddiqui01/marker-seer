@@ -1,0 +1,26 @@
+.dash-favourites,
+.dash-staff-favourites {
+  /* min-height: 50%; */
+  height: fit-content;
+  /* border: 1px solid #e5e6e8; */
+  padding: 12px;
+  margin: 15px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.sub-heading {
+  font-weight: 500;
+  font-size: 20px;
+  color: #324558;
+}
+
+.showDataRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 22px;
+}
+
+.insightDataShow {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
