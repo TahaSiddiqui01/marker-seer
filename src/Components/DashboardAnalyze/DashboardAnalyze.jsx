@@ -4,13 +4,17 @@ import Star from "../../assets/star.png";
 import Insights from "../Insights/Insights";
 import "./DashboardAnalyze.css";
 import Arrow from "../../assets/arrow.png";
+import ChartCompo from "../ChartCompo/ChartCompo";
 
 function DashboardAnalyze() {
   return (
     <>
-      <div style={{ height: "100vh" }} className="DashboardHomeRight">
+      <div
+        style={{ minHeight: "100vh" }}
+        className="DashboardHomeRight res_margin"
+      >
         <NavbarTop />
-        <div className="d-flex justify-content-start align-items-center">
+        <div className="d-flex justify-content-start align-items-center flex-wrap">
           <p
             className="dashboard-title interFamily py-0"
             style={{
@@ -22,18 +26,20 @@ function DashboardAnalyze() {
             Analyze
           </p>
           <span className="gain-btn">APPL</span>
-          <span
-            style={{ color: "rgba(50, 69, 88, 0.7);" }}
-            className="interFamily mx-3"
-          >
-            Apple Inc - Nasdaq
-          </span>
-          <img src={Star} alt="star" />
+          <div className="d-flex justify-content-center align-items-center res_coinName">
+            <span
+              style={{ color: "rgba(50, 69, 88, 0.7);" }}
+              className="interFamily mx-3"
+            >
+              Apple Inc - Nasdaq
+            </span>
+            <img src={Star} alt="star" />
+          </div>
         </div>
 
         <div className="insights-parent">
           <p className="sub-heading">Insights</p>
-          <div className="showDataRow insightDataShow mt-4">
+          <div className="card_grid insightDataShow mt-4">
             <Insights
               signalColor={"#EF4782"}
               signal={"Sell"}
@@ -98,12 +104,17 @@ function DashboardAnalyze() {
                   SELL
                 </p>
               </div>
-              <div className="insight-arrow-div" style={{ backgroundColor: "#1994A1" }}>
+              <div
+                className="insight-arrow-div"
+                style={{ backgroundColor: "#1994A1" }}
+              >
                 <img src={Arrow} alt="" />
               </div>
             </div>
           </div>
         </div>
+
+        <div>{/* <ChartCompo /> */}</div>
       </div>
     </>
   );

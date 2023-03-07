@@ -1,6 +1,9 @@
 .data-card {
   border: 1px solid #e5e6e8;
   border-radius: 8px;
+  width: 100%;
+  max-width: 363px !important;
+  
 }
 
 .data-coin {
@@ -24,6 +27,12 @@
   font-weight: 500;
   font-size: 26px;
 }
+.card_grid {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: start;
+}
 
 .sell-btn {
   color: #e21c57;
@@ -41,4 +50,43 @@
   border-radius: 8px;
   cursor: pointer;
   font-weight: 500;
+}
+@media  (max-width:500px){
+
+}
+@media screen and (max-width: 375px) {
+  .amount-percent {
+    font-size: 12px;
+  }
+
+  .amount-percent img {
+    width: 12px;
+  }
+
+  .sell-btn {
+    font-size: 10px;
+    padding: 2px 10px;
+  }
+
+  .data-coin {
+    font-size: 15px;
+  }
+
+  .data-coin-date {
+    font-size: 10px;
+  }
+  .data-card{
+    max-width: 240px;
+  }
+
+  
+}
+
+
+@media (max-width:340px) {
+  .data-card-bottom {
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    justify-content: center !important;
+  }
 }

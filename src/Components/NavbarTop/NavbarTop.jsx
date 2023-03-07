@@ -5,7 +5,8 @@ import User from "../../assets/user-4 1.png";
 function NavbarTop() {
   return (
     <>
-      <div className="robotoFamily dashboardHomeTop d-flex justify-content-between align-items-center">
+    {/* res_margin_nav */}
+      <div className="robotoFamily dashboardHomeTop d-flex justify-content-between align-items-center ">
         <div
           className="d-flex justify-content-center align-items-center"
           style={{ width: "50%", position: "relative" }}
@@ -17,7 +18,10 @@ function NavbarTop() {
           />
           <img className="search-icon" src={SearchIcon} alt="" />
         </div>
-        <div className="d-flex justify-content-between align-items-center">
+        <div
+          style={{ marginRight: "29px", marginLeft:"25px" }}
+          className="d-flex justify-content-between align-items-center"
+        >
           <button
             className="trail-text"
             style={{ backgroundColor: "#FFB80066", color: "#324558" }}

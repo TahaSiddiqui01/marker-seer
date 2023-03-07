@@ -1,6 +1,7 @@
 .DashboardHomeRight {
   width: 100%;
   background-color: #f5f5f5;
+  min-height: 100vh !important;
 }
 .dashboardHomeTopInput {
   padding: 4px;
@@ -8,6 +9,7 @@
   border-radius: 2px;
   border: 1px solid #e5e6e8;
   width: 100%;
+  min-width: 150px;
   /* position: relative; */
 }
 
@@ -68,22 +70,124 @@
   border-color: none;
 }
 
-
-.dashboard-title{
+.dashboard-title {
   font-weight: 600;
   font-size: 23px;
   margin: 30px 40px;
   color: #324558;
 }
 
-.dashboard-empty{
+.dashboard-empty {
   height: 545px;
   background-color: white;
   border-radius: 8px;
   margin: 32px 42px;
 }
 
-.empty-text{
+.empty-text {
   font-size: 20px;
   font-weight: 400px;
+}
+
+.hamburger {
+  font-size: 28px;
+  margin: 40px 6px 6px 6px;
+  font-weight: bold;
+  /* position: absolute; */
+  top: -10px;
+  left: 2px;
+  border-radius: 8rem;
+  cursor: pointer;
+  /* border: 1px solid black; */
+  padding: 3px;
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  display: none;
+}
+
+.hide {
+  width: 70px !important;
+}
+
+.seek {
+  display: block;
+}
+
+@media screen and (max-width: 750px) {
+  .empty-text {
+    font-size: 18px;
+  }
+
+  .empty-image {
+    width: 200px;
+  }
+
+  .dashboard-empty {
+    height: 400px;
+  }
+}
+
+@media screen and (max-width: 770px) {
+  /* .seek {
+    display: none;
+  } */
+  /* 
+  .navigation-table-left span,
+  .navigation-text,
+  .web-logo {
+    display: none;
+  } */
+
+  .hamburger {
+    display: block;
+
+    margin: 40px 6px 6px 19px;
+  }
+}
+
+@media screen and (max-width: 552px) {
+  .res_margin_nav {
+    margin-left: 10px;
+  }
+
+  .dashboardHomeTop {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .useImage {
+    width: 30px;
+  }
+  .dropdown-toggle {
+    font-size: 12px !important;
+  }
+  .trail-text {
+    font-size: 12px;
+  }
+  /* .dashboard-empty{
+    
+  } */
+  .empty-image {
+    width: 105px;
+    margin: 8px;
+  }
+
+  .empty-text {
+    font-size: 14px;
+  }
+
+  .dashboard-empty {
+    height: fit-content;
+    padding: 14px;
+    max-width: 200px;
+    margin: 12px 34px;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .empty-text {
+    font-size: 10px;
+  }
 }

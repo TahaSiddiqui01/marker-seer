@@ -8,15 +8,15 @@ import TaskScroll from "../../assets/Tasks scroll through.png";
 function DashboardHome() {
   return (
     <>
-      <div style={{ height: "100vh" }} className="DashboardHomeRight">
+      <div style={{ minHeight: "100vh" }} className="DashboardHomeRight res_margin">
         <NavbarTop />
 
         <p className="dashboard-title interFamily">Dashboard</p>
 
         <div className="dashboard-empty d-flex justify-content-center align-items-center flex-column">
-          <img src={TaskScroll} alt="task scroll" />
+          <img className="empty-image" src={TaskScroll} alt="task scroll" />
 
-          <p className="robotoFamily empty-text">
+          <p className="robotoFamily empty-text mx-4">
             Your favorite assets will appear here. To being search for a ticker
             on top.
           </p>

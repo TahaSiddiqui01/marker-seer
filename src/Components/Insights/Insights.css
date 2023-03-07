@@ -20,6 +20,7 @@
   border: 2px dotted #e5e6e8;
   border-radius: 16px;
   padding: 8px;
+  width: 295px;
 }
 
 .insight-child-arrow {
@@ -38,4 +39,17 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+}
+
+
+.insight-child-arrow {
+  width: 295px;
+}
+
+@media screen and (max-width: 550px) {
+
+  .res_coinName{
+    margin-left: 26px !important;
+  }
+  
 }

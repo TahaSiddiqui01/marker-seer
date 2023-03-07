@@ -7,7 +7,7 @@ import DataCard from "../DataCard/DataCard";
 function DashboardRightData() {
   return (
     <>
-      <div style={{ height: "100vh" }} className="DashboardHomeRight">
+      <div className="DashboardHomeRight res_margin">
         <NavbarTop />
 
         <p className="dashboard-title interFamily">Dashboard</p>
@@ -18,7 +18,7 @@ function DashboardRightData() {
         >
           <div className="dash-favourites">
             <p className="sub-heading robotoFamily my-3">Favorites</p>
-            <div className="showDataRow">
+            <div className="card_grid">
               <DataCard />
               <DataCard />
               <DataCard />
@@ -31,7 +31,7 @@ function DashboardRightData() {
           </div>
           <div className="dash-staff-favourites">
             <p className="sub-heading robotoFamily my-3">Staff Favorites</p>
-            <div className="showDataRow">
+            <div className="card_grid">
               <DataCard />
               <DataCard />
               <DataCard />

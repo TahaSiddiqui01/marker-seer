@@ -1,0 +1,39 @@
+.influncer-table {
+  width: 100%;
+  /* margin: 26px; */
+  min-width: 215px;
+}
+
+.table-head {
+  background-color: #f7f9fc;
+  height: 63px;
+  color: #324558;
+
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.table-heading {
+  padding: 0px 30px;
+}
+
+.table-data {
+  padding: 0px 30px;
+
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.table-body {
+  height: 80px;
+}
+
+.tbrow {
+  border-bottom: 1px solid #f1f5ff;
+  height: 65px;
+}
+
+.res-div {
+  min-width: 215px;
+  overflow: auto;
+}

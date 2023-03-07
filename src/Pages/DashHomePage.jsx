@@ -6,7 +6,10 @@ import "./Pages.css";
 function DashHomePage() {
   return (
     <>
-      <div style={{ height: "100%" }} className="DashboardHomePage">
+      <div
+        style={{ minHeight: "100%", maxHeight: "fit-content" }}
+        className="DashboardHomePage"
+      >
         <DashboardRight />
         <DashboardHome />
       </div>

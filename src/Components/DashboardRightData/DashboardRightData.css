@@ -24,3 +24,24 @@
 .insightDataShow {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
+
+@media screen and (max-width: 1590px) {
+  .showDataRow {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .dash-favourites {
+    margin: 0px;
+    padding: 0px;
+  }
+
+  .amount {
+    font-size: 18px !important;
+  }
+
+  .amount:nth-child(2){
+    font-size: 12pxj;
+  }
+}
