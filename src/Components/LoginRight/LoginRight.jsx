@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Gmail from "../../assets/Gmail logo.png";
 import Lock from "../../assets/Lock.png";
 import Invisible from "../../assets/Invisible.png";
@@ -15,6 +15,8 @@ function LoginRight() {
   const { Login } = useContext(MarketerContext);
   const [error, setError] = useState("");
 
+  const Navigate = useNavigate();
+
   const [inputData, setInputData] = useState({
     username: "",
     password: "",
@@ -29,6 +31,8 @@ function LoginRight() {
     //username, password, mobile, email, referral
     Login(inputData?.username, inputData?.password).then((data) => {
       if (data?.success) {
+        Navigate("/");
+
         swal({
           title: "Successfully login",
           icon: "success",

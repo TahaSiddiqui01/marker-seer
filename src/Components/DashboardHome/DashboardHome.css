@@ -146,6 +146,16 @@
   }
 }
 
+@media screen and (max-width: 575px) {
+  .dashboardHomeTopInput {
+    font-size: 10px;
+  }
+
+  .search-icon {
+    width: 10px;
+  }
+}
+
 @media screen and (max-width: 552px) {
   .res_margin_nav {
     margin-left: 10px;
@@ -154,6 +164,14 @@
   .dashboardHomeTop {
     flex-direction: column;
   }
+}
+
+@media screen and (max-width: 475px) {
+
+  .nav_top_in_div{
+    min-width: fit-content;
+  }
+  
 }
 
 @media screen and (max-width: 350px) {

@@ -7,6 +7,9 @@ import "./InfluncerRightCompo.css";
 import InfluncerTable from "../InfluncerTable/InfluncerTable";
 
 function InfluncerRightCompo() {
+
+  
+
   return (
     <>
       <div

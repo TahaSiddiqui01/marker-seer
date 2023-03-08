@@ -1,8 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./InfluncerTable.css";
+import MarketerContext from "../../Context/MarketerContext";
 
 function InfluncerTable() {
   const [repeatTable, setRepeatTable] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+
+  const { getInfluncer } = useContext(MarketerContext);
+
+  useEffect(() => {
+    getInfluncer().then((data) => {
+      console.log("Influncer Data: ", data?.data);
+    });
+  }, []);
 
   return (
     <>

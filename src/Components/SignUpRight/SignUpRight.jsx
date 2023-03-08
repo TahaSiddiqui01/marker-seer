@@ -4,7 +4,7 @@ import Lock from "../../assets/Lock.png";
 import Referral from "../../assets/Group.png";
 import Male from "../../assets/Male User.png";
 import Invisible from "../../assets/Invisible.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import MarketerContext from "../../Context/MarketerContext";
 import swal from "sweetalert";
@@ -12,6 +12,7 @@ import "./SignUpRight.css";
 
 function SignUpRight() {
   const { SignUp } = useContext(MarketerContext);
+  const Navigate = useNavigate();
 
   const [error, setError] = useState("");
 
@@ -32,37 +33,37 @@ function SignUpRight() {
       inputData?.mobile === "" ||
       inputData?.email === "" ||
       inputData?.referral === ""
-    ){
-      
+    ) {
       setError("Input fields can't be empty");
-      return
+      return;
     }
-      SignUp(
-        inputData?.username,
-        inputData?.password,
-        inputData?.mobile,
-        inputData?.email,
-        inputData?.referral
-      ).then((data) => {
-        if (data?.result?.description || !data?.success) {
-          console.log("It it wrong");
-          setError(data?.result?.description);
-        } else {
-          console.log("I am good");
-          swal({
-            title: "successfully signup",
-            icon: "success",
-          });
-          setError("");
-          setInputData({
-            username: "",
-            email: "",
-            password: "",
-            mobile: "",
-            referral: "",
-          });
-        }
-      });
+    SignUp(
+      inputData?.username,
+      inputData?.password,
+      inputData?.mobile,
+      inputData?.email,
+      inputData?.referral
+    ).then((data) => {
+      if (data?.result?.description || !data?.success) {
+        console.log("It it wrong");
+        setError(data?.result?.description);
+      } else {
+        Navigate("/login");
+        console.log("data result: ", data?.result);
+        swal({
+          title: "successfully signup",
+          icon: "success",
+        });
+        setError("");
+        setInputData({
+          username: "",
+          email: "",
+          password: "",
+          mobile: "",
+          referral: "",
+        });
+      }
+    });
   };
 
   const handleOnChange = (e) => {
@@ -144,7 +145,10 @@ function SignUpRight() {
           </Link>
         </p>
 
-        <button onClick={handleSignup} className="btn-signup my-4 medium-button">
+        <button
+          onClick={handleSignup}
+          className="btn-signup my-4 medium-button"
+        >
           Create Account
         </button>
         <p className="text-[#9F9F9F]">

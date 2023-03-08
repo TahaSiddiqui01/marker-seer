@@ -15,18 +15,17 @@ function MarketerState(props) {
       });
 
       console.log("Login Data: ", response);
-      
-      
-      return {
-        success:true,
-        result: response?.data
-      }
 
-    } catch (error) {
-      
+      localStorage.setItem("token", response?.data?.access);
+
       return {
-        success:false
-      }
+        success: true,
+        result: response?.data,
+      };
+    } catch (error) {
+      return {
+        success: false,
+      };
     }
   };
 
@@ -42,6 +41,8 @@ function MarketerState(props) {
         referral,
       });
 
+      console.log("sign up data: ", response);
+
       if (response?.status === 200) {
         return {
           success: true,
@@ -55,9 +56,213 @@ function MarketerState(props) {
     }
   };
 
+  // Following function is used to get the user data:
+
+  const getUserData = async () => {
+    try {
+      let token = localStorage.getItem("token");
+
+      let response = await axios.get(`${BASE_URL}/seer/api/user`, {
+        headers: {
+          "Content-Type": "application",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Following function is used to get the user favourites:
+
+  const getFavourites = async () => {
+    try {
+      let token = localStorage.getItem("token");
+      let response = await axios.get(`${BASE_URL}/seer/api/favorites`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Following function is used to get the Search ticker:
+
+  const getFetchTicker = async (query) => {
+    try {
+      let token = localStorage.getItem("token");
+      let response = await axios.get(
+        `${BASE_URL}/seer/api/tickers?query=${query} `,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return response;
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  };
+
+  // Following function is used to get the analyze data:
+
+  const getAnalyze = async (ticker) => {
+    try {
+      let token = localStorage.getItem("token");
+      let response = await axios.get(
+        `${BASE_URL}/seer/api/tickerdetails?ticker=${"APPL"}&expand=true&days=30/`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Following function is used to add favourites:
+
+  const addToFavourites = async (ticker, exchange) => {
+    try {
+      let token = localStorage.getItem("token");
+
+      let response = await axios.post(
+        `${BASE_URL}/seer/api/favorites`,
+        {
+          ticker,
+          exchange,
+        },
+        {
+          headers: {
+            "Content-type": "application/json",
+            Autorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return response;
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  };
+
+  // Following function is used to delete the favourites:
+
+  const deleteFavourite = async (ticker, exchange) => {
+    try {
+      let token = localStorage.getItem("token");
+
+      let response = await axios.delete(
+        `${BASE_URL}/seer/api/favorites`,
+        {
+          ticker,
+          exchange,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Following function is used to get influncer:
+
+  const getInfluncer = async (ticker, page) => {
+    try {
+      let token = localStorage.getItem("token");
+
+      let response = await axios.get(
+        `${BASE_URL}/seer/api/influencers?ticker=${ticker}&page=${page}&limit=10`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Following function is used to export to CSV:
+
+  const exportToCSV = async (ticker) => {
+    try {
+      let response = await axios.get(
+        `${BASE_URL}/seer/api/influencers?ticker=${ticker}&type=csv`
+      );
+
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Following function is used to logout the user:
+
+  const logoutTheUser = async (refresh_token) => {
+    try {
+      let token = localStorage.getItem("token");
+
+      let response = await axios.post(
+        `${BASE_URL}/seer/api/logout`,
+        {
+          refresh_token,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
-      <MarketerContext.Provider value={{ SignUp, Login }}>
+      <MarketerContext.Provider
+        value={{
+          SignUp,
+          Login,
+          getUserData,
+          getFavourites,
+          getFetchTicker,
+          getAnalyze,
+          addToFavourites,
+          getInfluncer,
+          logoutTheUser,
+          exportToCSV,
+        }}
+      >
         {props.children}
       </MarketerContext.Provider>
     </>

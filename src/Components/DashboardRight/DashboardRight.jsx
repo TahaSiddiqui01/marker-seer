@@ -10,8 +10,11 @@ import TopSells from "../../assets/Cart.png";
 import Setting from "../../assets/Group 252.png";
 import LogOut from "../../assets/Group 259.png";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { useNavigate } from "react-router-dom";
 
 function DashboardRight() {
+  let Navigate = useNavigate();
+
   const handlesidebar = () => {
     console.log("click");
     let dashNav = document.getElementsByClassName("dashboardLeft")[0];
@@ -34,7 +37,13 @@ function DashboardRight() {
       <RxHamburgerMenu className="hamburger  " onClick={handlesidebar} />
       <div className="dashboardLeft seek">
         <div className="d-flex align-items-center justify-content-center">
-          <img className="web-logo side_text" src={Logo} alt="" cc />
+          <img
+            className="web-logo side_text"
+            onClick={Navigate("/")}
+            src={Logo}
+            alt=""
+            cc
+          />
         </div>
         <div className="navigation-text side_text"> NAVIGATIONS</div>
         <div className="navigation-table-left">

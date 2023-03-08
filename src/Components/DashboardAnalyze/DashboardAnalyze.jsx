@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import NavbarTop from "../NavbarTop/NavbarTop";
 import Star from "../../assets/star.png";
 import Insights from "../Insights/Insights";
 import "./DashboardAnalyze.css";
 import Arrow from "../../assets/arrow.png";
 import ChartCompo from "../ChartCompo/ChartCompo";
+import MarketerContext from "../../Context/MarketerContext";
 
 function DashboardAnalyze() {
+  const { getAnalyze } = useContext(MarketerContext);
+
+  useEffect(() => {
+    getAnalyze().then((data) => {
+      console.log("Analyze Data: ", data?.data);
+    });
+  }, []);
+
   return (
     <>
       <div

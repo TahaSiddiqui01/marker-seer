@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./DashboardRightData.css";
 import NavbarTop from "../NavbarTop/NavbarTop";
 import TaskScroll from "../../assets/Tasks scroll through.png";
 import DataCard from "../DataCard/DataCard";
+import MarketerContext from "../../Context/MarketerContext";
 
 function DashboardRightData() {
+  const { getFavourites } = useContext(MarketerContext);
+
+  const [favouriteData, setFavouriteData] = useState([]);
+
+  useEffect(() => {
+    getFavourites().then((data) => {
+      console.log("Favourite Data: ", data);
+      setFavouriteData(data?.data);
+    });
+  }, []);
+
   return (
     <>
       <div className="DashboardHomeRight res_margin">
@@ -19,6 +31,7 @@ function DashboardRightData() {
           <div className="dash-favourites">
             <p className="sub-heading robotoFamily my-3">Favorites</p>
             <div className="card_grid">
+              
               <DataCard />
               <DataCard />
               <DataCard />
