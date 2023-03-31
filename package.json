@@ -23,9 +23,10 @@
     "react-icons": "^4.8.0",
     "react-router-dom": "^6.8.0",
     "react-scripts": "5.0.1",
+    "react-search-autocomplete": "^8.3.2",
     "react-stockcharts": "^0.7.8",
     "react-stockcharts-lx": "^0.7.21",
-    "react-toastify": "^9.1.1",
+    "react-toastify": "^9.1.2",
     "shortid": "^2.2.8",
     "sweetalert": "^2.1.2",
     "web-vitals": "^2.1.4"

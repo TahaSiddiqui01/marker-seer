@@ -1,8 +1,14 @@
-.insights-parent{
-    width: auto;
-    margin: 42px;
-    background-color: white;    
-    border-radius: 8px;
-    padding: 18px;
-    height: fit-content;
+.insights-parent {
+  width: auto;
+  margin: 42px;
+  background-color: white;
+  border-radius: 8px;
+  padding: 18px;
+  height: fit-content;
+}
+
+.your_date {
+  color: rgba(50, 69, 88, 0.7);
+  font-weight: 400;
+  font-size: 15px;
 }

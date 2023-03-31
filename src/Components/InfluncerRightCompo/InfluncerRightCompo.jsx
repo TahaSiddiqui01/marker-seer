@@ -1,14 +1,26 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import NavbarTop from "../NavbarTop/NavbarTop";
 import Star from "../../assets/star.png";
 import Search from "../../assets/Search Icon.png";
 import Csv from "../../assets/Export Icon.png";
 import "./InfluncerRightCompo.css";
 import InfluncerTable from "../InfluncerTable/InfluncerTable";
+import MarketerContext from "../../Context/MarketerContext";
 
 function InfluncerRightCompo() {
+  const { getInfluncer } = useContext(MarketerContext);
+  const [influncerData, setInfluncerData] = useState([]);
 
-  
+  useEffect(() => {
+    getInfluncer("NVDA", 10)
+      .then((data) => {
+        console.log("Influncer data: ", data?.data);
+        setInfluncerData(data?.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <>
@@ -44,7 +56,11 @@ function InfluncerRightCompo() {
         <div style={{ paddingBottom: "2px" }} className="table-parent">
           <div className="table-search d-flex justify-content-between align-items-center flex-wrap">
             <div className="table-input">
-              <input className="table-input-tag" placeholder="Search...." type="text" />
+              <input
+                className="table-input-tag"
+                placeholder="Search...."
+                type="text"
+              />
               <img src={Search} alt="" />
             </div>
             <button

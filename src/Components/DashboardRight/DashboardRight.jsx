@@ -56,7 +56,7 @@ function DashboardRight() {
         <div className="navigation-table-left">
           {" "}
           <img className="dashLogo" src={TopGainer} alt="logo" />{" "}
-          <span className="side_text">Top Gainers</span>
+          <span onClick={()=>{Navigate("/top-gainer")}} className="side_text">Top Gainers</span>
         </div>
         <div className="navigation-table-left">
           {" "}

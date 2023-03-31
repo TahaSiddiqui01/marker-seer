@@ -9,7 +9,7 @@ function Insights(props) {
           style={{ backgroundColor: props?.signalColor }}
           className="signal-circle mx-2"
         ></span>
-        <span className="signal-text robotoFamily">Current Signal</span>
+        <span className="signal-text robotoFamily">{props?.heading}</span>
       </div>
       <p
         style={{ color: props?.signalTextColor, marginLeft: "1.90rem" }}

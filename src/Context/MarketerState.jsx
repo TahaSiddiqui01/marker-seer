@@ -116,11 +116,11 @@ function MarketerState(props) {
 
   // Following function is used to get the analyze data:
 
-  const getAnalyze = async (ticker) => {
+  const getAnalyze = async (ticker, day) => {
     try {
       let token = localStorage.getItem("token");
       let response = await axios.get(
-        `${BASE_URL}/seer/api/tickerdetails?ticker=${"APPL"}&expand=true&days=30/`,
+        `${BASE_URL}/seer/api/tickerdetails?ticker=${ticker}&expand=true&days=${day}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -138,25 +138,25 @@ function MarketerState(props) {
 
   const addToFavourites = async (ticker, exchange) => {
     try {
+      console.log("Ticker: ", ticker, "Exchange: ", exchange);
+
       let token = localStorage.getItem("token");
 
-      let response = await axios.post(
-        `${BASE_URL}/seer/api/favorites`,
-        {
-          ticker,
-          exchange,
-        },
-        {
-          headers: {
-            "Content-type": "application/json",
-            Autorization: `Bearer ${token}`,
-          },
+
+      const response = await axios.post(`${BASE_URL}/seer/api/favorites`, {
+        ticker, exchange
+      }, {
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization": `Bearer ${token}`
         }
-      );
+      });
 
       return response;
+
     } catch (error) {
       console.log("error: ", error);
+      return new Error("There is an error", error);
     }
   };
 

@@ -1,0 +1,133 @@
+.setting_heading {
+  color: #324558;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.setting-box-1,
+.setting-box-2 {
+  background: #ffffff;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+  padding: 0px;
+  /* margin: 20px 40px; */
+  width: 50%;
+  padding: 26px;
+  height: 415px;
+}
+
+.setting-parent {
+  margin: 2rem 2.5rem;
+}
+
+.profile-img {
+  /* border: 1px solid black; */
+  width: 90px;
+  border-radius: 8rem;
+  margin: 8px;
+}
+
+.profile_detail span:nth-child(1) {
+  color: #324558;
+  font-size: 16px;
+}
+
+.profile_detail span:nth-child(2) {
+  font-weight: bold;
+  color: #324558;
+  font-size: 16px;
+}
+
+.profile-label {
+  font-weight: 500;
+  color: #324558;
+  font-size: 16px;
+}
+
+.profile-input {
+  border: 1px solid #e5e6e8;
+  outline: none;
+  padding: 12px;
+  border-radius: 8px;
+  margin: 10px 0px;
+  width: 100%;
+}
+
+.input-parent {
+  width: 60%;
+  min-width: 250px;
+}
+
+.profile_btn {
+  border: 1px solid #1994a1;
+  background: none;
+  color: #1994a1;
+  font-size: 17px;
+  font-weight: 500;
+  padding: 12px;
+  border-radius: 8px;
+  margin: 28px 0px;
+}
+
+.trail-style {
+  background-color: rgba(255, 184, 0, 0.4);
+  color: rgb(50, 69, 88);
+  width: fit-content;
+  margin: 8px;
+}
+
+.subscription-detail {
+  margin: 56px 25px;
+  width: fit-content;
+}
+
+.subscription-date {
+  color: #324558;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.subscription-detail span:nth-child(2){
+  color: #324558;
+  font-weight: 400;
+  font-size: 16px;
+  margin: 8px;
+}
+
+@media screen and (max-width: 1020px) {
+  .setting-parent {
+    flex-direction: column;
+  }
+
+  .setting-box-1 {
+    min-width: 350px;
+  }
+
+  .setting-box-2 {
+    min-width: 350px;
+  }
+}
+
+@media screen and (max-width: 385px) {
+  .setting-box-1 {
+    min-width: 250px;
+  }
+
+  .setting-box-2 {
+    min-width: 250px;
+  }
+  .profile-input {
+    width: 100%;
+    min-width: 100%;
+  }
+  .input-parent {
+    width: 100%;
+    min-width: 100%;
+  }
+  .setting-box-1 {
+    height: 480px;
+  }
+  .setting-box-2 {
+    height: 480px;
+  }
+}

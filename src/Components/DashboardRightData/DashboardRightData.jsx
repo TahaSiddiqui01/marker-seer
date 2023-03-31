@@ -12,10 +12,12 @@ function DashboardRightData() {
 
   useEffect(() => {
     getFavourites().then((data) => {
-      console.log("Favourite Data: ", data);
+      console.log("Favourite Data: ", data?.data);
       setFavouriteData(data?.data);
     });
   }, []);
+
+  const elem = [1, 2, 3, 4, 5, 6, 7, 8];
 
   return (
     <>
@@ -31,28 +33,33 @@ function DashboardRightData() {
           <div className="dash-favourites">
             <p className="sub-heading robotoFamily my-3">Favorites</p>
             <div className="card_grid">
-              
-              <DataCard />
-              <DataCard />
-              <DataCard />
-              <DataCard />
-              <DataCard />
-              <DataCard />
-              <DataCard />
-              <DataCard />
+              {favouriteData?.map((elem) => {
+                return (
+                  <DataCard
+                    ticket={elem?.ticker?.ticker}
+                    date={`As of ${new Date(elem?.date)?.toLocaleDateString()}`}
+                    close={Math.round(elem?.close)}
+                    percent={Math.round(elem?.percent)}
+                    signal={elem?.signal}
+                  />
+                );
+              })}
             </div>
           </div>
           <div className="dash-staff-favourites">
             <p className="sub-heading robotoFamily my-3">Staff Favorites</p>
             <div className="card_grid">
-              <DataCard />
-              <DataCard />
-              <DataCard />
-              <DataCard />
-              <DataCard />
-              <DataCard />
-              <DataCard />
-              <DataCard />
+              {elem?.map((elem) => {
+                return (
+                  <DataCard
+                    ticket="APPL"
+                    date="As of 11/16/2021"
+                    close="240"
+                    percent="20"
+                    signal="BUY"
+                  />
+                );
+              })}
             </div>
           </div>
         </div>

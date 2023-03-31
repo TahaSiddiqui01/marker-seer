@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./DashboardHome.css";
 import SearchIcon from "../../assets/Vector.png";
 import User from "../../assets/user-4 1.png";
 import NavbarTop from "../NavbarTop/NavbarTop";
 import TaskScroll from "../../assets/Tasks scroll through.png";
+import { useContext } from "react";
+import MarketerContext from "../../Context/MarketerContext";
 
 function DashboardHome() {
+
+  
+
   return (
     <>
       <div style={{ minHeight: "100vh" }} className="DashboardHomeRight res_margin">

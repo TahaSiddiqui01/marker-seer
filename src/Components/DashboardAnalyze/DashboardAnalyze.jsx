@@ -6,18 +6,64 @@ import "./DashboardAnalyze.css";
 import Arrow from "../../assets/arrow.png";
 import ChartCompo from "../ChartCompo/ChartCompo";
 import MarketerContext from "../../Context/MarketerContext";
+import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useParams } from "react-router-dom";
 
 function DashboardAnalyze() {
-  const { getAnalyze } = useContext(MarketerContext);
+  const { getAnalyze, addToFavourites } = useContext(MarketerContext);
+  const [analyzeData, setAnalyzeData] = useState({});
+  const [yourDate, setYourDate] = useState("");
+
+  const { ticket } = useParams();
 
   useEffect(() => {
-    getAnalyze().then((data) => {
-      console.log("Analyze Data: ", data?.data);
+    getAnalyze(ticket, 30).then((data) => {
+      setAnalyzeData(data?.data);
+      let newDate = new Date(data?.data?.date);
+      let utcDate = newDate.toUTCString().split(" ");
+      let formatedDate = `As of ${utcDate[2]} ${utcDate[1]}, ${utcDate[3]}`;
+      setYourDate(formatedDate);
     });
   }, []);
 
+  const addToFavourite = (ticker, exchange) => {
+    addToFavourites(ticker, exchange)
+      .then((data) => {
+        console.log("Add to favourite response: ", data);
+        toast("Add to favourite successfully!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      })
+      .catch((err) => {
+        console.log("Err: ", err);
+      });
+  };
+
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      {/* Same as */}
+
       <div
         style={{ minHeight: "100vh" }}
         className="DashboardHomeRight res_margin"
@@ -34,64 +80,91 @@ function DashboardAnalyze() {
           >
             Analyze
           </p>
-          <span className="gain-btn">APPL</span>
+          <span className="gain-btn">{analyzeData?.ticker?.ticker}</span>
           <div className="d-flex justify-content-center align-items-center res_coinName">
             <span
               style={{ color: "rgba(50, 69, 88, 0.7);" }}
               className="interFamily mx-3"
             >
-              Apple Inc - Nasdaq
+              {analyzeData?.ticker?.name} - {analyzeData?.ticker?.exchange}
             </span>
-            <img src={Star} alt="star" />
+            <img
+              style={{ cursor: "pointer" }}
+              src={Star}
+              alt="star"
+              onClick={() => {
+                addToFavourite(
+                  analyzeData?.ticker?.ticker,
+                  analyzeData?.ticker?.exchange
+                );
+              }}
+            />
           </div>
         </div>
 
         <div className="insights-parent">
-          <p className="sub-heading">Insights</p>
+          <div className="d-flex justify-content-between align-items-center">
+            <p className="sub-heading">Insights</p>
+
+            <p className="your_date">{yourDate}</p>
+          </div>
           <div className="card_grid insightDataShow mt-4">
             <Insights
+              heading="Current signal"
               signalColor={"#EF4782"}
-              signal={"Sell"}
+              signal={analyzeData?.signal}
               signalTextColor={"#E21C57"}
             />
             <Insights
+              heading="Market Price"
               signalColor={"#F8F38D"}
-              signal={"$125"}
+              signal={"$" + Math.round(analyzeData?.close)}
               signalTextColor={"#E21C57"}
             />
             <Insights
+              heading="30 Day Strategy Performancce"
               signalColor={"#EAA658"}
-              signal={"24%"}
+              signal={
+                Math.round(analyzeData?.metadata?.strategy_performance) + "%"
+              }
               signalTextColor={"#E21C57"}
             />
             <Insights
+              heading="AI Confidence Index"
               signalColor={"#9D94FF"}
               signal={"90%"}
               signalTextColor={"#E21C57"}
             />
             <Insights
+              heading="No of Signals"
               signalColor={"#42D6A4"}
-              signal={"6"}
+              signal={analyzeData?.metadata?.no_of_trades}
               signalTextColor={"#E21C57"}
             />
             <Insights
+              heading="Next Predicted Signal"
               signalColor={"#08CAD1"}
               signal={"BUY"}
               signalTextColor={"#E21C57"}
             />
             <Insights
+              heading="Next Predicted Signal"
               signalColor={"#FF6961"}
-              signal={"$127 (+/- 2.5)"}
+              signal={analyzeData?.predicted_close}
               signalTextColor={"#E21C57"}
             />
             <Insights
+              heading="30 Day Market Performance"
               signalColor={"#FFB480"}
-              signal={"10%"}
+              signal={
+                Math.round(analyzeData?.metadata?.market_performance) + "%"
+              }
               signalTextColor={"#E21C57"}
             />
             <Insights
+              heading="Prediction Accuracy"
               signalColor={"#59ADF6"}
-              signal={"80%"}
+              signal={analyzeData?.indicators?.sdfsd || "NaN"}
               signalTextColor={"#E21C57"}
             />
 
@@ -102,15 +175,13 @@ function DashboardAnalyze() {
                     style={{ backgroundColor: "#59ADF6" }}
                     className="signal-circle mx-2"
                   ></span>
-                  <span className="signal-text robotoFamily">
-                    Current Signal
-                  </span>
+                  <span className="signal-text robotoFamily">Influncers</span>
                 </div>
                 <p
                   style={{ color: "#59ADF6", marginLeft: "1.90rem" }}
                   className="signal-highlight robotoFamily  my-2"
                 >
-                  SELL
+                  {analyzeData?.influencer_count}
                 </p>
               </div>
               <div

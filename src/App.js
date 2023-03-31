@@ -8,6 +8,7 @@ import DashboardData from "./Components/DashboardData/DashboardData";
 import DashAnalyze from "./Pages/DashAnalyze";
 import InfluncerPage from "./Pages/InfluncerPage";
 import TopGainer from "./Pages/TopGainer";
+import SettingPage from "./Pages/SettingPage";
 
 function App() {
   return (
@@ -19,9 +20,10 @@ function App() {
             <Route path="/login" element={<Login />}></Route>
             <Route path="/sign-up" element={<SignUp />}></Route>
             <Route path="/dash-placeholder" element={<DashHomePage />}></Route>
-            <Route path="/analyze" element={<DashAnalyze />}></Route>
+            <Route path="/analyze/:ticket" element={<DashAnalyze />}></Route>
             <Route path="/influncer" element={<InfluncerPage />}></Route>
             <Route path="/top-gainer" element={<TopGainer />}></Route>
+            <Route path="/setting" element={<SettingPage />}></Route>
           </Routes>
         </Router>
       </MarketerState>

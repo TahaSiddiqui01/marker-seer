@@ -26,8 +26,9 @@
 
 .search-icon {
   position: absolute;
-  right: 40px;
+  right: -19px;
   cursor: pointer;
+  top: 19px;
 }
 
 .dropdown-top {
@@ -167,12 +168,20 @@
 }
 
 @media screen and (max-width: 475px) {
-
-  .nav_top_in_div{
+  .nav_top_in_div {
     min-width: fit-content;
+  }
+}
+
+
+@media screen and (max-width:385px) {
+
+  .dashboardHomeTopInput{
+    margin: 4px;
   }
   
 }
+
 
 @media screen and (max-width: 350px) {
   .useImage {
