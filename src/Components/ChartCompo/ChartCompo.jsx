@@ -14,14 +14,22 @@ function ChartCompo() {
     });
   }, []);
 
+  const chartContainer = document.getElementById("my-chart-container");
+  const styles = window.getComputedStyle(chartContainer);
+  console.log(styles);
+
   return (
     <>
-      {data?.length > 0 ? (
-        <TypeChooser>
-          {(type) => <Chart type={type} data={data} />}
-        </TypeChooser>
-      ) : (
-        "Loading..."
+      {styles && (
+        <div id="my-chart-container">
+          {data?.length > 0 ? (
+            <TypeChooser>
+              {(type) => <Chart type={type} data={data} />}
+            </TypeChooser>
+          ) : (
+            "Loading..."
+          )}
+        </div>
       )}
     </>
   );

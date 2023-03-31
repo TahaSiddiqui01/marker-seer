@@ -17,6 +17,7 @@ function DashboardAnalyze() {
   const [yourDate, setYourDate] = useState("");
   const Navigate = useNavigate();
   const { ticket } = useParams();
+  const [showChart, setShowChart] = useState(false);
 
   useEffect(() => {
     getAnalyze(ticket, 30).then((data) => {
@@ -26,6 +27,10 @@ function DashboardAnalyze() {
       let formatedDate = `As of ${utcDate[2]} ${utcDate[1]}, ${utcDate[3]}`;
       setYourDate(formatedDate);
     });
+
+    setTimeout(() => {
+      setShowChart(true);
+    }, 5000);
   }, []);
 
   const addToFavourite = (ticker, exchange) => {
@@ -197,10 +202,10 @@ function DashboardAnalyze() {
           </div>
         </div>
 
+        {/* <div>{showChart ? <ChartCompo /> : ""}</div> */}
         <div>
           <ChartCompo />
         </div>
-
       </div>
     </>
   );
