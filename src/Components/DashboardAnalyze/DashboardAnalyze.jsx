@@ -9,13 +9,13 @@ import MarketerContext from "../../Context/MarketerContext";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function DashboardAnalyze() {
   const { getAnalyze, addToFavourites } = useContext(MarketerContext);
   const [analyzeData, setAnalyzeData] = useState({});
   const [yourDate, setYourDate] = useState("");
-
+  const Navigate = useNavigate();
   const { ticket } = useParams();
 
   useEffect(() => {
@@ -150,7 +150,7 @@ function DashboardAnalyze() {
             <Insights
               heading="Next Predicted Signal"
               signalColor={"#FF6961"}
-              signal={analyzeData?.predicted_close}
+              signal={Math.round(analyzeData?.predicted_close)}
               signalTextColor={"#E21C57"}
             />
             <Insights
@@ -185,6 +185,9 @@ function DashboardAnalyze() {
                 </p>
               </div>
               <div
+                onClick={() =>
+                  Navigate(`/influncer/${analyzeData?.ticker?.ticker}`)
+                }
                 className="insight-arrow-div"
                 style={{ backgroundColor: "#1994A1" }}
               >
@@ -194,7 +197,10 @@ function DashboardAnalyze() {
           </div>
         </div>
 
-        <div>{/* <ChartCompo /> */}</div>
+        <div>
+          <ChartCompo />
+        </div>
+
       </div>
     </>
   );

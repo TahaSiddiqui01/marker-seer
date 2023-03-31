@@ -6,13 +6,15 @@ import Csv from "../../assets/Export Icon.png";
 import "./InfluncerRightCompo.css";
 import InfluncerTable from "../InfluncerTable/InfluncerTable";
 import MarketerContext from "../../Context/MarketerContext";
+import { useParams } from "react-router-dom";
 
 function InfluncerRightCompo() {
+  const { ticket } = useParams();
   const { getInfluncer } = useContext(MarketerContext);
   const [influncerData, setInfluncerData] = useState([]);
 
   useEffect(() => {
-    getInfluncer("NVDA", 10)
+    getInfluncer(ticket, 10)
       .then((data) => {
         console.log("Influncer data: ", data?.data);
         setInfluncerData(data?.data);

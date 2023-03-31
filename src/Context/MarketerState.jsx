@@ -142,18 +142,21 @@ function MarketerState(props) {
 
       let token = localStorage.getItem("token");
 
-
-      const response = await axios.post(`${BASE_URL}/seer/api/favorites`, {
-        ticker, exchange
-      }, {
-        headers:{
-          "Content-Type":"application/json",
-          "Authorization": `Bearer ${token}`
+      const response = await axios.post(
+        `${BASE_URL}/seer/api/favorites`,
+        {
+          ticker,
+          exchange,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
         }
-      });
+      );
 
       return response;
-
     } catch (error) {
       console.log("error: ", error);
       return new Error("There is an error", error);
@@ -247,6 +250,30 @@ function MarketerState(props) {
     }
   };
 
+  // Following function is used to update the password:
+
+  const updatedPassword = async (password) => {
+    try {
+      let token = localStorage.getItem("token");
+
+      let response = await axios.patch(
+        `${BASE_URL}/seer/api/user`,
+        {
+          password,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <MarketerContext.Provider
@@ -261,6 +288,7 @@ function MarketerState(props) {
           getInfluncer,
           logoutTheUser,
           exportToCSV,
+          updatedPassword,
         }}
       >
         {props.children}

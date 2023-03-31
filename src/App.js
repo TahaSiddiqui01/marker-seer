@@ -21,7 +21,10 @@ function App() {
             <Route path="/sign-up" element={<SignUp />}></Route>
             <Route path="/dash-placeholder" element={<DashHomePage />}></Route>
             <Route path="/analyze/:ticket" element={<DashAnalyze />}></Route>
-            <Route path="/influncer" element={<InfluncerPage />}></Route>
+            <Route
+              path="/influncer/:ticket"
+              element={<InfluncerPage />}
+            ></Route>
             <Route path="/top-gainer" element={<TopGainer />}></Route>
             <Route path="/setting" element={<SettingPage />}></Route>
           </Routes>

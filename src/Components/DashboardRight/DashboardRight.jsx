@@ -32,6 +32,11 @@ function DashboardRight() {
     }
   }, [breakpoint?.matches]);
 
+  const logoutMe = () => {
+    localStorage.removeItem("token");
+    Navigate("/login");
+  };
+
   return (
     <div className="ham_parent ">
       <RxHamburgerMenu className="hamburger  " onClick={handlesidebar} />
@@ -56,7 +61,14 @@ function DashboardRight() {
         <div className="navigation-table-left">
           {" "}
           <img className="dashLogo" src={TopGainer} alt="logo" />{" "}
-          <span onClick={()=>{Navigate("/top-gainer")}} className="side_text">Top Gainers</span>
+          <span
+            onClick={() => {
+              Navigate("/top-gainer");
+            }}
+            className="side_text"
+          >
+            Top Gainers
+          </span>
         </div>
         <div className="navigation-table-left">
           {" "}
@@ -76,12 +88,23 @@ function DashboardRight() {
         <div className="navigation-table-left">
           {" "}
           <img src={Setting} alt="logo" />{" "}
-          <span className="side_text"> Settings</span>{" "}
+          <span
+            onClick={() => {
+              Navigate("/setting");
+            }}
+            className="side_text"
+          >
+            {" "}
+            Settings
+          </span>{" "}
         </div>
         <div className="navigation-table-left">
           {" "}
           <img className="dashLogo" src={LogOut} alt="logo" />{" "}
-          <span className="side_text"> Log out</span>
+          <span onClick={logoutMe} className="side_text">
+            {" "}
+            Log out
+          </span>
         </div>
       </div>
     </div>
