@@ -66,6 +66,24 @@ function SignUpRight() {
     });
   };
 
+  const showHide = () => {
+    let passInputTag = document.querySelector(".password-input");
+    if (passInputTag.getAttribute("type") != "password") {
+      passInputTag.setAttribute("type", "password");
+    } else {
+      passInputTag.setAttribute("type", "text");
+    }
+  };
+
+  const noShowHide = () => {
+    let passInputTag = document.querySelector(".no-input");
+    if (passInputTag.getAttribute("type") != "password") {
+      passInputTag.setAttribute("type", "password");
+    } else {
+      passInputTag.setAttribute("type", "text");
+    }
+  };
+
   const handleOnChange = (e) => {
     setInputData({ ...inputData, [e.target.name]: e.target.value });
   };
@@ -103,19 +121,24 @@ function SignUpRight() {
           </div>
           <div className="h-[79px]">
             <input
-              className="custom-input shadow-[rgba(0, 0, 0, 0.25)] focus-visible:border-transparent"
+              className="custom-input password-input shadow-[rgba(0, 0, 0, 0.25)] focus-visible:border-transparent"
               placeholder="Password"
-              type="password"
+              type="text"
               name="password"
               value={inputData?.password}
               onChange={handleOnChange}
             />
             <img className="input-logo" src={Lock} alt="" />
-            <img className="input-logo-right" src={Invisible} alt="eye" />
+            <img
+              className="input-logo-right cursor-pointer"
+              src={Invisible}
+              onClick={showHide}
+              alt="eye"
+            />
           </div>
           <div className="h-[79px]">
             <input
-              className="custom-input shadow-[rgba(0, 0, 0, 0.25)] focus-visible:border-transparent"
+              className="custom-input no-input shadow-[rgba(0, 0, 0, 0.25)] focus-visible:border-transparent"
               placeholder="Mobile"
               type="text"
               name="mobile"
@@ -123,7 +146,12 @@ function SignUpRight() {
               onChange={handleOnChange}
             />
             <img className="input-logo" src={Lock} alt="" />
-            <img className="input-logo-right" src={Invisible} alt="" />
+            <img
+              className="input-logo-right cursor-pointer"
+              onClick={noShowHide}
+              src={Invisible}
+              alt=""
+            />
           </div>
           <div className="h-[79px]">
             <input
@@ -140,7 +168,7 @@ function SignUpRight() {
 
         <p className="text-[#9F9F9F] px-2 my-2">
           <input type="checkbox" /> <span>I read and agree to</span>
-          <Link className="font-bold mx-2 text-[#1994a1]" to="/">
+          <Link className="font-bold mx-2 text-[#1994a1]" to="/terms-condition">
             terms and conditions
           </Link>
         </p>

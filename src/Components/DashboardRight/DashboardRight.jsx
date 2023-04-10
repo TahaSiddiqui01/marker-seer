@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import "./DashboardRight.css";
 import Logo from "../../assets/logo 1.png";
 
@@ -11,9 +11,13 @@ import Setting from "../../assets/Group 252.png";
 import LogOut from "../../assets/Group 259.png";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
+import Logo2 from "../../assets/logo-2.png";
+import MarketerContext from "../../Context/MarketerContext";
 
 function DashboardRight() {
   let Navigate = useNavigate();
+
+  const { logoutTheUser } = useContext(MarketerContext);
 
   const handlesidebar = () => {
     console.log("click");
@@ -33,7 +37,12 @@ function DashboardRight() {
   }, [breakpoint?.matches]);
 
   const logoutMe = () => {
-    localStorage.removeItem("token");
+    logoutTheUser().then((data) => {
+      console.log("Logout Response: ", data);
+
+      localStorage.removeItem("token");
+    });
+    localStorage.setItem("remember", false);
     Navigate("/login");
   };
 
@@ -44,8 +53,8 @@ function DashboardRight() {
         <div className="d-flex align-items-center justify-content-center">
           <img
             className="web-logo side_text"
-            onClick={Navigate("/")}
-            src={Logo}
+            onClick={() => Navigate("/")}
+            src={Logo2}
             alt=""
             cc
           />

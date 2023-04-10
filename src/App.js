@@ -9,6 +9,8 @@ import DashAnalyze from "./Pages/DashAnalyze";
 import InfluncerPage from "./Pages/InfluncerPage";
 import TopGainer from "./Pages/TopGainer";
 import SettingPage from "./Pages/SettingPage";
+import Forgot from "./Components/Forgot/Forgot";
+import TermsAndCondition from "./Components/TermsAndCondition/TermsAndCondition";
 
 function App() {
   return (
@@ -18,6 +20,7 @@ function App() {
           <Routes>
             <Route path="/" element={<DashboardData />}></Route>
             <Route path="/login" element={<Login />}></Route>
+            <Route path="/forgot" element={<Forgot />}></Route>
             <Route path="/sign-up" element={<SignUp />}></Route>
             <Route path="/dash-placeholder" element={<DashHomePage />}></Route>
             <Route path="/analyze/:ticket" element={<DashAnalyze />}></Route>
@@ -27,6 +30,7 @@ function App() {
             ></Route>
             <Route path="/top-gainer" element={<TopGainer />}></Route>
             <Route path="/setting" element={<SettingPage />}></Route>
+            <Route path="/terms-condition" element={<TermsAndCondition />}></Route>
           </Routes>
         </Router>
       </MarketerState>

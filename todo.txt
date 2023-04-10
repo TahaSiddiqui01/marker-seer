@@ -1,0 +1,12 @@
+1. Login screen: remember me is not working  =========> DONE
+2. Login screen: show password icon is not working  ==========> DONE
+3. Login screen: forgot password link is not working  ==========> DONE
+
+4. Create user screen: show password is not working =========> DONE
+5. Terms and conditions link is broken =========> DONE
+
+6. Home page: Website logo missing ============> DONE
+7. Home page: Top gainers is calling the wrong API  ==============> DONE
+8. Home page: Logout is not calling the logout API ==============> DONE
+
+9. Dashboard: May be display the same favorites on the staff picks. I can update that later.  ===========> DONE

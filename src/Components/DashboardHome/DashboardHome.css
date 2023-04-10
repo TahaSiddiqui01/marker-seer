@@ -145,6 +145,14 @@
 
     margin: 40px 6px 6px 19px;
   }
+
+  .hide {
+    width: 59px !important;
+  }
+
+  .ham_parent {
+    height: 117vh;
+  }
 }
 
 @media screen and (max-width: 575px) {
@@ -173,15 +181,17 @@
   }
 }
 
-
-@media screen and (max-width:385px) {
-
-  .dashboardHomeTopInput{
+@media screen and (max-width: 385px) {
+  .dashboardHomeTopInput {
     margin: 4px;
   }
-  
-}
 
+  .search-icon {
+    left: unset !important;
+    right: 8px !important;
+    top: 12px !important;
+  }
+}
 
 @media screen and (max-width: 350px) {
   .useImage {

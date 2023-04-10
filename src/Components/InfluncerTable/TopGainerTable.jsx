@@ -1,21 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./InfluncerTable.css";
 import MarketerContext from "../../Context/MarketerContext";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function InfluncerTable() {
+function TopGainerTable() {
   const Navigate = useNavigate();
-
-  const {ticket} = useParams()
 
   const [repeatTable, setRepeatTable] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
   const [influncerData, setInfluncerData] = useState([]);
-
-  const { getInfluncer } = useContext(MarketerContext);
+  const { getInfluncer, topGainer } = useContext(MarketerContext);
   useEffect(() => {
-    getInfluncer(ticket, 10)
+    topGainer(1, 10)
       .then((data) => {
-        console.log("Influncer data: ", data?.data);
+        console.log("TopGainer data: ", data?.data);
         setInfluncerData(data?.data);
       })
       .catch((error) => {
@@ -25,9 +22,7 @@ function InfluncerTable() {
 
   return (
     <>
-
-      {
-        influncerData?.headers?.length > 0 ? <div className="res-div">
+      <div className="res-div">
         <table className="influncer-table robotoFamily">
           <thead className="table-head">
             <tr>
@@ -43,8 +38,14 @@ function InfluncerTable() {
             {influncerData?.data?.map((data) => {
               return (
                 <tr className="tbrow">
+                  <td className="table-data"> {data?.net_gain}</td>
+                  <td className="table-data">{data?.market_performance}</td>
+                  <td className="table-data">{data?.strategy_performance}</td>
+                  <td style={{ color: "#D42722" }} className="table-data">
+                    {/* {Math.round(data?.average_returns_per_day) + "%"} */}
+                    {data?.average_returns_per_day + "%"}
+                  </td>
                   <td className="table-data">
-                    {" "}
                     <span
                       onClick={() => {
                         Navigate(`/analyze/${data?.ticker}`);
@@ -52,13 +53,9 @@ function InfluncerTable() {
                       className="gain-btn"
                     >
                       {data?.ticker}
-                    </span>
-                  </td>
+                    </span></td>
                   <td className="table-data">{data?.name}</td>
                   <td className="table-data">{data?.exchange}</td>
-                  <td style={{ color: "#D42722" }} className="table-data">
-                    {Math.round(data?.similarity) + "%"}
-                  </td>
                   <td style={{ color: "#D42722" }} className="table-data">
                     {data?.signal}
                   </td>
@@ -77,11 +74,9 @@ function InfluncerTable() {
           </tr> */}
           </tbody>
         </table>
-      </div> : <h2 style={{margin:"3rem", fontWeight:"600", fontSize:"20px"}}>Oops! nothing to show</h2>
-      }
-
+      </div>
     </>
   );
 }
 
-export default InfluncerTable;
+export default TopGainerTable;

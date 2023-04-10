@@ -49,7 +49,7 @@ function DashboardRightData() {
           <div className="dash-staff-favourites">
             <p className="sub-heading robotoFamily my-3">Staff Favorites</p>
             <div className="card_grid">
-              {elem?.map((elem) => {
+              {/* {elem?.map((elem) => {
                 return (
                   <DataCard
                     ticket="APPL"
@@ -57,6 +57,17 @@ function DashboardRightData() {
                     close="240"
                     percent="20"
                     signal="BUY"
+                  />
+                );
+              })} */}
+              {favouriteData?.map((elem) => {
+                return (
+                  <DataCard
+                    ticket={elem?.ticker?.ticker}
+                    date={`As of ${new Date(elem?.date)?.toLocaleDateString()}`}
+                    close={Math.round(elem?.close)}
+                    percent={Math.round(elem?.percent)}
+                    signal={elem?.signal}
                   />
                 );
               })}

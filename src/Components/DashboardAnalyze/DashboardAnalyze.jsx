@@ -21,6 +21,7 @@ function DashboardAnalyze() {
 
   useEffect(() => {
     getAnalyze(ticket, 30).then((data) => {
+      console.log("Analyze Data: ", data);
       setAnalyzeData(data?.data);
       let newDate = new Date(data?.data?.date);
       let utcDate = newDate.toUTCString().split(" ");
@@ -191,7 +192,7 @@ function DashboardAnalyze() {
               </div>
               <div
                 onClick={() =>
-                  Navigate(`/influncer/${analyzeData?.ticker?.ticker}`)
+                  Navigate(`/influncer/${ticket}`)
                 }
                 className="insight-arrow-div"
                 style={{ backgroundColor: "#1994A1" }}
@@ -204,7 +205,7 @@ function DashboardAnalyze() {
 
         {/* <div>{showChart ? <ChartCompo /> : ""}</div> */}
         <div>
-          <ChartCompo />
+          {/* <ChartCompo /> */}
         </div>
       </div>
     </>

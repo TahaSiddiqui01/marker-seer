@@ -17,6 +17,7 @@ function MarketerState(props) {
       console.log("Login Data: ", response);
 
       localStorage.setItem("token", response?.data?.access);
+      localStorage.setItem("refresh_token", response?.data?.refresh);
 
       return {
         success: true,
@@ -227,9 +228,10 @@ function MarketerState(props) {
 
   // Following function is used to logout the user:
 
-  const logoutTheUser = async (refresh_token) => {
+  const logoutTheUser = async () => {
     try {
       let token = localStorage.getItem("token");
+      let refresh_token = localStorage.getItem("refresh_token");
 
       let response = await axios.post(
         `${BASE_URL}/seer/api/logout`,
@@ -274,6 +276,46 @@ function MarketerState(props) {
     }
   };
 
+  // Following function is used to forgot the password:
+
+  const forgotPassword = async (email) => {
+    try {
+      let response = await axios.post(
+        `${BASE_URL}/seer/api/forgotpassword`,
+        {
+          email,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Following function is used for top gainer:
+
+  const topGainer = async (page, limit) => {
+    try {
+      let response =
+        await axios.get(`${BASE_URL}/seer/api/reportdata?report=GENERAL&page=${page}&limit=${limit}
+      `, {
+        headers:{
+          "Authorization":`Bearer ${localStorage.getItem("token")}`
+        }
+      });
+
+      return response
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <MarketerContext.Provider
@@ -289,6 +331,8 @@ function MarketerState(props) {
           logoutTheUser,
           exportToCSV,
           updatedPassword,
+          forgotPassword,
+          topGainer
         }}
       >
         {props.children}

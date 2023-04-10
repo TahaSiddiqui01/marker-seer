@@ -12,16 +12,15 @@ import "./LoginRight.css";
 import swal from "sweetalert";
 
 function LoginRight() {
+  const Navigate = useNavigate();
+
   const { Login } = useContext(MarketerContext);
   const [error, setError] = useState("");
-
-  const Navigate = useNavigate();
 
   const [inputData, setInputData] = useState({
     username: "",
     password: "",
   });
-
   const handleSignIn = () => {
     if (inputData?.username === "" || inputData?.password === "") {
       setError("Input fields can't be empty");
@@ -56,6 +55,24 @@ function LoginRight() {
     setInputData({ ...inputData, [e.target.name]: e.target.value });
   };
 
+  const showHide = () => {
+    let passInputTag = document.querySelector(".password-input");
+    if (passInputTag.getAttribute("type") != "password") {
+      passInputTag.setAttribute("type", "password");
+    } else {
+      passInputTag.setAttribute("type", "text");
+    }
+  };
+
+  const handleRememberMe = (e) => {
+    console.log(e.target.checked);
+    if (e.target.checked) {
+      localStorage.setItem("remember", true);
+    } else {
+      localStorage.setItem("remember", false);
+    }
+  };
+
   return (
     <>
       <div className="w-2/4  flex  min-w-fit items-center h-screen flex-col max-[960px]:h-fit">
@@ -79,15 +96,19 @@ function LoginRight() {
           </div>
           <div className="h-[79px]">
             <input
-              className="custom-input shadow-[rgba(0, 0, 0, 0.25)] focus-visible:border-transparent"
+              className="custom-input password-input shadow-[rgba(0, 0, 0, 0.25)] focus-visible:border-transparent"
               placeholder="Password"
-              type="password"
               name="password"
               value={inputData?.password}
               onChange={handleOnChange}
             />
             <img className="input-logo" src={Lock} alt="" />
-            <img className="input-logo-right" src={Invisible} alt="" />
+            <img
+              className="input-logo-right show-hide cursor-pointer"
+              onClick={showHide}
+              src={Invisible}
+              alt=""
+            />
           </div>
         </div>
         <div className="flex max-w-[389px]  max-[370px]:text-sm max-[370px]:px-10 w-full text-[#9F9F9F] justify-between  flex-wrap">
@@ -97,10 +118,14 @@ function LoginRight() {
               type="checkbox"
               name="Remember"
               id="rem-1"
+              onChange={handleRememberMe}
             />
-            <label htmlFor="rem1 ">Remember me</label>
+            <label htmlFor="rem-1">Remember me</label>
           </div>
-          <Link to="/forgot ">Forgot password</Link>
+          <Link to="/forgot ">
+            {" "}
+            <span style={{ color: "#1994A1", fontWeight:"600" }}>Forgot password?</span>
+          </Link>
         </div>
 
         <button onClick={handleSignIn} className="btn-login medium-button">

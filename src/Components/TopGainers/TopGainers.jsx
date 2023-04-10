@@ -5,6 +5,7 @@ import Star from "../../assets/star.png";
 import Search from "../../assets/Search Icon.png";
 import Csv from "../../assets/Export Icon.png";
 import InfluncerTable from "../InfluncerTable/InfluncerTable";
+import TopGainerTable from "../InfluncerTable/TopGainerTable";
 
 function TopGainers() {
   return (
@@ -39,7 +40,8 @@ function TopGainers() {
               <img src={Search} alt="" />
             </div>
           </div>
-          <InfluncerTable />
+          {/* <InfluncerTable /> */}
+          <TopGainerTable/>
 
           <div className="d-flex justify-content-center align-items-center my-5">
             <nav

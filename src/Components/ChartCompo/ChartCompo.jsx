@@ -7,17 +7,18 @@ import { TypeChooser } from "react-stockcharts/lib/helper";
 
 function ChartCompo() {
   const [data, setData] = useState([]);
+  let styles = false;
 
   useEffect(() => {
     getData().then((data) => {
       setData(data);
     });
+
+    console.log("Document load; ");
+    const chartContainer = document.getElementById("my-chart-container");
+    styles = window.getComputedStyle(chartContainer);
+    console.log(styles);
   }, []);
-
-  const chartContainer = document.getElementById("my-chart-container");
-  const styles = window.getComputedStyle(chartContainer);
-  console.log(styles);
-
   return (
     <>
       {styles && (
