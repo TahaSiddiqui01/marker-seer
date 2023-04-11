@@ -10,7 +10,15 @@ import TopGainerTable from "../InfluncerTable/TopGainerTable";
 function TopGainers() {
   return (
     <>
-      <div style={{ minHeight: "100vh" }} className="DashboardHomeRight res_margin">
+      <div
+        style={{
+          Height: "100vh",
+          width: "100%",
+          maxWidth: "100%",
+          overflowX: "hidden",
+        }}
+        className="DashboardHomeRight res_margin "
+      >
         <NavbarTop />
 
         <div className="d-flex justify-content-between flex-wrap align-items-center">
@@ -32,44 +40,48 @@ function TopGainers() {
             Export to CSV
           </button>
         </div>
-
-        <div style={{ paddingBottom: "2px" }} className="table-parent">
-          <div className="table-search d-flex justify-content-between align-items-center">
-            <div className="table-input">
-              <input className="table-input-tag" placeholder="Search...." type="text" />
-              <img src={Search} alt="" />
+        <div style={{paddingLeft:"40px",paddingRight:"40px"}}>
+          <div style={{ paddingBottom: "2px" }} className="table-parent ">
+            <div className="table-search d-flex justify-content-between align-items-center">
+              <div className="table-input">
+                <input
+                  className="table-input-tag"
+                  placeholder="Search...."
+                  type="text"
+                />
+                <img src={Search} alt="" />
+              </div>
             </div>
-          </div>
-          {/* <InfluncerTable /> */}
-          <TopGainerTable/>
+            {/* <InfluncerTable /> */}
+            <TopGainerTable />
 
-          <div className="d-flex justify-content-center align-items-center my-5">
-            <nav
-              style={{ color: "#324558" }}
-              aria-label="Page pagination-bottom navigation example my-5"
-            >
-              <ul style={{ gap: "10px" }} class="pagination">
-                <li class="page-item">
-                  <a class="page-link">Prev</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link">1</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link">2</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link">3</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link">Next</a>
-                </li>
-              </ul>
-            </nav>
+            <div className="d-flex justify-content-center align-items-center my-5">
+              <nav
+                style={{ color: "#324558" }}
+                aria-label="Page pagination-bottom navigation example my-5"
+              >
+                <ul style={{ gap: "10px" }} class="pagination">
+                  <li class="page-item">
+                    <a class="page-link">Prev</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link">1</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link">2</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link">3</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link">Next</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
           </div>
         </div>
       </div>
-      ;
     </>
   );
 }

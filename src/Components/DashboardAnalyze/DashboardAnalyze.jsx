@@ -109,7 +109,7 @@ function DashboardAnalyze() {
         </div>
 
         <div className="insights-parent">
-          <div className="d-flex justify-content-between align-items-center">
+          <div className="d-flex analyze-date-headin justify-content-between align-items-center">
             <p className="sub-heading">Insights</p>
 
             <p className="your_date">{yourDate}</p>

@@ -12,3 +12,45 @@
   font-weight: 400;
   font-size: 15px;
 }
+
+@media screen and (max-width: 340px) {
+  .signal-highlight {
+    font-size: 12px;
+  }
+
+  .signal-text {
+    font-size: 13px;
+  }
+
+  .signal-circle {
+    height: 9px;
+    width: 9px;
+  }
+
+  .insight-child {
+    width: 144px;
+  }
+
+  .your_date{
+    font-size: 13px;
+  }
+
+  .sub-heading{
+    font-size: 13px;
+  }
+
+  .analyze-date-headin{
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .insights-parent{
+    width: 180px;
+  }
+
+  .res_coinName img{
+    margin: 0px 8px;
+  }
+
+}

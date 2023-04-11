@@ -34,14 +34,13 @@
 .table-parent {
   background-color: white;
   border: 8px;
-  margin: 20px 36px;
+  padding: 20px 0px;
   border-radius: 8px;
+  /* margin: 20px 40px; */
 }
-
-.table-search {
+.influncer-table-parent {
+  margin: 20px 40px;
 }
-
-
 
 .pagination-bottom {
   display: flex !important;
@@ -70,6 +69,12 @@
   box-shadow: none;
 }
 
+@media screen and (max-width: 560px) {
+  .influncer-coin-heading {
+    margin: 8px 8px 8px 25px;
+  }
+}
+
 @media screen and (max-width: 425px) {
   .table-input-tag {
     width: 100%;
@@ -87,8 +92,25 @@
     max-width: 180px;
   }
 
-  .dashboard-title{
+  .dashboard-title {
     font-size: 20px;
-    margin:8px 12px 8px 18px !important;
+    margin: 8px 12px 8px 50px !important;
+  }
+  .table-input-tag {
+    width: 150px !important;
+  }
+}
+
+@media screen and (max-width: 330px) {
+  .influncer-title {
+    font-size: 17px;
+  }
+
+  .influner-top-btn {
+    font-size: 10px;
+  }
+
+  .table-parent {
+    min-width: 192px;
   }
 }

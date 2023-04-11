@@ -10,12 +10,14 @@ import TopSells from "../../assets/Cart.png";
 import Setting from "../../assets/Group 252.png";
 import LogOut from "../../assets/Group 259.png";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Logo2 from "../../assets/logo-2.png";
 import MarketerContext from "../../Context/MarketerContext";
 
 function DashboardRight() {
   let Navigate = useNavigate();
+
+  let location = useLocation();
 
   const { logoutTheUser } = useContext(MarketerContext);
 
@@ -60,10 +62,19 @@ function DashboardRight() {
           />
         </div>
         <div className="navigation-text side_text"> NAVIGATIONS</div>
-        <div className="navigation-table-left">
+        <div
+          onClick={() => {
+            Navigate("/");
+          }}
+          className="navigation-table-left"
+        >
           {" "}
           <img className="dashLogo" src={Dashboard} alt="logo" />{" "}
-          <span className="side_text" style={{ color: "#1994A1" }}>
+          <span
+            className={`side_text ${
+              location.pathname === "/" ? "active-color" : ""
+            }`}
+          >
             Dashboard
           </span>
         </div>
@@ -74,7 +85,9 @@ function DashboardRight() {
             onClick={() => {
               Navigate("/top-gainer");
             }}
-            className="side_text"
+            className={`side_text ${
+              location.pathname === "/top-gainer" ? "active-color" : ""
+            }`}
           >
             Top Gainers
           </span>
@@ -101,7 +114,9 @@ function DashboardRight() {
             onClick={() => {
               Navigate("/setting");
             }}
-            className="side_text"
+            className={`side_text ${
+              location.pathname === "/setting" ? "active-color" : ""
+            }`}
           >
             {" "}
             Settings

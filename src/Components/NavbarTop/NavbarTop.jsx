@@ -7,11 +7,16 @@ import swal from "sweetalert";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 
 function NavbarTop() {
+  
   const { getUserData, getFetchTicker } = useContext(MarketerContext);
   const [userData, setUserData] = useState({});
   const [msg, setMsg] = useState("");
   const [showInput, setShowInput] = useState(false);
   const [searchedTicket, setsearchedTicket] = useState([]);
+
+
+  
+
 
   useEffect(() => {
     getUserData().then((data) => {
@@ -77,7 +82,7 @@ function NavbarTop() {
                       </div>
                       <div className="ticker-exchange">{elem?.exchange}</div>
                     </div>
-                  );
+                  )
                 })
               ) : (
                 <div>No Results</div>
@@ -126,7 +131,7 @@ function NavbarTop() {
         </div>
       </div>
     </>
-  );
+  )
 }
 
 export default NavbarTop;

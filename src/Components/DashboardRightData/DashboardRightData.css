@@ -50,6 +50,12 @@
   .res_margin {
     margin-left: 35px;
   }
+
+  .data-card-bottom{
+    flex-wrap: wrap;
+  }
+
+
 }
 
 @media screen and (max-width: 430px) {

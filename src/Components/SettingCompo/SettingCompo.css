@@ -108,6 +108,42 @@
   }
 }
 
+@media screen and (max-width: 992px) {
+  
+  .setting-box-1{
+    height: auto;
+  }
+
+}
+
+@media screen and (max-width: 460px) {
+  
+  .setting-box-1, .setting-box-2{
+    width: 100%;
+    min-width: 200px;
+  }
+
+  .profile-input{
+    width: 100%;
+  }
+
+}
+
+@media screen and (max-width: 400px) {
+
+  .profile_detail span:first-child{
+    font-size: 14x;
+  }
+
+  .profile_detail span:last-child{
+
+    font-size: 14px;
+
+  }
+
+
+}
+
 @media screen and (max-width: 385px) {
   .setting-box-1 {
     min-width: 250px;
@@ -130,4 +166,11 @@
   .setting-box-2 {
     height: 480px;
   }
+}
+
+
+@media screen and (max-width: 350px) {
+  
+  
+
 }

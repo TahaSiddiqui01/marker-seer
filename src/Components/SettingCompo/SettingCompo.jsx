@@ -79,7 +79,7 @@ function SettingCompo() {
       {/* Same as */}
       <ToastContainer />
 
-      <div className="DashboardHomeRight res_margin robotoFamily">
+      <div className="DashboardHomeRight res_margin robotoFamily" style={{overflowX:"hidden"}}>
         <NavbarTop />
 
         <p className="dashboard-title interFamily">Settings</p>

@@ -10,6 +10,11 @@
   font-family: "DM Sans", sans-serif;
   font-family: "Poppins", sans-serif;
 }
+
+.active-color{
+  color: #1994A1;
+}
+
 .side_text1 {
   display: none !important;
 }

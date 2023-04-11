@@ -34,7 +34,7 @@ function InfluncerRightCompo() {
 
         <div className="d-flex flex-wrap justify-content-start align-items-center">
           <p
-            className="dashboard-title interFamily py-0"
+            className="dashboard-title influncer-title interFamily py-0"
             style={{
               borderRight: "1px solid #324558",
               paddingRight: "1.2rem",
@@ -43,8 +43,8 @@ function InfluncerRightCompo() {
           >
             Influencers
           </p>
-          <span className="gain-btn">APPL</span>
-          <div className="d-flex jusitfy-content-center align-items-center ">
+          <span className="gain-btn influner-top-btn">APPL</span>
+          <div className="d-flex influncer-coin-heading jusitfy-content-center align-items-center ">
             <span
               style={{ color: "rgba(50, 69, 88, 0.7)" }}
               className="interFamily mx-3 "
@@ -55,7 +55,7 @@ function InfluncerRightCompo() {
           </div>
         </div>
 
-        <div style={{ paddingBottom: "2px" }} className="table-parent">
+        <div style={{ paddingBottom: "2px" }} className="table-parent influncer-table-parent">
           <div className="table-search d-flex justify-content-between align-items-center flex-wrap">
             <div className="table-input">
               <input
@@ -80,7 +80,7 @@ function InfluncerRightCompo() {
               style={{ color: "#324558" }}
               aria-label="Page flex-wrap pagination-bottom navigation example my-5"
             >
-              <ul style={{ gap: "10px" }} class="pagination">
+              <ul style={{ gap: "10px" }} class="pagination d-flex justify-content-centera align-items-center flex-wrap">
                 <li class="page-item">
                   <a class="page-link">Prev</a>
                 </li>
