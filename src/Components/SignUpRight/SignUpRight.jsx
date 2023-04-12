@@ -3,6 +3,7 @@ import Gmail from "../../assets/Gmail logo.png";
 import Lock from "../../assets/Lock.png";
 import Referral from "../../assets/Group.png";
 import Male from "../../assets/Male User.png";
+import Eye from "../../assets/Eye.png";
 import Invisible from "../../assets/Invisible.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
@@ -23,6 +24,9 @@ function SignUpRight() {
     mobile: "",
     referral: "",
   });
+
+  const [isShowPassword, setIsShowPassword] = useState(false);
+  const [isShowMobile, setIsShowMobile] = useState(false);
 
   const handleSignup = () => {
     //username, password, mobile, email, referral
@@ -68,6 +72,7 @@ function SignUpRight() {
 
   const showHide = () => {
     let passInputTag = document.querySelector(".password-input");
+    setIsShowPassword(!isShowPassword);
     if (passInputTag.getAttribute("type") != "password") {
       passInputTag.setAttribute("type", "password");
     } else {
@@ -77,6 +82,7 @@ function SignUpRight() {
 
   const noShowHide = () => {
     let passInputTag = document.querySelector(".no-input");
+    setIsShowMobile(!isShowMobile);
     if (passInputTag.getAttribute("type") != "password") {
       passInputTag.setAttribute("type", "password");
     } else {
@@ -123,7 +129,7 @@ function SignUpRight() {
             <input
               className="custom-input password-input shadow-[rgba(0, 0, 0, 0.25)] focus-visible:border-transparent"
               placeholder="Password"
-              type="text"
+              type="password"
               name="password"
               value={inputData?.password}
               onChange={handleOnChange}
@@ -131,7 +137,7 @@ function SignUpRight() {
             <img className="input-logo" src={Lock} alt="" />
             <img
               className="input-logo-right cursor-pointer"
-              src={Invisible}
+              src={`${!isShowPassword ? Invisible : Eye}`}
               onClick={showHide}
               alt="eye"
             />
@@ -140,7 +146,7 @@ function SignUpRight() {
             <input
               className="custom-input no-input shadow-[rgba(0, 0, 0, 0.25)] focus-visible:border-transparent"
               placeholder="Mobile"
-              type="text"
+              type="password"
               name="mobile"
               value={inputData?.mobile}
               onChange={handleOnChange}
@@ -149,7 +155,7 @@ function SignUpRight() {
             <img
               className="input-logo-right cursor-pointer"
               onClick={noShowHide}
-              src={Invisible}
+              src={`${!isShowMobile ? Invisible : Eye}`}
               alt=""
             />
           </div>

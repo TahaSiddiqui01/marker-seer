@@ -1,0 +1,14 @@
+#my-chart-container {
+  overflow: hidden;
+  margin: 10px 42px;
+  background: white;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.react-stockchart {
+  width: 100% !important;
+}
+
+.my-chart-container {
+}

@@ -16,8 +16,8 @@ function InfluncerRightCompo() {
   useEffect(() => {
     getInfluncer(ticket, 10)
       .then((data) => {
-        console.log("Influncer data: ", data?.data);
-        setInfluncerData(data?.data);
+        console.log("Influncer Top data: ", data?.data?.data);
+        setInfluncerData(data?.data?.data);
       })
       .catch((error) => {
         console.log(error);
@@ -43,19 +43,22 @@ function InfluncerRightCompo() {
           >
             Influencers
           </p>
-          <span className="gain-btn influner-top-btn">APPL</span>
+          <span className="gain-btn influner-top-btn">{influncerData?.length > 0 ? influncerData[0]?.ticker : ""}</span>
           <div className="d-flex influncer-coin-heading jusitfy-content-center align-items-center ">
             <span
-              style={{ color: "rgba(50, 69, 88, 0.7)" }}
+              style={{ color: "rgba(50, 69, 88, 0.7)"}}
               className="interFamily mx-3 "
             >
-              Apple Inc - Nasdaq
+              {influncerData?.length > 0 ?  influncerData[0]?.name : ""}
             </span>
             <img src={Star} alt="star" />
           </div>
         </div>
 
-        <div style={{ paddingBottom: "2px" }} className="table-parent influncer-table-parent">
+        <div
+          style={{ paddingBottom: "2px" }}
+          className="table-parent influncer-table-parent"
+        >
           <div className="table-search d-flex justify-content-between align-items-center flex-wrap">
             <div className="table-input">
               <input
@@ -80,7 +83,10 @@ function InfluncerRightCompo() {
               style={{ color: "#324558" }}
               aria-label="Page flex-wrap pagination-bottom navigation example my-5"
             >
-              <ul style={{ gap: "10px" }} class="pagination d-flex justify-content-centera align-items-center flex-wrap">
+              <ul
+                style={{ gap: "10px" }}
+                class="pagination d-flex justify-content-centera align-items-center flex-wrap"
+              >
                 <li class="page-item">
                   <a class="page-link">Prev</a>
                 </li>

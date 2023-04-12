@@ -51,6 +51,12 @@
   cursor: pointer;
 }
 
+
+.side_text:hover{
+  color: #1994A1;
+}
+
+
 .navigation-table-left {
   display: flex;
   /* border: 1px solid; */

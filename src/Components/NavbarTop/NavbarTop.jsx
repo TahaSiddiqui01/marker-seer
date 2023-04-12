@@ -5,18 +5,14 @@ import MarketerContext from "../../Context/MarketerContext";
 import axios from "axios";
 import swal from "sweetalert";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
+import { Link } from "react-router-dom";
 
 function NavbarTop() {
-  
   const { getUserData, getFetchTicker } = useContext(MarketerContext);
   const [userData, setUserData] = useState({});
   const [msg, setMsg] = useState("");
   const [showInput, setShowInput] = useState(false);
   const [searchedTicket, setsearchedTicket] = useState([]);
-
-
-  
-
 
   useEffect(() => {
     getUserData().then((data) => {
@@ -75,14 +71,16 @@ function NavbarTop() {
               {searchedTicket?.length > 0 ? (
                 searchedTicket?.map((elem) => {
                   return (
-                    <div className="d-flex highlight-search justify-content-beteween align-items-center">
-                      <div>
-                        <span className="auto-ticker">{elem?.ticker}</span>
-                        <span className="desc-ticker">{elem?.name}</span>
+                    <Link to={`/analyze/${elem?.ticker}`}>
+                      <div className="d-flex highlight-search justify-content-beteween align-items-center">
+                        <div>
+                          <span className="auto-ticker">{elem?.ticker}</span>
+                          <span className="desc-ticker">{elem?.name}</span>
+                        </div>
+                        <div className="ticker-exchange">{elem?.exchange}</div>
                       </div>
-                      <div className="ticker-exchange">{elem?.exchange}</div>
-                    </div>
-                  )
+                    </Link>
+                  );
                 })
               ) : (
                 <div>No Results</div>
@@ -131,7 +129,7 @@ function NavbarTop() {
         </div>
       </div>
     </>
-  )
+  );
 }
 
 export default NavbarTop;

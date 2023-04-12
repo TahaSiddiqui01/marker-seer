@@ -2,7 +2,7 @@
   border: 1px solid #e5e6e8;
   border-radius: 8px;
   width: 100%;
-  max-width: 363px !important;
+  /* max-width: 363px !important; */
   
 }
 
@@ -21,6 +21,7 @@
   padding: 4px 18px;
   display: flex;
   margin: 15px 0px;
+  flex-wrap: wrap;
 }
 
 .amount {

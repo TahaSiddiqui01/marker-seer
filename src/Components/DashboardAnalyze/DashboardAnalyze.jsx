@@ -10,6 +10,7 @@ import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate, useParams } from "react-router-dom";
+import Unfavourite from "../../assets/Unfavourite.png";
 
 function DashboardAnalyze() {
   const { getAnalyze, addToFavourites } = useContext(MarketerContext);
@@ -18,15 +19,17 @@ function DashboardAnalyze() {
   const Navigate = useNavigate();
   const { ticket } = useParams();
   const [showChart, setShowChart] = useState(false);
+  const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
     getAnalyze(ticket, 30).then((data) => {
-      console.log("Analyze Data: ", data);
+      console.log("Analyze Data from page: ", data);
       setAnalyzeData(data?.data);
       let newDate = new Date(data?.data?.date);
       let utcDate = newDate.toUTCString().split(" ");
       let formatedDate = `As of ${utcDate[2]} ${utcDate[1]}, ${utcDate[3]}`;
       setYourDate(formatedDate);
+      setChartData(data?.data?.historic_data);
     });
 
     setTimeout(() => {
@@ -96,7 +99,7 @@ function DashboardAnalyze() {
             </span>
             <img
               style={{ cursor: "pointer" }}
-              src={Star}
+              src={`${Star || Unfavourite}`}
               alt="star"
               onClick={() => {
                 addToFavourite(
@@ -124,14 +127,16 @@ function DashboardAnalyze() {
             <Insights
               heading="Market Price"
               signalColor={"#F8F38D"}
-              signal={"$" + Math.round(analyzeData?.close)}
+              signal={"$" + analyzeData?.close}
+              // signal={"$" + Math.round(analyzeData?.close)}
               signalTextColor={"#E21C57"}
             />
             <Insights
               heading="30 Day Strategy Performancce"
               signalColor={"#EAA658"}
               signal={
-                Math.round(analyzeData?.metadata?.strategy_performance) + "%"
+                analyzeData?.metadata?.strategy_performance + "%"
+                // Math.round(analyzeData?.metadata?.strategy_performance) + "%"
               }
               signalTextColor={"#E21C57"}
             />
@@ -156,14 +161,16 @@ function DashboardAnalyze() {
             <Insights
               heading="Next Predicted Signal"
               signalColor={"#FF6961"}
-              signal={Math.round(analyzeData?.predicted_close)}
+              signal={analyzeData?.predicted_close}
+              // signal={Math.round(analyzeData?.predicted_close)}
               signalTextColor={"#E21C57"}
             />
             <Insights
               heading="30 Day Market Performance"
               signalColor={"#FFB480"}
               signal={
-                Math.round(analyzeData?.metadata?.market_performance) + "%"
+                analyzeData?.metadata?.market_performance + "%"
+                // Math.round(analyzeData?.metadata?.market_performance) + "%"
               }
               signalTextColor={"#E21C57"}
             />
@@ -191,9 +198,7 @@ function DashboardAnalyze() {
                 </p>
               </div>
               <div
-                onClick={() =>
-                  Navigate(`/influncer/${ticket}`)
-                }
+                onClick={() => Navigate(`/influncer/${ticket}`)}
                 className="insight-arrow-div"
                 style={{ backgroundColor: "#1994A1" }}
               >
@@ -205,7 +210,7 @@ function DashboardAnalyze() {
 
         {/* <div>{showChart ? <ChartCompo /> : ""}</div> */}
         <div>
-          {/* <ChartCompo /> */}
+          <ChartCompo chartData={chartData} />
         </div>
       </div>
     </>

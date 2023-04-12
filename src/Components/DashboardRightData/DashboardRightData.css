@@ -88,8 +88,9 @@
   }
 
   .data-card {
-    width: 100%;
-    max-width: 300px;
+    /* width: 100%; */
+    /* max-width: 300px; */
+    max-width: unset !important;
   }
 
   .dashboard-empty {

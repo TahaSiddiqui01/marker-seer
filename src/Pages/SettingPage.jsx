@@ -5,7 +5,7 @@ import SettingCompo from "../Components/SettingCompo/SettingCompo";
 
 function SettingPage() {
 
-  
+  // Create
 
   return (
     <>

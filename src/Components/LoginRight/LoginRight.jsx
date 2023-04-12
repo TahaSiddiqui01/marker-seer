@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Gmail from "../../assets/Gmail logo.png";
 import Lock from "../../assets/Lock.png";
+import Eye from "../../assets/Eye.png";
 import Invisible from "../../assets/Invisible.png";
 import { useContext } from "react";
 import MarketerContext from "../../Context/MarketerContext";
@@ -16,6 +17,8 @@ function LoginRight() {
 
   const { Login } = useContext(MarketerContext);
   const [error, setError] = useState("");
+  const [isPassword, setIsPassword] = useState(true);
+  const [isShowPassword, setIsShowPassword] = useState(false);
 
   const [inputData, setInputData] = useState({
     username: "",
@@ -57,6 +60,7 @@ function LoginRight() {
 
   const showHide = () => {
     let passInputTag = document.querySelector(".password-input");
+    setIsShowPassword(!isShowPassword);
     if (passInputTag.getAttribute("type") != "password") {
       passInputTag.setAttribute("type", "password");
     } else {
@@ -99,6 +103,7 @@ function LoginRight() {
               className="custom-input password-input shadow-[rgba(0, 0, 0, 0.25)] focus-visible:border-transparent"
               placeholder="Password"
               name="password"
+              type="password"
               value={inputData?.password}
               onChange={handleOnChange}
             />
@@ -106,7 +111,7 @@ function LoginRight() {
             <img
               className="input-logo-right show-hide cursor-pointer"
               onClick={showHide}
-              src={Invisible}
+              src={`${!isShowPassword ? Invisible : Eye}`}
               alt=""
             />
           </div>
@@ -124,7 +129,9 @@ function LoginRight() {
           </div>
           <Link to="/forgot ">
             {" "}
-            <span style={{ color: "#1994A1", fontWeight:"600" }}>Forgot password?</span>
+            <span style={{ color: "#1994A1", fontWeight: "600" }}>
+              Forgot password?
+            </span>
           </Link>
         </div>
 

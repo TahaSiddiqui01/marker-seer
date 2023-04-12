@@ -1,12 +1,30 @@
-1. Login screen: remember me is not working  =========> DONE
-2. Login screen: show password icon is not working  ==========> DONE
-3. Login screen: forgot password link is not working  ==========> DONE
+TODO: Export to CSV not working.   ===========> Pending from client
 
-4. Create user screen: show password is not working =========> DONE
-5. Terms and conditions link is broken =========> DONE
+TODO: Pagination is not working. 
 
-6. Home page: Website logo missing ============> DONE
-7. Home page: Top gainers is calling the wrong API  ==============> DONE
-8. Home page: Logout is not calling the logout API ==============> DONE
+TODO: Table search is not working.    ===========> Pending from client
 
-9. Dashboard: May be display the same favorites on the staff picks. I can update that later.  ===========> DONE
+TODO: Influencers page is hardcoded with AAPL on the title.     ===========> Pending from client
+
+TODO: Clicking on a searched ticker doesn't take me to the analyze page. ========> DONE
+
+TODO: All the numbers are presented as integers. Stock prices should be float (based on API response) =========> DONE
+
+TODO: Note that the demo account is set to expire on April 20th. Please make sure that only the Settings section is enabled at this point. Everything else should be disabled/blurred. 
+(I'll give you a new account) ===============> Pending from Client
+
+TODO: I don't see the graph on the analyze page as yet. Is that still being worked on?    ===========> DONE
+
+Regarding the feedback:
+TODO: - is still not working. If you are not able to do it, just remove the "Remember me" checkbox.  =========> DONE
+
+TODO: - the default action should be to hide. I'm seeing the password when i type and i have to click on the icon to hide it. Can you change the icon to reflect the behavior? I'll add both icons to the mocks.  ===========> DONE
+
+TODO: - has this been implemented using a timer? I don't see any calls to refresh the token.
+
+Separately:
+TODO: The favorites star needs to show a "favorited" vs "not favorited" state. So that i know if it is part of my favorites or not. I'll add this icon to the mocks if you don't have it.
+
+TODO: Clicking on the dashboard ticker should take me to the analyze page. Nothing happens when i click it now. ===========> DONE
+
+TODO: Can you add a hover (mouse over) color when I hover over the left navigation ? Same color as when it is selected.  ================> DONE

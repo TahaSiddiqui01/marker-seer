@@ -31,26 +31,29 @@
     width: 144px;
   }
 
-  .your_date{
+  .your_date {
     font-size: 13px;
   }
 
-  .sub-heading{
+  .sub-heading {
     font-size: 13px;
   }
 
-  .analyze-date-headin{
+  .analyze-date-headin {
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
   }
 
-  .insights-parent{
+  .insights-parent {
     width: 180px;
   }
 
-  .res_coinName img{
+  .res_coinName img {
     margin: 0px 8px;
   }
 
+  .insight-child-arrow {
+    width: 150px;
+  }
 }

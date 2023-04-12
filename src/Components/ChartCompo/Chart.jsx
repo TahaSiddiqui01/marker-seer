@@ -76,7 +76,7 @@ class CandleStickChartWithAnnotation extends React.Component {
 					xExtents={xExtents}>
 
 				<Label x={(width - margin.left - margin.right) / 2} y={30}
-					fontSize="30" text="Chart title here" />
+					fontSize="30" text="" />
 
 				<Chart id={1}
 						yExtents={[d => [d.high, d.low]]}
