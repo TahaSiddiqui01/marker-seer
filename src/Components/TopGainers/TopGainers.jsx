@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./TopGainers.css";
 import NavbarTop from "../NavbarTop/NavbarTop";
 import Star from "../../assets/star.png";
@@ -6,8 +6,23 @@ import Search from "../../assets/Search Icon.png";
 import Csv from "../../assets/Export Icon.png";
 import InfluncerTable from "../InfluncerTable/InfluncerTable";
 import TopGainerTable from "../InfluncerTable/TopGainerTable";
+import MarketerContext from "../../Context/MarketerContext";
 
 function TopGainers() {
+  const { topGainer } = useContext(MarketerContext);
+  const [pageDat, PageDat] = useState({})
+
+  useEffect(() => {
+    topGainer(1, 10)
+      .then((data) => {
+        console.log("TopGainer home data: ", data?.data);
+        // setInfluncerData(data?.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <>
       <div
@@ -40,9 +55,9 @@ function TopGainers() {
             Export to CSV
           </button>
         </div>
-        <div style={{paddingLeft:"40px",paddingRight:"40px"}}>
-          <div style={{ paddingBottom: "2px" }} className="table-parent ">
-            <div className="table-search d-flex justify-content-between align-items-center">
+        <div style={{ paddingLeft: "40px", paddingRight: "40px" }}>
+          <div style={{ paddingBottom: "2px" }} className="table-parent pt-0">
+            {/* <div className="table-search d-flex justify-content-between align-items-center">
               <div className="table-input">
                 <input
                   className="table-input-tag"
@@ -51,7 +66,7 @@ function TopGainers() {
                 />
                 <img src={Search} alt="" />
               </div>
-            </div>
+            </div> */}
             {/* <InfluncerTable /> */}
             <TopGainerTable />
 
@@ -61,6 +76,7 @@ function TopGainers() {
                 aria-label="Page pagination-bottom navigation example my-5"
               >
                 <ul style={{ gap: "10px" }} class="pagination">
+                  {}
                   <li class="page-item">
                     <a class="page-link">Prev</a>
                   </li>

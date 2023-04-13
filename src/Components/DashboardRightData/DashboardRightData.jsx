@@ -38,8 +38,8 @@ function DashboardRightData() {
                   <DataCard
                     ticket={elem?.ticker?.ticker}
                     date={`As of ${new Date(elem?.date)?.toLocaleDateString()}`}
-                    close={elem?.close}
-                    percent={elem?.percent}
+                    close={parseFloat(elem?.close).toFixed(2)}
+                    percent={parseFloat(elem?.percent).toFixed(2)}
                     // close={Math.round(elem?.close)}
                     // percent={Math.round(elem?.percent)}
                     signal={elem?.signal}
@@ -67,8 +67,8 @@ function DashboardRightData() {
                   <DataCard
                     ticket={elem?.ticker?.ticker}
                     date={`As of ${new Date(elem?.date)?.toLocaleDateString()}`}
-                    close={elem?.close}
-                    percent={elem?.percent}
+                    close={parseFloat(elem?.close).toFixed(2)}
+                    percent={parseFloat(elem?.percent).toFixed(2)}
                     // close={Math.round(elem?.close)}
                     // percent={Math.round(elem?.percent)}
                     signal={elem?.signal}

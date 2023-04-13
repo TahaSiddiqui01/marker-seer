@@ -13,13 +13,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import Unfavourite from "../../assets/Unfavourite.png";
 
 function DashboardAnalyze() {
-  const { getAnalyze, addToFavourites } = useContext(MarketerContext);
+  const { getAnalyze, addToFavourites, deleteFavourite, getFavourites } =
+    useContext(MarketerContext);
   const [analyzeData, setAnalyzeData] = useState({});
   const [yourDate, setYourDate] = useState("");
   const Navigate = useNavigate();
   const { ticket } = useParams();
   const [showChart, setShowChart] = useState(false);
   const [chartData, setChartData] = useState([]);
+  const [isInFavourite, setIsInFavourite] = useState(false);
 
   useEffect(() => {
     getAnalyze(ticket, 30).then((data) => {
@@ -30,6 +32,14 @@ function DashboardAnalyze() {
       let formatedDate = `As of ${utcDate[2]} ${utcDate[1]}, ${utcDate[3]}`;
       setYourDate(formatedDate);
       setChartData(data?.data?.historic_data);
+    });
+
+    getFavourites().then((data) => {
+      for (let ticker of data?.data) {
+        if (ticker?.ticker?.ticker === ticket) {
+          setIsInFavourite(true);
+        }
+      }
     });
 
     setTimeout(() => {
@@ -51,6 +61,7 @@ function DashboardAnalyze() {
           progress: undefined,
           theme: "light",
         });
+        setIsInFavourite(!isInFavourite);
       })
       .catch((err) => {
         console.log("Err: ", err);
@@ -97,17 +108,31 @@ function DashboardAnalyze() {
             >
               {analyzeData?.ticker?.name} - {analyzeData?.ticker?.exchange}
             </span>
-            <img
-              style={{ cursor: "pointer" }}
-              src={`${Star || Unfavourite}`}
-              alt="star"
-              onClick={() => {
-                addToFavourite(
-                  analyzeData?.ticker?.ticker,
-                  analyzeData?.ticker?.exchange
-                );
-              }}
-            />
+            {isInFavourite ? (
+              <img
+                style={{ cursor: "pointer" }}
+                src={`${Star}`}
+                alt="star"
+                onClick={() => {
+                  deleteFavourite(
+                    analyzeData?.ticker?.ticker,
+                    analyzeData?.ticker?.exchange
+                  );
+                }}
+              />
+            ) : (
+              <img
+                style={{ cursor: "pointer" }}
+                src={`${Unfavourite}`}
+                alt="star"
+                onClick={() => {
+                  addToFavourite(
+                    analyzeData?.ticker?.ticker,
+                    analyzeData?.ticker?.exchange
+                  );
+                }}
+              />
+            )}
           </div>
         </div>
 
@@ -127,7 +152,7 @@ function DashboardAnalyze() {
             <Insights
               heading="Market Price"
               signalColor={"#F8F38D"}
-              signal={"$" + analyzeData?.close}
+              signal={"$" + parseFloat(analyzeData?.close).toFixed(2)}
               // signal={"$" + Math.round(analyzeData?.close)}
               signalTextColor={"#E21C57"}
             />
@@ -135,7 +160,9 @@ function DashboardAnalyze() {
               heading="30 Day Strategy Performancce"
               signalColor={"#EAA658"}
               signal={
-                analyzeData?.metadata?.strategy_performance + "%"
+                parseFloat(analyzeData?.metadata?.strategy_performance).toFixed(
+                  2
+                ) + "%"
                 // Math.round(analyzeData?.metadata?.strategy_performance) + "%"
               }
               signalTextColor={"#E21C57"}
@@ -161,7 +188,7 @@ function DashboardAnalyze() {
             <Insights
               heading="Next Predicted Signal"
               signalColor={"#FF6961"}
-              signal={analyzeData?.predicted_close}
+              signal={parseFloat(analyzeData?.predicted_close).toFixed(2)}
               // signal={Math.round(analyzeData?.predicted_close)}
               signalTextColor={"#E21C57"}
             />
@@ -169,7 +196,9 @@ function DashboardAnalyze() {
               heading="30 Day Market Performance"
               signalColor={"#FFB480"}
               signal={
-                analyzeData?.metadata?.market_performance + "%"
+                parseFloat(analyzeData?.metadata?.market_performance).toFixed(
+                  2
+                ) + "%"
                 // Math.round(analyzeData?.metadata?.market_performance) + "%"
               }
               signalTextColor={"#E21C57"}
@@ -177,7 +206,7 @@ function DashboardAnalyze() {
             <Insights
               heading="Prediction Accuracy"
               signalColor={"#59ADF6"}
-              signal={analyzeData?.indicators?.sdfsd || "NaN"}
+              signal={parseFloat(analyzeData?.indicators?.ema_3).toFixed(2) || "NaN"}
               signalTextColor={"#E21C57"}
             />
 
@@ -194,11 +223,11 @@ function DashboardAnalyze() {
                   style={{ color: "#59ADF6", marginLeft: "1.90rem" }}
                   className="signal-highlight robotoFamily  my-2"
                 >
-                  {analyzeData?.influencer_count}
+                  {!analyzeData.influencer_count ? 0 : analyzeData.influencer_count}
                 </p>
               </div>
               <div
-                onClick={() => Navigate(`/influncer/${ticket}`)}
+                onClick={!analyzeData.influencer_count ? "" : () => Navigate(`/influncer/${ticket}`)}
                 className="insight-arrow-div"
                 style={{ backgroundColor: "#1994A1" }}
               >

@@ -164,6 +164,38 @@ function MarketerState(props) {
     }
   };
 
+  // Following function is used to delete from favourites:
+
+  const deleteFromFavourites = async (ticker, exchange) => {
+    try {
+      console.log("Ticker: ", ticker, "Exchange: ", exchange);
+
+      let token = localStorage.getItem("token");
+
+      const response = await axios.delete(
+        `${BASE_URL}/seer/api/favorites`,
+        {
+          ticker,
+          exchange,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log("DeleteFav Token: ", token);
+      return response;
+    } catch (error) {
+      let token = localStorage.getItem("token");
+      console.log("DeleteFav Token: ", token);
+      console.log("error: ", error);
+      return new Error("There is an error", error);
+    }
+  };
+
   // Following function is used to delete the favourites:
 
   const deleteFavourite = async (ticker, exchange) => {
@@ -301,16 +333,17 @@ function MarketerState(props) {
 
   const topGainer = async (page, limit) => {
     try {
-      let response =
-        await axios.get(`${BASE_URL}/seer/api/reportdata?report=GENERAL&page=${page}&limit=${limit}
-      `, {
-        headers:{
-          "Authorization":`Bearer ${localStorage.getItem("token")}`
+      let response = await axios.get(
+        `${BASE_URL}/seer/api/reportdata?report=GENERAL&page=${page}&limit=${limit}
+      `,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
-      });
+      );
 
-      return response
-
+      return response;
     } catch (error) {
       console.log(error);
     }
@@ -327,12 +360,14 @@ function MarketerState(props) {
           getFetchTicker,
           getAnalyze,
           addToFavourites,
+          deleteFromFavourites,
           getInfluncer,
           logoutTheUser,
           exportToCSV,
           updatedPassword,
           forgotPassword,
-          topGainer
+          topGainer,
+          deleteFavourite
         }}
       >
         {props.children}

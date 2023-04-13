@@ -20,6 +20,8 @@ function TopGainerTable() {
       });
   }, []);
 
+  
+
   return (
     <>
       <div className="res-div">
@@ -38,12 +40,12 @@ function TopGainerTable() {
             {influncerData?.data?.map((data) => {
               return (
                 <tr className="tbrow">
-                  <td className="table-data"> {data?.net_gain}</td>
-                  <td className="table-data">{data?.market_performance}</td>
-                  <td className="table-data">{data?.strategy_performance}</td>
+                  <td className="table-data"> {parseFloat(data?.net_gain).toFixed(2)}</td>
+                  <td className="table-data">{parseFloat(data?.market_performance).toFixed(2)}</td>
+                  <td className="table-data">{parseFloat(data?.strategy_performance).toFixed(2)}</td>
                   <td style={{ color: "#D42722" }} className="table-data">
                     {/* {Math.round(data?.average_returns_per_day) + "%"} */}
-                    {data?.average_returns_per_day + "%"}
+                    {parseFloat(data?.average_returns_per_day).toFixed(2) + "%"}
                   </td>
                   <td className="table-data">
                     <span
@@ -53,7 +55,8 @@ function TopGainerTable() {
                       className="gain-btn"
                     >
                       {data?.ticker}
-                    </span></td>
+                    </span>
+                  </td>
                   <td className="table-data">{data?.name}</td>
                   <td className="table-data">{data?.exchange}</td>
                   <td style={{ color: "#D42722" }} className="table-data">

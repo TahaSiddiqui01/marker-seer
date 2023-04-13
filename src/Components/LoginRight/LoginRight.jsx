@@ -117,7 +117,7 @@ function LoginRight() {
           </div>
         </div>
         <div className="flex max-w-[389px]  max-[370px]:text-sm max-[370px]:px-10 w-full text-[#9F9F9F] justify-between  flex-wrap">
-          <div className="flex justify-center  items-center">
+          {/* <div className="flex justify-center  items-center">
             <input
               className="mr-2"
               type="checkbox"
@@ -126,7 +126,7 @@ function LoginRight() {
               onChange={handleRememberMe}
             />
             <label htmlFor="rem-1">Remember me</label>
-          </div>
+          </div> */}
           <Link to="/forgot ">
             {" "}
             <span style={{ color: "#1994A1", fontWeight: "600" }}>

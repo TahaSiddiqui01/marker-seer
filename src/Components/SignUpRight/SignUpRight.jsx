@@ -187,7 +187,7 @@ function SignUpRight() {
         </button>
         <p className="text-[#9F9F9F]">
           Already have an account?{" "}
-          <Link className="font-bold text-[#1994a1]" to="/">
+          <Link className="font-bold text-[#1994a1]" to="/login">
             SIGN IN
           </Link>
         </p>

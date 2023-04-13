@@ -56,7 +56,7 @@ function InfluncerTable() {
                     <td className="table-data">{data?.name}</td>
                     <td className="table-data">{data?.exchange}</td>
                     <td style={{ color: "#D42722" }} className="table-data">
-                      {data?.similarity + "%"}
+                      {parseFloat(data?.similarity).toFixed(2) + "%"}
                       {/* {Math.round(data?.similarity) + "%"} */}
                     </td>
                     <td style={{ color: "#D42722" }} className="table-data">

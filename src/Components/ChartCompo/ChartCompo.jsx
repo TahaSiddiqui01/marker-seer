@@ -12,15 +12,24 @@ function ChartCompo(props) {
   useEffect(() => {
     getData().then((data) => {
       // setData(data);
-      console.log("Chart Data: =============>", data);
-      console.log("Historic Char data: =========>", props?.chartData);
-      setData(data);
+
+      // [close, date, open, predicted_signal, signal, ticker, trader_type, volume, ]
+      
+      const parseData = props?.chartData?.map((elem) => {
+        let dt = new Date(elem?.date);
+        elem.date = dt;
+        elem.low = elem?.close
+        return elem;
+      });
+
+      setData(parseData);
+
     });
 
     console.log("Document load; ");
     const chartContainer = document.getElementById("my-chart-container");
     styles = window.getComputedStyle(chartContainer);
-    console.log(styles, "ldk");
+    // console.log(styles, "ldk");
   }, [props?.chartData]);
   return (
     <>

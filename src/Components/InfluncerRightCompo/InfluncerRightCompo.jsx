@@ -43,13 +43,15 @@ function InfluncerRightCompo() {
           >
             Influencers
           </p>
-          <span className="gain-btn influner-top-btn">{influncerData?.length > 0 ? influncerData[0]?.ticker : ""}</span>
+          <span className="gain-btn influner-top-btn">
+            {influncerData?.length > 0 ? influncerData[0]?.ticker : ""}
+          </span>
           <div className="d-flex influncer-coin-heading jusitfy-content-center align-items-center ">
             <span
-              style={{ color: "rgba(50, 69, 88, 0.7)"}}
+              style={{ color: "rgba(50, 69, 88, 0.7)" }}
               className="interFamily mx-3 "
             >
-              {influncerData?.length > 0 ?  influncerData[0]?.name : ""}
+              {influncerData?.length > 0 ? influncerData[0]?.name : ""}
             </span>
             <img src={Star} alt="star" />
           </div>
@@ -57,17 +59,17 @@ function InfluncerRightCompo() {
 
         <div
           style={{ paddingBottom: "2px" }}
-          className="table-parent influncer-table-parent"
+          className="table-parent influncer-table-parent pt-0"
         >
-          <div className="table-search d-flex justify-content-between align-items-center flex-wrap">
-            <div className="table-input">
+          <div className="table-search d-flex justify-content-end align-items-center flex-wrap">
+            {/* <div className="table-input">
               <input
                 className="table-input-tag"
                 placeholder="Search...."
                 type="text"
               />
               <img src={Search} alt="" />
-            </div>
+            </div> */}
             <button
               style={{ margin: "24px" }}
               className="csv-btn robotoFamily d-flex justify-content-center align-items-center py-1 px-3"
