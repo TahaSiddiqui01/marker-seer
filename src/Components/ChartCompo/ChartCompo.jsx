@@ -13,18 +13,21 @@ function ChartCompo(props) {
     getData().then((data) => {
       // setData(data);
 
+      // console.log("Fake Data: ", data)
+
       // [close, date, open, predicted_signal, signal, ticker, trader_type, volume, ]
-      
-      const parseData = props?.chartData?.map((elem) => {
-        let dt = new Date(elem?.date);
-        elem.date = dt;
-        elem.low = elem?.close
-        return elem;
-      });
-
-      setData(parseData);
-
     });
+
+    const parseData = props?.chartData?.map((elem) => {
+      let dt = new Date(elem?.date);
+      elem.date = dt;
+      elem.low = elem?.close;
+      return elem;
+    });
+
+
+
+    setData(parseData);
 
     console.log("Document load; ");
     const chartContainer = document.getElementById("my-chart-container");

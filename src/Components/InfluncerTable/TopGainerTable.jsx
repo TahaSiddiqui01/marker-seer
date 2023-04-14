@@ -3,14 +3,14 @@ import "./InfluncerTable.css";
 import MarketerContext from "../../Context/MarketerContext";
 import { useNavigate } from "react-router-dom";
 
-function TopGainerTable() {
+function TopGainerTable(props) {
   const Navigate = useNavigate();
 
   const [repeatTable, setRepeatTable] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
   const [influncerData, setInfluncerData] = useState([]);
   const { getInfluncer, topGainer } = useContext(MarketerContext);
   useEffect(() => {
-    topGainer(1, 10)
+    topGainer(props?.currentPage, 10)
       .then((data) => {
         console.log("TopGainer data: ", data?.data);
         setInfluncerData(data?.data);
@@ -18,9 +18,7 @@ function TopGainerTable() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
-
-  
+  }, [props?.currentPage]);
 
   return (
     <>
@@ -40,9 +38,16 @@ function TopGainerTable() {
             {influncerData?.data?.map((data) => {
               return (
                 <tr className="tbrow">
-                  <td className="table-data"> {parseFloat(data?.net_gain).toFixed(2)}</td>
-                  <td className="table-data">{parseFloat(data?.market_performance).toFixed(2)}</td>
-                  <td className="table-data">{parseFloat(data?.strategy_performance).toFixed(2)}</td>
+                  <td className="table-data">
+                    {" "}
+                    {parseFloat(data?.net_gain).toFixed(2)}
+                  </td>
+                  <td className="table-data">
+                    {parseFloat(data?.market_performance).toFixed(2)}
+                  </td>
+                  <td className="table-data">
+                    {parseFloat(data?.strategy_performance).toFixed(2)}
+                  </td>
                   <td style={{ color: "#D42722" }} className="table-data">
                     {/* {Math.round(data?.average_returns_per_day) + "%"} */}
                     {parseFloat(data?.average_returns_per_day).toFixed(2) + "%"}

@@ -3,6 +3,7 @@ import Gmail from "../../assets/Gmail logo.png";
 import Lock from "../../assets/Lock.png";
 import Referral from "../../assets/Group.png";
 import Male from "../../assets/Male User.png";
+import Iphone from "../../assets/iPhone SE.png";
 import Eye from "../../assets/Eye.png";
 import Invisible from "../../assets/Invisible.png";
 import { Link, useNavigate } from "react-router-dom";
@@ -151,7 +152,7 @@ function SignUpRight() {
               value={inputData?.mobile}
               onChange={handleOnChange}
             />
-            <img className="input-logo" src={Lock} alt="" />
+            <img className="input-logo" src={Iphone} alt="" />
             <img
               className="input-logo-right cursor-pointer"
               onClick={noShowHide}
@@ -168,7 +169,7 @@ function SignUpRight() {
               value={inputData?.referral}
               onChange={handleOnChange}
             />
-            <img className="input-logo" src={Referral} alt="" />
+            <img style={{paddingTop:"8px"}} className="input-logo" src={Referral} alt="" />
           </div>
         </div>
 

@@ -1,30 +1,16 @@
-TODO: Export to CSV not working.   ===========> Pending from client
+TODO: Login screen/Create user screen icons need to be updated (user, phone) =======> DONE
 
-TODO: Pagination is not working. 
+TODO: Remove "Successfully logged in" popup.  ============> DONE
 
-TODO: Table search is not working.    ===========> Pending from client
+TODO: Update user icon on main page.  =================> DONE
 
-TODO: Influencers page is hardcoded with AAPL on the title.     ===========> Pending from client
+TODO: Update favorites icon when favorited vs not favorited.  ==========> DONE
 
-TODO: Clicking on a searched ticker doesn't take me to the analyze page. ========> DONE
+TODO: Graph needs Buy/Sell indicators   ===============> DONE
 
-TODO: All the numbers are presented as integers. Stock prices should be float (based on API response) =========> DONE
+TODO: Pagination not working.   ===========> DONE
 
-TODO: Note that the demo account is set to expire on April 20th. Please make sure that only the Settings section is enabled at this point. Everything else should be disabled/blurred. 
-(I'll give you a new account) ===============> Pending from Client
+TODO: Export to CSV not working.  ==========> Done
 
-TODO: I don't see the graph on the analyze page as yet. Is that still being worked on?    ===========> DONE
+TODO: Change the desing of search bar.
 
-Regarding the feedback:
-TODO: - is still not working. If you are not able to do it, just remove the "Remember me" checkbox.  =========> DONE
-
-TODO: - the default action should be to hide. I'm seeing the password when i type and i have to click on the icon to hide it. Can you change the icon to reflect the behavior? I'll add both icons to the mocks.  ===========> DONE
-
-TODO: - has this been implemented using a timer? I don't see any calls to refresh the token.
-
-Separately:
-TODO: The favorites star needs to show a "favorited" vs "not favorited" state. So that i know if it is part of my favorites or not. I'll add this icon to the mocks if you don't have it.
-
-TODO: Clicking on the dashboard ticker should take me to the analyze page. Nothing happens when i click it now. ===========> DONE
-
-TODO: Can you add a hover (mouse over) color when I hover over the left navigation ? Same color as when it is selected.  ================> DONE

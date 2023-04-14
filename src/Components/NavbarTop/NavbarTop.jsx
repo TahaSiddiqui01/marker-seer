@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import SearchIcon from "../../assets/Vector.png";
-import User from "../../assets/user-4 1.png";
+import User from "../../assets/Cat Profile.png";
 import MarketerContext from "../../Context/MarketerContext";
 import axios from "axios";
 import swal from "sweetalert";
@@ -59,8 +59,7 @@ function NavbarTop() {
               value={msg}
             />
             <img className="search-icon" src={SearchIcon} alt="" />
-          </div>
-
+            
           <div
             className={` ${
               showInput ? "d-flex" : "d-none"
@@ -87,6 +86,8 @@ function NavbarTop() {
               )}
             </div>
           </div>
+          </div>
+
         </div>
         <div
           style={{ marginRight: "29px", marginLeft: "25px" }}

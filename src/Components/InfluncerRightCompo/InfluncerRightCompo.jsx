@@ -7,11 +7,13 @@ import "./InfluncerRightCompo.css";
 import InfluncerTable from "../InfluncerTable/InfluncerTable";
 import MarketerContext from "../../Context/MarketerContext";
 import { useParams } from "react-router-dom";
+import { CSVLink } from "react-csv";
 
 function InfluncerRightCompo() {
   const { ticket } = useParams();
-  const { getInfluncer } = useContext(MarketerContext);
+  const { getInfluncer, exportToCSV } = useContext(MarketerContext);
   const [influncerData, setInfluncerData] = useState([]);
+  const [CSVData, setCSVData] = useState([]);
 
   useEffect(() => {
     getInfluncer(ticket, 10)
@@ -22,6 +24,11 @@ function InfluncerRightCompo() {
       .catch((error) => {
         console.log(error);
       });
+
+    exportToCSV().then((data) => {
+      console.log("Influncer CSV Data: ", data);
+      setCSVData(data?.data?.data);
+    });
   }, []);
 
   return (
@@ -70,13 +77,28 @@ function InfluncerRightCompo() {
               />
               <img src={Search} alt="" />
             </div> */}
+
+
+            {
+              CSVData?.length > 0 ? 
+              <button
+                style={{ margin: "24px" }}
+                className="csv-btn robotoFamily d-flex justify-content-center align-items-center py-1 px-3"
+              >
+                <img className="m-2" src={Csv} alt="csv" /> 
+  
+                <CSVLink data={CSVData}>Export to CSV</CSVLink>
+              </button> : 
             <button
               style={{ margin: "24px" }}
               className="csv-btn robotoFamily d-flex justify-content-center align-items-center py-1 px-3"
             >
-              <img className="m-2" src={Csv} alt="csv" />
-              Export to CSV
+              <img className="m-2" src={Csv} alt="csv" /> 
+                Export to CSV
             </button>
+            }
+
+
           </div>
           <InfluncerTable />
 

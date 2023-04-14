@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import MarketerContext from "./MarketerContext";
 import axios from "axios";
 
 function MarketerState(props) {
   const BASE_URL = "http://www.marketseer.ai";
+  const [pageNo, setPageNo] = useState(1);
+  const [influncerPage, setInfluncerPage] = useState(1);
 
   // Following function is used to login the user:
 
@@ -248,8 +250,33 @@ function MarketerState(props) {
 
   const exportToCSV = async (ticker) => {
     try {
+      let token = localStorage.getItem("token")
       let response = await axios.get(
-        `${BASE_URL}/seer/api/influencers?ticker=${ticker}&type=csv`
+        `${BASE_URL}/seer/api/influencers?ticker=${ticker}&type=csv`,
+        {
+          headers:{
+            "Authorization":`Bearer ${token}`
+          }
+        }
+      );
+
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Following function is used to Download the CSV fro the top gainer:
+
+  const downloadCSV = async () => {
+    try {
+      let response = await axios.get(
+        `${BASE_URL}/seer/api/reportdata?report=GENERAL&page=${pageNo}&limit=10&type=CSV`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
 
       return response;
@@ -333,6 +360,7 @@ function MarketerState(props) {
 
   const topGainer = async (page, limit) => {
     try {
+      setPageNo(page);
       let response = await axios.get(
         `${BASE_URL}/seer/api/reportdata?report=GENERAL&page=${page}&limit=${limit}
       `,
@@ -367,7 +395,9 @@ function MarketerState(props) {
           updatedPassword,
           forgotPassword,
           topGainer,
-          deleteFavourite
+          deleteFavourite,
+          downloadCSV,
+          pageNo,
         }}
       >
         {props.children}

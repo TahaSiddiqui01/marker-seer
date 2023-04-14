@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Gmail from "../../assets/Gmail logo.png";
+import User from "../../assets/Male User.png";
 import Lock from "../../assets/Lock.png";
 import Eye from "../../assets/Eye.png";
 import Invisible from "../../assets/Invisible.png";
@@ -35,10 +35,6 @@ function LoginRight() {
       if (data?.success) {
         Navigate("/");
 
-        swal({
-          title: "Successfully login",
-          icon: "success",
-        });
         setInputData({
           username: "",
           password: "",
@@ -96,7 +92,7 @@ function LoginRight() {
               value={inputData?.username}
               onChange={handleOnChange}
             />
-            <img className="input-logo" src={Gmail} alt="" />
+            <img className="input-logo" src={User} alt="" />
           </div>
           <div className="h-[79px]">
             <input
