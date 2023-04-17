@@ -4,6 +4,8 @@ import DashboardHome from "../DashboardHome/DashboardHome";
 import DashboardRightData from "../DashboardRightData/DashboardRightData";
 
 function DashboardData() {
+  
+
   return (
     <>
       <div style={{ height: "100%" }} className="DashboardHomePage">

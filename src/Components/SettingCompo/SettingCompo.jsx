@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import "./SettingCompo.css";
 import NavbarTop from "../NavbarTop/NavbarTop";
 import CatProfile from "../../assets/Cat Profile.png";
@@ -62,6 +62,10 @@ function SettingCompo() {
       });
   };
 
+  const renderNavbar = useCallback(() => {
+    return <NavbarTop />;
+  }, []);
+
   return (
     <>
       <ToastContainer
@@ -79,8 +83,12 @@ function SettingCompo() {
       {/* Same as */}
       <ToastContainer />
 
-      <div className="DashboardHomeRight res_margin robotoFamily" style={{overflowX:"hidden"}}>
-        <NavbarTop />
+      <div
+        className="DashboardHomeRight res_margin robotoFamily"
+        style={{ overflowX: "hidden" }}
+      >
+        {/* <NavbarTop /> */}
+        {renderNavbar()}
 
         <p className="dashboard-title interFamily">Settings</p>
 

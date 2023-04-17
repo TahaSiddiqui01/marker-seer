@@ -6,6 +6,7 @@ function MarketerState(props) {
   const BASE_URL = "http://www.marketseer.ai";
   const [pageNo, setPageNo] = useState(1);
   const [influncerPage, setInfluncerPage] = useState(1);
+  const [expired, setExpired] = useState(false)
 
   // Following function is used to login the user:
 
@@ -377,6 +378,31 @@ function MarketerState(props) {
     }
   };
 
+
+  // Following function is used to refresh the token:
+
+  const genRefreshToken = async ()=>{
+    try {
+      
+      let response = await axios.post(`${BASE_URL}/seer/token/refresh/`, {
+        refresh:localStorage.getItem("refresh_token")
+      });
+      return response;
+
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+
+
+  // Following function is used to set that the subscription of user is availabe or not:
+
+  const setExpiredFromOut = (state)=>{
+    setExpired(state)
+  }
+
+
   return (
     <>
       <MarketerContext.Provider
@@ -397,6 +423,9 @@ function MarketerState(props) {
           topGainer,
           deleteFavourite,
           downloadCSV,
+          genRefreshToken,
+          setExpiredFromOut,
+          expired,
           pageNo,
         }}
       >

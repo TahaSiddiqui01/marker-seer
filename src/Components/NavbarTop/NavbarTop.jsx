@@ -6,6 +6,9 @@ import axios from "axios";
 import swal from "sweetalert";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 function NavbarTop() {
   const { getUserData, getFetchTicker } = useContext(MarketerContext);
@@ -13,12 +16,24 @@ function NavbarTop() {
   const [msg, setMsg] = useState("");
   const [showInput, setShowInput] = useState(false);
   const [searchedTicket, setsearchedTicket] = useState([]);
+  const Navigate = useNavigate();
 
   useEffect(() => {
     getUserData().then((data) => {
       console.log("UserData ===> ", data?.data);
       if (!data?.data) {
-        swal("Your session has expired", "Please login again", "error");
+        // swal("Your session has expired", "Please login again", "error");
+        toast.warn("Session expired. Please login again", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        Navigate("/login");
       }
       setUserData(data?.data);
     });
@@ -44,6 +59,20 @@ function NavbarTop() {
 
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      {/* Same as */}
+      <ToastContainer />
       {/* res_margin_nav */}
       <div className="robotoFamily dashboardHomeTop d-flex justify-content-between align-items-center ">
         <div
@@ -59,35 +88,36 @@ function NavbarTop() {
               value={msg}
             />
             <img className="search-icon" src={SearchIcon} alt="" />
-            
-          <div
-            className={` ${
-              showInput ? "d-flex" : "d-none"
-            } autocomplete py-2 px-3`}
-            style={{ position: "relative" }}
-          >
-            <div className={` autocomplete-child `}>
-              {searchedTicket?.length > 0 ? (
-                searchedTicket?.map((elem) => {
-                  return (
-                    <Link to={`/analyze/${elem?.ticker}`}>
-                      <div className="d-flex highlight-search justify-content-beteween align-items-center">
-                        <div>
-                          <span className="auto-ticker">{elem?.ticker}</span>
-                          <span className="desc-ticker">{elem?.name}</span>
+
+            <div
+              className={` ${
+                showInput ? "d-flex" : "d-none"
+              } autocomplete py-2 px-3`}
+              style={{ position: "relative" }}
+            >
+              <div className={` autocomplete-child `}>
+                {searchedTicket?.length > 0 ? (
+                  searchedTicket?.map((elem) => {
+                    return (
+                      <Link to={`/analyze/${elem?.ticker}`}>
+                        <div className="d-flex highlight-search justify-content-beteween align-items-center">
+                          <div>
+                            <span className="auto-ticker">{elem?.ticker}</span>
+                            <span className="desc-ticker">{elem?.name}</span>
+                          </div>
+                          <div className="ticker-exchange">
+                            {elem?.exchange}
+                          </div>
                         </div>
-                        <div className="ticker-exchange">{elem?.exchange}</div>
-                      </div>
-                    </Link>
-                  );
-                })
-              ) : (
-                <div>No Results</div>
-              )}
+                      </Link>
+                    );
+                  })
+                ) : (
+                  <div>No Results</div>
+                )}
+              </div>
             </div>
           </div>
-          </div>
-
         </div>
         <div
           style={{ marginRight: "29px", marginLeft: "25px" }}

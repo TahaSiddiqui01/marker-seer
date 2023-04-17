@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import "./DashboardHome.css";
 import SearchIcon from "../../assets/Vector.png";
 import User from "../../assets/user-4 1.png";
@@ -9,12 +9,18 @@ import MarketerContext from "../../Context/MarketerContext";
 
 function DashboardHome() {
 
+
+  
+  const renderNavbar = useCallback(() => {
+    return <NavbarTop />;
+  }, []);
   
 
   return (
     <>
       <div style={{ minHeight: "100vh" }} className="DashboardHomeRight res_margin">
-        <NavbarTop />
+        {/* <NavbarTop /> */}
+        {renderNavbar()}
 
         <p className="dashboard-title interFamily">Dashboard</p>
 

@@ -1,16 +1,17 @@
-TODO: Login screen/Create user screen icons need to be updated (user, phone) =======> DONE
 
-TODO: Remove "Successfully logged in" popup.  ============> DONE
+TODO: The graph seems broken (see screenshot)
 
-TODO: Update user icon on main page.  =================> DONE
+TODO: No BUY/ SELL signals. Note that the BUY and SELL signal has a start and end date. So only displaying BUY and SELL wont work. We need something like what I have on my google doc or something like a BUY followed by a "CLOSE POSITION". Similar for SELL.  ==========> I am working on it.
 
-TODO: Update favorites icon when favorited vs not favorited.  ==========> DONE
+TODO: Timer with token refresh API is not implemented. ======> DONE
 
-TODO: Graph needs Buy/Sell indicators   ===============> DONE
+TODO: Favorites is still broken. The toggle functionality is not working. I see an auth error when trying to favorited item.   ============> This is you error.
 
-TODO: Pagination not working.   ===========> DONE
+TODO: Analyze page tiles don't match mocks.  =========> Everthing is ok (There is color difference between text)
 
-TODO: Export to CSV not working.  ==========> Done
+TODO: Analyze screen has some invalid values on the tile or when the API doesn't return a value.
+If the API doesn't return a value for a particular tile - please display "-" or "N/A" (see screenshot)  ==========> DONE
 
-TODO: Change the desing of search bar.
+TODO: When the session is no longer valid please send the user to the login screen with the "Session expired. Please login again" (toast message). No need to show the popup in the dashboard. (screenshot attached)  =====> DONE
 
+TODO: I think I mentioned this before but once the user subscription has expired, all the pages except for the "Settings" page should be disabled or blurred or a note saying "Your subscription has expired". I can give you a mock for this if needed.  ==========> DONE

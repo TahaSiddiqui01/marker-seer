@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import Login from "./Components/Login/Login";
 import SignUp from "./Components/SignUp/SignUp";
@@ -11,12 +11,68 @@ import TopGainer from "./Pages/TopGainer";
 import SettingPage from "./Pages/SettingPage";
 import Forgot from "./Components/Forgot/Forgot";
 import TermsAndCondition from "./Components/TermsAndCondition/TermsAndCondition";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+const BASE_URL = "http://www.marketseer.ai";
 
 function App() {
+  // Handle toke expiration:
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      // Perform token refresh logic here, e.g. fetching a new token from the server
+      console.log("Token has expired, refreshing...");
+      genRefreshToken().then((data) => {
+        console.log("RefreshToken response: ", data?.data);
+        localStorage.setItem("token", data?.data?.access);
+        localStorage.setItem("refresh_token", data?.data?.refresh);
+      });
+
+      toast.warn("Your token has expired", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }, 15 * 60 * 1000); // Set timeout for 15 minutes
+
+    return () => clearTimeout(timeoutId);
+  }, []);
+
+  const genRefreshToken = async () => {
+    try {
+      let response = await axios.post(`${BASE_URL}/seer/token/refresh/`, {
+        refresh: localStorage.getItem("refresh_token"),
+      });
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <MarketerState>
         <Router>
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
+          {/* Same as */}
+          <ToastContainer />
           <Routes>
             <Route path="/" element={<DashboardData />}></Route>
             <Route path="/login" element={<Login />}></Route>

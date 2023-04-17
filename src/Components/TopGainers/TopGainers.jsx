@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import "./TopGainers.css";
 import NavbarTop from "../NavbarTop/NavbarTop";
 import Star from "../../assets/star.png";
@@ -10,7 +10,8 @@ import MarketerContext from "../../Context/MarketerContext";
 import { CSVLink } from "react-csv";
 
 function TopGainers() {
-  const { topGainer, downloadCSV, pageNo } = useContext(MarketerContext);
+  const { topGainer, downloadCSV, pageNo, expired } =
+    useContext(MarketerContext);
   const [csvFetchedData, setCsvFetchedData] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -67,6 +68,10 @@ function TopGainers() {
     }
   };
 
+  const renderNavbar = useCallback(() => {
+    return <NavbarTop />;
+  }, []);
+
   return (
     <>
       <div
@@ -78,30 +83,36 @@ function TopGainers() {
         }}
         className="DashboardHomeRight res_margin "
       >
-        <NavbarTop />
+        {/* <NavbarTop /> */}
+        {renderNavbar()}
 
-        <div className="d-flex justify-content-between flex-wrap align-items-center">
-          <p
-            className="dashboard-title interFamily py-0"
-            style={{
-              paddingRight: "1.2rem",
-              marginRight: "1.2rem",
-            }}
-          >
-            Top Gainers
-          </p>
+        {!expired ? (
+          <>
+            <div className="d-flex justify-content-between flex-wrap align-items-center">
+              <p
+                className="dashboard-title interFamily py-0"
+                style={{
+                  paddingRight: "1.2rem",
+                  marginRight: "1.2rem",
+                }}
+              >
+                Top Gainers
+              </p>
 
-          <button
-            style={{ margin: "24px", backgroundColor: "#FFFFFF" }}
-            className="csv-btn csv-wrap robotoFamily d-flex justify-content-center flex-wrap align-items-center py-1 px-3"
-          >
-            <img className="m-2" src={Csv} alt="csv" />
-            <CSVLink data={csvFetchedData}>Export to CSV</CSVLink>
-          </button>
-        </div>
-        <div style={{ paddingLeft: "40px", paddingRight: "40px" }}>
-          <div style={{ paddingBottom: "2px" }} className="table-parent pt-0">
-            {/* <div className="table-search d-flex justify-content-between align-items-center">
+              <button
+                style={{ margin: "24px", backgroundColor: "#FFFFFF" }}
+                className="csv-btn csv-wrap robotoFamily d-flex justify-content-center flex-wrap align-items-center py-1 px-3"
+              >
+                <img className="m-2" src={Csv} alt="csv" />
+                <CSVLink data={csvFetchedData}>Export to CSV</CSVLink>
+              </button>
+            </div>
+            <div style={{ paddingLeft: "40px", paddingRight: "40px" }}>
+              <div
+                style={{ paddingBottom: "2px" }}
+                className="table-parent pt-0"
+              >
+                {/* <div className="table-search d-flex justify-content-between align-items-center">
               <div className="table-input">
                 <input
                   className="table-input-tag"
@@ -111,71 +122,71 @@ function TopGainers() {
                 <img src={Search} alt="" />
               </div>
             </div> */}
-            {/* <InfluncerTable /> */}
-            <TopGainerTable currentPage={currentPage} />
+                {/* <InfluncerTable /> */}
+                <TopGainerTable currentPage={currentPage} />
 
-            <div className="d-flex justify-content-center align-items-center my-5">
-              <nav
-                style={{ color: "#324558" }}
-                aria-label="Page pagination-bottom navigation example my-5"
-              >
-                <ul style={{ gap: "10px" }} class="pagination">
-                  {}
-                  <li class="page-item">
-                    <a class="page-link" onClick={handlePrevious}>
-                      Prev
-                    </a>
-                  </li>
-                  <li class="page-item">
-                    <a
-                      class="page-link"
-                      onClick={() => handlePageChange(currentPage)}
-                    >
-                      {currentPage}
-                    </a>
-                  </li>
-                  <li class="page-item">
-                    <a
-                      class="page-link"
-                      onClick={() =>
-                        handlePageChange(
-                          currentPage >= totalPages ? 1 : currentPage + 1
-                        )
-                      }
-                    >
-                      {currentPage >= totalPages ? 1 : currentPage + 1}
-                    </a>
-                  </li>
-                  <li class="page-item">
-                    <a
-                      class="page-link"
-                      onClick={() =>
-                        handlePageChange(
-                          currentPage >= totalPages ? 2 : currentPage + 2
-                        )
-                      }
-                    >
-                      {currentPage >= totalPages ? 2 : currentPage + 2}
-                    </a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link">...</a>
-                  </li>
-                  <li class="page-item">
-                    <a
-                      class="page-link"
-                      onClick={() => handlePageChange(totalPages)}
-                    >
-                      {totalPages}
-                    </a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" onClick={handleNext}>
-                      Next
-                    </a>
-                  </li>
-                </ul>
-                {/* <ul className="pagination">
+                <div className="d-flex justify-content-center align-items-center my-5">
+                  <nav
+                    style={{ color: "#324558" }}
+                    aria-label="Page pagination-bottom navigation example my-5"
+                  >
+                    <ul style={{ gap: "10px" }} class="pagination">
+                      {}
+                      <li class="page-item">
+                        <a class="page-link" onClick={handlePrevious}>
+                          Prev
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a
+                          class="page-link"
+                          onClick={() => handlePageChange(currentPage)}
+                        >
+                          {currentPage}
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a
+                          class="page-link"
+                          onClick={() =>
+                            handlePageChange(
+                              currentPage >= totalPages ? 1 : currentPage + 1
+                            )
+                          }
+                        >
+                          {currentPage >= totalPages ? 1 : currentPage + 1}
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a
+                          class="page-link"
+                          onClick={() =>
+                            handlePageChange(
+                              currentPage >= totalPages ? 2 : currentPage + 2
+                            )
+                          }
+                        >
+                          {currentPage >= totalPages ? 2 : currentPage + 2}
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link">...</a>
+                      </li>
+                      <li class="page-item">
+                        <a
+                          class="page-link"
+                          onClick={() => handlePageChange(totalPages)}
+                        >
+                          {totalPages}
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" onClick={handleNext}>
+                          Next
+                        </a>
+                      </li>
+                    </ul>
+                    {/* <ul className="pagination">
                   {pageNumbers.map((pageNumber) => (
                     <li
                       key={pageNumber}
@@ -192,10 +203,22 @@ function TopGainers() {
                     </li>
                   ))}
                 </ul> */}
-              </nav>
+                  </nav>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          </>
+        ) : (
+          <h2
+            style={{
+              margin: "3rem",
+              fontWeight: "600",
+              fontSize: "20px",
+            }}
+          >
+            Your subscription has expired
+          </h2>
+        )}
       </div>
     </>
   );
