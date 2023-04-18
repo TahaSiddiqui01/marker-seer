@@ -78,7 +78,10 @@ function DashboardAnalyze() {
   }, []);
 
 
-  //  This is the best way to see the work now I want to see that
+  // This is the best way to see the work now I want to see that
+
+  
+
 
   return (
     <>
@@ -134,6 +137,7 @@ function DashboardAnalyze() {
                         analyzeData?.ticker?.ticker,
                         analyzeData?.ticker?.exchange
                       );
+                      setIsInFavourite(!isInFavourite)
                     }}
                   />
                 ) : (

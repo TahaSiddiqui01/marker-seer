@@ -6,7 +6,7 @@ function MarketerState(props) {
   const BASE_URL = "http://www.marketseer.ai";
   const [pageNo, setPageNo] = useState(1);
   const [influncerPage, setInfluncerPage] = useState(1);
-  const [expired, setExpired] = useState(false)
+  const [expired, setExpired] = useState(false);
 
   // Following function is used to login the user:
 
@@ -203,23 +203,64 @@ function MarketerState(props) {
 
   const deleteFavourite = async (ticker, exchange) => {
     try {
-      let token = localStorage.getItem("token");
+      // let token = localStorage.getItem("token");
 
-      let response = await axios.delete(
-        `${BASE_URL}/seer/api/favorites`,
-        {
-          ticker,
-          exchange,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
+      // let response = await axios.post(
+      //   `${BASE_URL}/seer/api/favorites`,
+      //   {
+      //     ticker,
+      //     exchange,
+      //   },
+      //   {
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //       Authorization: `Bearer ${token}`,
+      //     },
+      //   }
+      // );
+
+      // var myHeaders = new Headers();
+      // myHeaders.append("Authorization", "Bearer " + localStorage.getItem("token"));
+      // myHeaders.append("Content-Type", "text/plain");
+
+      // var raw = "{\n    \"ticker\": \"TSLA\",\n    \"exchange\": \"NASDAQ\"\n}";
+
+      // var requestOptions = {
+      //   method: 'DELETE',
+      //   headers: myHeaders,
+      //   body: raw,
+      //   redirect: 'follow'
+      // };
+
+      // fetch("http://www.marketseer.ai/seer/api/favorites", requestOptions)
+      //   .then(response => response.text())
+      //   .then(result => console.log(result))
+      //   .catch(error => console.log('error', error));
+      var myHeaders = new Headers();
+      myHeaders.append(
+        "Authorization",
+        "Bearer " + localStorage.getItem("token")
       );
+      myHeaders.append("Content-Type", "application/json");
 
-      return response;
+      var raw = JSON.stringify({
+        ticker,
+        exchange,
+      });
+
+      var requestOptions = {
+        method: "DELETE",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
+
+      fetch("http://www.marketseer.ai/seer/api/favorites", requestOptions)
+        .then((response) => response.text())
+        .then((result) => console.log(result))
+        .catch((error) => console.log("error", error));
+
+      // return response;
     } catch (error) {
       console.log(error);
     }
@@ -251,13 +292,13 @@ function MarketerState(props) {
 
   const exportToCSV = async (ticker) => {
     try {
-      let token = localStorage.getItem("token")
+      let token = localStorage.getItem("token");
       let response = await axios.get(
         `${BASE_URL}/seer/api/influencers?ticker=${ticker}&type=csv`,
         {
-          headers:{
-            "Authorization":`Bearer ${token}`
-          }
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
 
@@ -378,30 +419,24 @@ function MarketerState(props) {
     }
   };
 
-
   // Following function is used to refresh the token:
 
-  const genRefreshToken = async ()=>{
+  const genRefreshToken = async () => {
     try {
-      
       let response = await axios.post(`${BASE_URL}/seer/token/refresh/`, {
-        refresh:localStorage.getItem("refresh_token")
+        refresh: localStorage.getItem("refresh_token"),
       });
       return response;
-
     } catch (error) {
       console.log(error);
-      
     }
-  }
-
+  };
 
   // Following function is used to set that the subscription of user is availabe or not:
 
-  const setExpiredFromOut = (state)=>{
-    setExpired(state)
-  }
-
+  const setExpiredFromOut = (state) => {
+    setExpired(state);
+  };
 
   return (
     <>

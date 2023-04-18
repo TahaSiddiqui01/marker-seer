@@ -1,4 +1,3 @@
-
 TODO: The graph seems broken (see screenshot)
 
 TODO: No BUY/ SELL signals. Note that the BUY and SELL signal has a start and end date. So only displaying BUY and SELL wont work. We need something like what I have on my google doc or something like a BUY followed by a "CLOSE POSITION". Similar for SELL.  ==========> I am working on it.
@@ -15,3 +14,26 @@ If the API doesn't return a value for a particular tile - please display "-" or 
 TODO: When the session is no longer valid please send the user to the login screen with the "Session expired. Please login again" (toast message). No need to show the popup in the dashboard. (screenshot attached)  =====> DONE
 
 TODO: I think I mentioned this before but once the user subscription has expired, all the pages except for the "Settings" page should be disabled or blurred or a note saying "Your subscription has expired". I can give you a mock for this if needed.  ==========> DONE
+
+
+
+
+
+
+
+
+
+
+
+
+
+=============================== Following Roadmap wil be used by me for getting my first client =============================
+
+
+TODO: Until tomorrow I will complete my portfolio website.
+
+
+TODO: I will complete my print on demand website till Sunday and After getting my printing machine I will launch my project
+
+
+TODO: 
