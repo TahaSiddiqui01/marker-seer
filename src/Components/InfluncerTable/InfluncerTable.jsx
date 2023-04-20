@@ -3,7 +3,7 @@ import "./InfluncerTable.css";
 import MarketerContext from "../../Context/MarketerContext";
 import { useNavigate, useParams } from "react-router-dom";
 
-function InfluncerTable() {
+function InfluncerTable(props) {
   const Navigate = useNavigate();
 
   const { ticket } = useParams();
@@ -13,9 +13,9 @@ function InfluncerTable() {
 
   const { getInfluncer } = useContext(MarketerContext);
   useEffect(() => {
-    getInfluncer(ticket, 10)
+    getInfluncer(ticket, props?.currentPage)
       .then((data) => {
-        console.log("Influncer data: ", data?.data);
+        // console.log("Influncer data: ", data?.data);
         setInfluncerData(data?.data);
       })
       .catch((error) => {

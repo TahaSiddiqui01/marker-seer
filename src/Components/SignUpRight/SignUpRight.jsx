@@ -50,11 +50,11 @@ function SignUpRight() {
       inputData?.referral
     ).then((data) => {
       if (data?.result?.description || !data?.success) {
-        console.log("It it wrong");
+        // console.log("It it wrong");
         setError(data?.result?.description);
       } else {
         Navigate("/login");
-        console.log("data result: ", data?.result);
+        // console.log("data result: ", data?.result);
         swal({
           title: "successfully signup",
           icon: "success",

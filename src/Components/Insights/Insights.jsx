@@ -12,7 +12,7 @@ function Insights(props) {
         <span className="signal-text robotoFamily">{props?.heading}</span>
       </div>
       <p
-        style={{ color: props?.signalTextColor, marginLeft: "1.90rem" }}
+        style={{ color: props?.color, marginLeft: "1.90rem" }}
         className="signal-highlight robotoFamily  my-2"
       >
         {props?.signal}

@@ -29,7 +29,7 @@ function ChartCompo(props) {
 
     setData(parseData);
 
-    console.log("Document load; ");
+    // console.log("Document load; ");
     const chartContainer = document.getElementById("my-chart-container");
     styles = window.getComputedStyle(chartContainer);
     // console.log(styles, "ldk");

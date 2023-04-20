@@ -4,17 +4,28 @@ import NavbarTop from "../NavbarTop/NavbarTop";
 import TaskScroll from "../../assets/Tasks scroll through.png";
 import DataCard from "../DataCard/DataCard";
 import MarketerContext from "../../Context/MarketerContext";
+import FadeLoader from "react-spinners/FadeLoader";
+
+const override = {
+  justifyContent: "center",
+  display: "flex",
+  alignItems: "center",
+};
 
 function DashboardRightData() {
   const { getFavourites, getUserData, setExpired, expired } =
     useContext(MarketerContext);
 
   const [favouriteData, setFavouriteData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getFavourites().then((data) => {
-      console.log("Favourite Data: ", data?.data);
+      // console.log("Favourite Data: ", data?.data);
       setFavouriteData(data?.data);
+      if (data?.data?.length <= 0) {
+        setIsLoading(false);
+      }
     });
   }, []);
 
@@ -34,11 +45,10 @@ function DashboardRightData() {
       }
     })
     .catch((error) => {
-      console.log(error);
+      // console.log(error);
     });
 
-    // I will make the 
-
+  // I will make the
 
   return (
     <>
@@ -73,16 +83,19 @@ function DashboardRightData() {
                         />
                       );
                     })
+                  ) : // <h2
+                  //   style={{
+                  //     margin: "3rem",
+                  //     fontWeight: "600",
+                  //     fontSize: "20px",
+                  //   }}
+                  // >
+                  //   Oops! nothing to show
+                  // </h2>
+                  isLoading ? (
+                    <FadeLoader cssOverride={override} color="#33a9c8" />
                   ) : (
-                    <h2
-                      style={{
-                        margin: "3rem",
-                        fontWeight: "600",
-                        fontSize: "20px",
-                      }}
-                    >
-                      Oops! nothing to show
-                    </h2>
+                    ""
                   )}
                 </div>
               </div>
@@ -105,16 +118,19 @@ function DashboardRightData() {
                         />
                       );
                     })
+                  ) : // <h2
+                  //   style={{
+                  //     margin: "3rem",
+                  //     fontWeight: "600",
+                  //     fontSize: "20px",
+                  //   }}
+                  // >
+                  //   Oops! nothing to show
+                  // </h2>
+                  isLoading ? (
+                    <FadeLoader cssOverride={override} color="#33a9c8" />
                   ) : (
-                    <h2
-                      style={{
-                        margin: "3rem",
-                        fontWeight: "600",
-                        fontSize: "20px",
-                      }}
-                    >
-                      Oops! nothing to show
-                    </h2>
+                    ""
                   )}
                 </div>
               </div>

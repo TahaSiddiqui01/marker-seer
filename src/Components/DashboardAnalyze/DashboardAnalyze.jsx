@@ -29,8 +29,8 @@ function DashboardAnalyze() {
   const [isInFavourite, setIsInFavourite] = useState(false);
 
   useEffect(() => {
-    getAnalyze(ticket, 30).then((data) => {
-      console.log("Analyze Data from page: ", data);
+    getAnalyze(ticket, 90).then((data) => {
+      // console.log("Analyze Data from page: ", data?.data?.metadata?.no_of_trades);
       setAnalyzeData(data?.data);
       let newDate = new Date(data?.data?.date);
       let utcDate = newDate.toUTCString().split(" ");
@@ -55,7 +55,7 @@ function DashboardAnalyze() {
   const addToFavourite = (ticker, exchange) => {
     addToFavourites(ticker, exchange)
       .then((data) => {
-        console.log("Add to favourite response: ", data);
+        // console.log("Add to favourite response: ", data);
         toast("Add to favourite successfully!", {
           position: "top-right",
           autoClose: 5000,
@@ -77,11 +77,7 @@ function DashboardAnalyze() {
     return <NavbarTop />;
   }, []);
 
-
   // This is the best way to see the work now I want to see that
-
-  
-
 
   return (
     <>
@@ -137,7 +133,7 @@ function DashboardAnalyze() {
                         analyzeData?.ticker?.ticker,
                         analyzeData?.ticker?.exchange
                       );
-                      setIsInFavourite(!isInFavourite)
+                      setIsInFavourite(!isInFavourite);
                     }}
                   />
                 ) : (
@@ -167,6 +163,7 @@ function DashboardAnalyze() {
                   signalColor={"#EF4782"}
                   signal={analyzeData?.signal || "N/A"}
                   signalTextColor={"#E21C57"}
+                  color="#E21C57"
                 />
                 <Insights
                   heading="Market Price"
@@ -176,6 +173,7 @@ function DashboardAnalyze() {
                   }
                   // signal={"$" + Math.round(analyzeData?.close)}
                   signalTextColor={"#E21C57"}
+                  color="#E21C57"
                 />
                 <Insights
                   heading="30 Day Strategy Performancce"
@@ -188,33 +186,45 @@ function DashboardAnalyze() {
                     "N/A"
                   }
                   signalTextColor={"#E21C57"}
+                  color="#1BB274"
                 />
                 <Insights
                   heading="AI Confidence Index"
                   signalColor={"#9D94FF"}
-                  signal={"N/A"}
+                  signal={
+                    analyzeData.ai_confidence_index
+                      ? parseFloat(analyzeData.ai_confidence_index).toFixed(2) + "%"
+                      : "N/A"
+                  }
                   signalTextColor={"#E21C57"}
+                  color="#324558"
                 />
                 <Insights
                   heading="No of Signals"
                   signalColor={"#42D6A4"}
-                  signal={analyzeData?.metadata?.no_of_trades || "N/A"}
+                  signal={analyzeData?.metadata?.no_of_trades === 0 || analyzeData?.metadata?.no_of_trades ? analyzeData?.metadata?.no_of_trades : "N/A" }
                   signalTextColor={"#E21C57"}
+                  color="#324558"
                 />
                 <Insights
                   heading="Next Predicted Signal"
                   signalColor={"#08CAD1"}
-                  signal={"N/A"}
+                  signal={analyzeData.predicted_signal ? analyzeData.predicted_signal : "N/A"}
                   signalTextColor={"#E21C57"}
+                  color="#1BB274"
                 />
                 <Insights
-                  heading="Next Predicted Signal"
+                  heading="Next Predicted Price"
                   signalColor={"#FF6961"}
                   signal={
-                    parseFloat(analyzeData?.predicted_close).toFixed(2) || "N/A"
+                    analyzeData.predicted_close
+                      ? "$" +
+                        parseFloat(analyzeData?.predicted_close).toFixed(2)
+                      : "N/A"
                   }
                   // signal={Math.round(analyzeData?.predicted_close)}
                   signalTextColor={"#E21C57"}
+                  color="#1BB274"
                 />
                 <Insights
                   heading="30 Day Market Performance"
@@ -226,22 +236,26 @@ function DashboardAnalyze() {
                     // Math.round(analyzeData?.metadata?.market_performance) + "%"
                   }
                   signalTextColor={"#E21C57"}
+                  color="#1BB274"
                 />
                 <Insights
                   heading="Prediction Accuracy"
                   signalColor={"#59ADF6"}
                   signal={
-                    parseFloat(analyzeData?.indicators?.ema_3).toFixed(2) ||
-                    "N/A"
+                    analyzeData.indicators
+                      ? parseFloat(analyzeData.indicators.ema_3).toFixed(2) +
+                        "%"
+                      : "N/A"
                   }
                   signalTextColor={"#E21C57"}
+                  color="#324558"
                 />
 
                 <div className="insight-child-arrow ">
                   <div className="m-2">
                     <div className="d-flex justify-content-start align-items-center my-2">
                       <span
-                        style={{ backgroundColor: "#59ADF6" }}
+                        style={{ backgroundColor: "#C780E8" }}
                         className="signal-circle mx-2"
                       ></span>
                       <span className="signal-text robotoFamily">
@@ -249,17 +263,17 @@ function DashboardAnalyze() {
                       </span>
                     </div>
                     <p
-                      style={{ color: "#59ADF6", marginLeft: "1.90rem" }}
+                      style={{ color: "#324558", marginLeft: "1.90rem" }}
                       className="signal-highlight robotoFamily  my-2"
                     >
                       {!analyzeData.influencer_count
                         ? "N/A"
-                        : analyzeData.influencer_count}
+                        : analyzeData?.influencer_count}
                     </p>
                   </div>
                   <div
                     onClick={
-                      !analyzeData.influencer_count
+                      !analyzeData?.influencer_count
                         ? ""
                         : () => Navigate(`/influncer/${ticket}`)
                     }

@@ -4,29 +4,25 @@ import LoginRight from "../LoginRight/LoginRight";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const Navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
+  // const Navigate = useNavigate();
+  // const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    let rememberMe = localStorage.getItem("remember");
+  // useEffect(() => {
+  //   let rememberMe = localStorage.getItem("remember");
 
-    if (JSON.parse(rememberMe)) {
-      Navigate("/");
-    } else {
-      setLoading(true);
-    }
-  }, []);
+  //   if (JSON.parse(rememberMe)) {
+  //     Navigate("/");
+  //   } else {
+  //     setLoading(true);
+  //   }
+  // }, []);
 
   return (
     <>
-      {loading ? (
         <div className="flex login-page items-center flex-wrap ">
           <LoginLeft />
           <LoginRight />
         </div>
-      ) : (
-        ""
-      )}
     </>
   );
 }

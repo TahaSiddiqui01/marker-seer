@@ -15,7 +15,7 @@ function SettingCompo() {
   useEffect(() => {
     getUserData()
       .then((data) => {
-        console.log("Response from profile data: ", data?.data);
+        // console.log("Response from profile data: ", data?.data);
         setProfileData(data?.data);
         let newDate = new Date(data?.data?.subscription_end_date);
         let utcDate = newDate.toUTCString().split(" ");
@@ -32,9 +32,24 @@ function SettingCompo() {
   };
 
   const changePass = () => {
+    if (password === "") {
+      toast.warn("Password can't be empty", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+
+      return;
+    }
+
     updatedPassword(password)
       .then((data) => {
-        console.log("Your password change: ", data);
+        // console.log("Your password change: ", data);
         toast.success("Password changed successfully!", {
           position: "top-right",
           autoClose: 5000,

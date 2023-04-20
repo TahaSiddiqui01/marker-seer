@@ -17,7 +17,7 @@ function MarketerState(props) {
         password,
       });
 
-      console.log("Login Data: ", response);
+      // console.log("Login Data: ", response);
 
       localStorage.setItem("token", response?.data?.access);
       localStorage.setItem("refresh_token", response?.data?.refresh);
@@ -45,7 +45,7 @@ function MarketerState(props) {
         referral,
       });
 
-      console.log("sign up data: ", response);
+      // console.log("sign up data: ", response);
 
       if (response?.status === 200) {
         return {
@@ -56,7 +56,7 @@ function MarketerState(props) {
         return { success: false };
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -75,7 +75,7 @@ function MarketerState(props) {
 
       return response;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -93,7 +93,7 @@ function MarketerState(props) {
 
       return response;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -114,7 +114,7 @@ function MarketerState(props) {
 
       return response;
     } catch (error) {
-      console.log("error: ", error);
+      // console.log("error: ", error);
     }
   };
 
@@ -134,7 +134,7 @@ function MarketerState(props) {
       );
       return response;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -142,7 +142,7 @@ function MarketerState(props) {
 
   const addToFavourites = async (ticker, exchange) => {
     try {
-      console.log("Ticker: ", ticker, "Exchange: ", exchange);
+      // console.log("Ticker: ", ticker, "Exchange: ", exchange);
 
       let token = localStorage.getItem("token");
 
@@ -162,7 +162,7 @@ function MarketerState(props) {
 
       return response;
     } catch (error) {
-      console.log("error: ", error);
+      // console.log("error: ", error);
       return new Error("There is an error", error);
     }
   };
@@ -171,7 +171,7 @@ function MarketerState(props) {
 
   const deleteFromFavourites = async (ticker, exchange) => {
     try {
-      console.log("Ticker: ", ticker, "Exchange: ", exchange);
+      // console.log("Ticker: ", ticker, "Exchange: ", exchange);
 
       let token = localStorage.getItem("token");
 
@@ -189,12 +189,12 @@ function MarketerState(props) {
         }
       );
 
-      console.log("DeleteFav Token: ", token);
+      // console.log("DeleteFav Token: ", token);
       return response;
     } catch (error) {
       let token = localStorage.getItem("token");
-      console.log("DeleteFav Token: ", token);
-      console.log("error: ", error);
+      // console.log("DeleteFav Token: ", token);
+      // console.log("error: ", error);
       return new Error("There is an error", error);
     }
   };
@@ -234,8 +234,8 @@ function MarketerState(props) {
 
       // fetch("http://www.marketseer.ai/seer/api/favorites", requestOptions)
       //   .then(response => response.text())
-      //   .then(result => console.log(result))
-      //   .catch(error => console.log('error', error));
+      //   .then(result => // console.log(result))
+      //   .catch(error => // console.log('error', error));
       var myHeaders = new Headers();
       myHeaders.append(
         "Authorization",
@@ -262,7 +262,7 @@ function MarketerState(props) {
 
       // return response;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -284,7 +284,7 @@ function MarketerState(props) {
 
       return response;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -294,6 +294,8 @@ function MarketerState(props) {
     try {
       let token = localStorage.getItem("token");
       let response = await axios.get(
+        
+        // `http://www.marketseer.ai/seer/api/influencers?ticker=NVDA&type=csv'`,
         `${BASE_URL}/seer/api/influencers?ticker=${ticker}&type=csv`,
         {
           headers: {
@@ -301,10 +303,10 @@ function MarketerState(props) {
           },
         }
       );
-
+      
       return response;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -323,7 +325,7 @@ function MarketerState(props) {
 
       return response;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -349,7 +351,7 @@ function MarketerState(props) {
 
       return response;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -373,7 +375,7 @@ function MarketerState(props) {
 
       return response;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -394,7 +396,7 @@ function MarketerState(props) {
       );
       return response;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -415,7 +417,7 @@ function MarketerState(props) {
 
       return response;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -428,7 +430,7 @@ function MarketerState(props) {
       });
       return response;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 

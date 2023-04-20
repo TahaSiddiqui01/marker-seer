@@ -25,14 +25,10 @@ function ForgotRight() {
 
     //username, password, mobile, email, referral
     forgotPassword(inputData?.email).then((data) => {
-      console.log("ForgotPasswordResponse: ", data);
+      // console.log("ForgotPasswordResponse: ", data);
       if (data?.data?.data === "Temporary password sent") {
-        Navigate("/login");
+        Navigate("/login/Temporary password sent");
 
-        swal({
-          title: "Temporary password sent",
-          icon: "success",
-        });
         setInputData({
           email: ""
         });

@@ -12,7 +12,7 @@ import "./LoginRight.css";
 
 import swal from "sweetalert";
 
-function LoginRight() {
+function LoginRight({msg}) {
   const Navigate = useNavigate();
 
   const { Login } = useContext(MarketerContext);
@@ -65,7 +65,7 @@ function LoginRight() {
   };
 
   const handleRememberMe = (e) => {
-    console.log(e.target.checked);
+    // console.log(e.target.checked);
     if (e.target.checked) {
       localStorage.setItem("remember", true);
     } else {
@@ -82,7 +82,15 @@ function LoginRight() {
         <p className="text-[#9F9F9F]">Sign in to your account</p>
 
         <div className="mt-24 flex flex-wrap flex-col m">
-          <p className="font-bold mt-6 text-red-600 text-center"> {error} </p>
+
+        {
+          msg ? 
+          <p className={`font-bold mt-6 ${msg.includes("password") ? "text-green-600" : "text-red-600"} text-center`}> { msg === "" ? error : msg} </p> : 
+          <p className={`font-bold mt-6 text-red-600 text-center`}> {error} </p>
+        }
+
+
+          {/* <p className={`font-bold mt-6 ${msg.includes("password") ? "text-green-600" : "text-red-600"} text-center`}> { msg === "" ? error : msg} </p> */}
           <div className="h-[79px]">
             <input
               className="custom-input shadow-[rgba(0, 0, 0, 0.25)] focus-visible:border-transparent"

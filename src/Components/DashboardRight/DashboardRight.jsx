@@ -22,7 +22,7 @@ function DashboardRight() {
   const { logoutTheUser } = useContext(MarketerContext);
 
   const handlesidebar = () => {
-    console.log("click");
+    // console.log("click");
     let dashNav = document.getElementsByClassName("dashboardLeft")[0];
     dashNav.classList.toggle("hide");
     let sides = document.getElementsByClassName("side_text");
@@ -34,13 +34,13 @@ function DashboardRight() {
 
   useEffect(() => {
     if (breakpoint.matches) {
-      console.log("It matches");
+      // console.log("It matches");
     }
   }, [breakpoint?.matches]);
 
   const logoutMe = () => {
     logoutTheUser().then((data) => {
-      console.log("Logout Response: ", data);
+      // console.log("Logout Response: ", data);
 
       localStorage.removeItem("token");
     });

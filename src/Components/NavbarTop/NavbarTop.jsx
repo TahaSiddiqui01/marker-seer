@@ -9,6 +9,8 @@ import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import { useCallback } from "react";
+import { useMemo } from "react";
 
 function NavbarTop() {
   const { getUserData, getFetchTicker } = useContext(MarketerContext);
@@ -20,30 +22,20 @@ function NavbarTop() {
 
   useEffect(() => {
     getUserData().then((data) => {
-      console.log("UserData ===> ", data?.data);
+      // console.log("UserData aaa===> ", data?.data);
       if (!data?.data) {
-        // swal("Your session has expired", "Please login again", "error");
-        toast.warn("Session expired. Please login again", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-        Navigate("/login");
+        Navigate("/login/Session Expired. Please login again.");
       }
       setUserData(data?.data);
     });
-  }, []);
+  }, [])
+  
 
   const searchTicker = async (e) => {
     try {
       setMsg(e.target.value);
       getFetchTicker(e.target.value.toUpperCase()).then((data) => {
-        console.log("Searched Ticket: ", data?.data);
+        // console.log("Searched Ticket: ", data?.data);
         setsearchedTicket(data?.data);
       });
 

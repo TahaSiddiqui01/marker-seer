@@ -1,3 +1,16 @@
+.color-white{
+  color: white !important;
+  background-color: #1994A1;
+}
+
+
+.deactive-link{
+  background-color: white !important;
+  color: black !important;
+  
+}
+
+
 @media (max-width:768px) {
   .DashboardHomeRight{
     max-width: 100% !important;

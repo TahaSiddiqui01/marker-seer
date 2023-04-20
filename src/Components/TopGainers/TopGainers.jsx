@@ -33,7 +33,7 @@ function TopGainers() {
     getData(currentPage, ITEMS_PER_PAGE);
 
     downloadCSV().then((data) => {
-      console.log("CSV data for download: ", data);
+      // console.log("CSV data for download: ", data);
       setCsvFetchedData(data?.data?.data);
     });
   }, []);
@@ -41,18 +41,18 @@ function TopGainers() {
   const getData = (page, limit) => {
     topGainer(page, limit)
       .then((data) => {
-        console.log(
-          "Showing TopGainer data for page: ",
-          currentPage + "\n",
-          data?.data
-        );
+        // console.log(
+        //   "Showing TopGainer data for page: ",
+        //   currentPage + "\n",
+        //   data?.data
+        // );
         setTotalPages(data?.data?.pages);
         setTotalItems(data?.data?.total);
 
         // setInfluncerData(data?.data);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 
@@ -139,7 +139,7 @@ function TopGainers() {
                       </li>
                       <li class="page-item">
                         <a
-                          class="page-link"
+                          class="page-link color-white"
                           onClick={() => handlePageChange(currentPage)}
                         >
                           {currentPage}

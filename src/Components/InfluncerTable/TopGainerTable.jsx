@@ -12,7 +12,7 @@ function TopGainerTable(props) {
   useEffect(() => {
     topGainer(props?.currentPage, 10)
       .then((data) => {
-        console.log("TopGainer data: ", data?.data);
+        // console.log("TopGainer data: ", data?.data);
         setInfluncerData(data?.data);
       })
       .catch((error) => {

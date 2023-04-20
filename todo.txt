@@ -1,39 +1,56 @@
-TODO: The graph seems broken (see screenshot)
 
-TODO: No BUY/ SELL signals. Note that the BUY and SELL signal has a start and end date. So only displaying BUY and SELL wont work. We need something like what I have on my google doc or something like a BUY followed by a "CLOSE POSITION". Similar for SELL.  ==========> I am working on it.
+TODO: Regarding the influencer issue: When you click on NVDA and click on Influencers:
+The title is supposed to show Influencers: NVDA Nvdia (Data from the NVDA ticker)
+It is currently showing the value of the first row of the table.   ==========> DONE
 
-TODO: Timer with token refresh API is not implemented. ======> DONE
+TODO: Regarding the pagination issue: If there is only a single page, the pagination should only show: Prev | 1 | Next (with next and previous disabled)
 
-TODO: Favorites is still broken. The toggle functionality is not working. I see an auth error when trying to favorited item.   ============> This is you error.
+It is currently showing: Prev | 1 | 1 | 2 | ... | 1 | Next   ==========> DONE
 
-TODO: Analyze page tiles don't match mocks.  =========> Everthing is ok (There is color difference between text)
+The API returns the number of pages - couldn't you estimate based on that?  =========> DONE
 
-TODO: Analyze screen has some invalid values on the tile or when the API doesn't return a value.
-If the API doesn't return a value for a particular tile - please display "-" or "N/A" (see screenshot)  ==========> DONE
+TODO: Regarding the charts: You can get more data by increasing the value for the days parameter. The default value is 30. You can increase it up to 90. Let me know if that helps.  =======> DONE
 
-TODO: When the session is no longer valid please send the user to the login screen with the "Session expired. Please login again" (toast message). No need to show the popup in the dashboard. (screenshot attached)  =====> DONE
+TODO: It seems like the dashboards show "Oops nothing to show" whenever it is loading data. Can we change that to a more meaningful loading gif/icon?  ====> DONE
 
-TODO: I think I mentioned this before but once the user subscription has expired, all the pages except for the "Settings" page should be disabled or blurred or a note saying "Your subscription has expired". I can give you a mock for this if needed.  ==========> DONE
+TODO: Influencers export to CSV:
+You just need to add type=csv
+
+To get influencers for NVDA:
+GET 'http://www.marketseer.ai/seer/api/influencers?ticker=NVDA'
+
+To export to CSV influencers of NVDA:
+GET 'http://www.marketseer.ai/seer/api/influencers?ticker=NVDA&type=csv'
+
+See screenshot.  ===========> DONE
+
+TODO: Analyze page showing incorrect information.
+Ex: FREQ:
+"no_of_trades": 0 : UI shows No of signals: N/A
+"predicted_signal": "NO_SIGNAL" : UI shows Next predicted signal: N/A
+
+Ex: GOOG:
+"ai_confidence_index": "97.61904761904762" : UI shows AI confidence index: N/A
+"predicted_signal": "NO_SIGNAL", : UI shows Next predicted signal: 106.61
+"30_day_directional_accuracy_percent": "0" : UI shows Prediction accuracy: 108.24
+
+Note: Next predicted signal is displayed twice.
+
+Also Next predicted price is missing.
+
+There are a lot of errors here. Please verify that the data is correctly being displayed on the UI.
+
+============> DONE
+
+TODO: Regarding token usage:
+This was the first token retrieved from /tokens:
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxOTQ1MDYxLCJqdGkiOiI5NTczZThkNGMyZGM0ODkyOGIxNWQ0YWRlOTc4YWY0YyIsInVzZXJuYW1lIjoia2lyYW4ifQ.UAHQ_TR8tAwtczde3TuXZ-U1-OhbaocG5Hoksh41Z6E
+
+later i see a call to /refresh and you received:
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxOTQ1ODAxLCJqdGkiOiIzYTkxMTYzOWQwNTQ0NWNiODU4MzM5MjAwM2Q2MGI1ZSIsInVzZXJuYW1lIjoia2lyYW4ifQ.z07GeBXnVkNkbdbgpeK9NrjDg1N
+
+later i see all API calls going with a different token.
+Can you please verify this?
 
 
-
-
-
-
-
-
-
-
-
-
-
-=============================== Following Roadmap wil be used by me for getting my first client =============================
-
-
-TODO: Until tomorrow I will complete my portfolio website.
-
-
-TODO: I will complete my print on demand website till Sunday and After getting my printing machine I will launch my project
-
-
-TODO: 
+TODO: I've also attached a few screenshot with too many API calls going out for each page.   ===========> DONE

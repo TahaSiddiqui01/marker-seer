@@ -14,26 +14,55 @@ function InfluncerRightCompo() {
   const { getInfluncer, exportToCSV, expired } = useContext(MarketerContext);
   const [influncerData, setInfluncerData] = useState([]);
   const [CSVData, setCSVData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalItems, setTotalItems] = useState(0);
+  const ITEMS_PER_PAGE = 10; // set the number of items per page
+  const [mappingPages, setMappingPages] = useState([]);
 
   useEffect(() => {
     getInfluncer(ticket, 10)
       .then((data) => {
-        console.log("Influncer Top data: ", data?.data?.data);
+        console.log("Influncer Top data: ", data?.data);
+        setTotalPages(data?.data?.pages);
+        setTotalItems(data?.data?.total);
         setInfluncerData(data?.data?.data);
+
+        let pagesArr = [];
+        for (let i = 1; i <= data?.data?.pages; i++) {
+          pagesArr.push(i);
+        }
+        setMappingPages(pagesArr);
       })
       .catch((error) => {
         console.log(error);
       });
 
-    exportToCSV().then((data) => {
-      console.log("Influncer CSV Data: ", data);
-      setCSVData(data?.data?.data);
+    exportToCSV(ticket).then((data) => {
+      setCSVData(data?.data);
     });
   }, []);
 
   const renderNavbar = useCallback(() => {
     return <NavbarTop />;
   }, []);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    getInfluncer(ticket, pageNumber);
+  };
+
+  const handlePrevious = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
   return (
     <>
@@ -104,34 +133,141 @@ function InfluncerRightCompo() {
                   </button>
                 )}
               </div>
-              <InfluncerTable />
+              <InfluncerTable currentPage={currentPage} />
 
-              <div className="d-flex justify-content-center align-items-center flex-wrap mx-1 my-5">
-                <nav
-                  style={{ color: "#324558" }}
-                  aria-label="Page flex-wrap pagination-bottom navigation example my-5"
-                >
-                  <ul
-                    style={{ gap: "10px" }}
-                    class="pagination d-flex justify-content-centera align-items-center flex-wrap"
+              <div className="d-flex justify-content-center align-items-center my-5">
+                {parseInt(totalPages) < 3 ? (
+                  <nav
+                    style={{ color: "#324558" }}
+                    aria-label="Page pagination-bottom navigation example my-5"
                   >
-                    <li class="page-item">
-                      <a class="page-link">Prev</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link">1</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link">2</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link">3</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link">Next</a>
-                    </li>
-                  </ul>
-                </nav>
+                    <ul style={{ gap: "10px" }} class="pagination">
+                      <li class="page-item">
+                        <a
+                          style={{ color: "black" }}
+                          class="page-link"
+                          onClick={handlePrevious}
+                        >
+                          Prev
+                        </a>
+                      </li>
+
+                      {mappingPages?.map((elem, index) => {
+                        return (
+                          <li class="page-item">
+                            <a
+                              class={` ${
+                                currentPage === index + 1
+                                  ? "page-link color-white"
+                                  : "page-link deactive-link"
+                              }`}
+                              onClick={() => handlePageChange(index + 1)}
+                            >
+                              {index + 1}
+                            </a>
+                          </li>
+                        );
+                      })}
+
+                      <li class="page-item">
+                        <a
+                          style={{ color: "black" }}
+                          class="page-link"
+                          onClick={handleNext}
+                        >
+                          Next
+                        </a>
+                      </li>
+                    </ul>
+                  </nav>
+                ) : (
+                  <nav
+                    style={{ color: "#324558" }}
+                    aria-label="Page pagination-bottom navigation example my-5"
+                  >
+                    <ul style={{ gap: "10px" }} class="pagination">
+                      {}
+                      <li class="page-item">
+                        <a
+                          style={{ color: "black" }}
+                          class="page-link"
+                          onClick={handlePrevious}
+                        >
+                          Prev
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a
+                          class="page-link color-white"
+                          onClick={() => handlePageChange(currentPage)}
+                        >
+                          {currentPage}
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a
+                          class="page-link"
+                          onClick={() =>
+                            handlePageChange(
+                              currentPage >= totalPages ? 1 : currentPage + 1
+                            )
+                          }
+                        >
+                          {currentPage >= totalPages ? 1 : currentPage + 1}
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a
+                          class="page-link"
+                          onClick={() =>
+                            handlePageChange(
+                              currentPage >= totalPages ? 2 : currentPage + 2
+                            )
+                          }
+                        >
+                          {currentPage >= totalPages ? 2 : currentPage + 2}
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link">...</a>
+                      </li>
+                      <li class="page-item">
+                        <a
+                          class="page-link"
+                          onClick={() => handlePageChange(totalPages)}
+                        >
+                          {totalPages}
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a
+                          style={{ color: "black" }}
+                          class="page-link"
+                          onClick={handleNext}
+                        >
+                          Next
+                        </a>
+                      </li>
+                    </ul>
+                    {/* <ul className="pagination">
+{pageNumbers.map((pageNumber) => (
+ <li
+   key={pageNumber}
+   className={`page-item ${
+     pageNumber === currentPage ? "active" : ""
+   }`}
+ >
+   <button
+     className="page-link"
+     onClick={() => handlePageChange(pageNumber)}
+   >
+     {pageNumber}
+   </button>
+ </li>
+))}
+</ul> */}
+                  </nav>
+                )}
               </div>
             </div>
           </>

@@ -56,12 +56,9 @@
 }
 
 .page-link {
-  color: #324558 !important;
-}
-
-.page-link {
   border-radius: 10px !important;
   cursor: pointer;
+  color:black !important;
 }
 
 .page-link:focus {

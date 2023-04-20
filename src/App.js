@@ -14,6 +14,7 @@ import TermsAndCondition from "./Components/TermsAndCondition/TermsAndCondition"
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import LoginMsg from "./Components/Login/LoginMsg";
 const BASE_URL = "http://www.marketseer.ai";
 
 function App() {
@@ -22,9 +23,9 @@ function App() {
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       // Perform token refresh logic here, e.g. fetching a new token from the server
-      console.log("Token has expired, refreshing...");
+      // console.log("Token has expired, refreshing...");
       genRefreshToken().then((data) => {
-        console.log("RefreshToken response: ", data?.data);
+        // console.log("RefreshToken response: ", data?.data);
         localStorage.setItem("token", data?.data?.access);
         localStorage.setItem("refresh_token", data?.data?.refresh);
       });
@@ -76,6 +77,7 @@ function App() {
           <Routes>
             <Route path="/" element={<DashboardData />}></Route>
             <Route path="/login" element={<Login />}></Route>
+            <Route path="/login/:msg" element={<LoginMsg />}></Route>
             <Route path="/forgot" element={<Forgot />}></Route>
             <Route path="/sign-up" element={<SignUp />}></Route>
             <Route path="/dash-placeholder" element={<DashHomePage />}></Route>
