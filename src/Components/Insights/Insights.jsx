@@ -11,12 +11,49 @@ function Insights(props) {
         ></span>
         <span className="signal-text robotoFamily">{props?.heading}</span>
       </div>
-      <p
-        style={{ color: props?.color, marginLeft: "1.90rem" }}
-        className="signal-highlight robotoFamily  my-2"
-      >
-        {props?.signal}
-      </p>
+
+      {
+        props?.heading === "Current Signal" || props?.heading === "Next Predicted Signal" ? <>
+
+          {
+            props?.signal === "SELL" ?
+              <p
+                style={{ color: "#1BB274", marginLeft: "1.90rem" }}
+                className="signal-highlight robotoFamily  my-2"
+              >
+                {props?.signal}
+              </p> : ""
+          }
+
+          {
+            props?.signal === "BUY" ?
+              <p
+                style={{ color: "#E21C57", marginLeft: "1.90rem" }}
+                className="signal-highlight robotoFamily  my-2"
+              >
+                {props?.signal}
+              </p> : ""
+          }
+
+          {
+            props?.signal === "NO_SIGNAL" ?
+              <p
+                style={{ color: "#324558", marginLeft: "1.90rem" }}
+                className="signal-highlight robotoFamily  my-2"
+              >
+                {props?.signal}
+              </p> : ""
+          }
+        </> : <p
+                style={{ color: props?.color, marginLeft: "1.90rem" }}
+                className="signal-highlight robotoFamily  my-2"
+              >
+                {props?.signal}
+              </p> 
+      }
+
+
+
     </div>
   );
 }

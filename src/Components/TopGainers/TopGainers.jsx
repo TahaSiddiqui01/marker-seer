@@ -18,6 +18,7 @@ function TopGainers() {
   const [totalPages, setTotalPages] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
   const ITEMS_PER_PAGE = 10; // set the number of items per page
+  const [mappingPages, setMappingPages] = useState([]);
 
   const pageNumbers = [];
   for (let i = 1; i <= totalPages; i++) {
@@ -50,6 +51,12 @@ function TopGainers() {
         setTotalItems(data?.data?.total);
 
         // setInfluncerData(data?.data);
+
+        let pagesArr = [];
+        for (let i = 1; i <= data?.data?.pages; i++) {
+          pagesArr.push(i);
+        }
+        setMappingPages(pagesArr);
       })
       .catch((error) => {
         // console.log(error);
@@ -126,6 +133,51 @@ function TopGainers() {
                 <TopGainerTable currentPage={currentPage} />
 
                 <div className="d-flex justify-content-center align-items-center my-5">
+                {parseInt(totalPages) < 3 ? (
+                  <nav
+                    style={{ color: "#324558" }}
+                    aria-label="Page pagination-bottom navigation example my-5"
+                  >
+                    <ul style={{ gap: "10px" }} class="pagination">
+                      <li class="page-item">
+                        <a
+                          style={{ color: "black" }}
+                          class="page-link"
+                          onClick={handlePrevious}
+                        >
+                          Prev
+                        </a>
+                      </li>
+
+                      {mappingPages?.map((elem, index) => {
+                        return (
+                          <li class="page-item">
+                            <a
+                              class={` ${
+                                currentPage === index + 1
+                                  ? "page-link color-white"
+                                  : "page-link deactive-link"
+                              }`}
+                              onClick={() => handlePageChange(index + 1)}
+                            >
+                              {index + 1}
+                            </a>
+                          </li>
+                        );
+                      })}
+
+                      <li class="page-item">
+                        <a
+                          style={{ color: "black" }}
+                          class="page-link"
+                          onClick={handleNext}
+                        >
+                          Next
+                        </a>
+                      </li>
+                    </ul>
+                  </nav>
+                ) : (
                   <nav
                     style={{ color: "#324558" }}
                     aria-label="Page pagination-bottom navigation example my-5"
@@ -133,7 +185,11 @@ function TopGainers() {
                     <ul style={{ gap: "10px" }} class="pagination">
                       {}
                       <li class="page-item">
-                        <a class="page-link" onClick={handlePrevious}>
+                        <a
+                          style={{ color: "black" }}
+                          class="page-link"
+                          onClick={handlePrevious}
+                        >
                           Prev
                         </a>
                       </li>
@@ -175,35 +231,40 @@ function TopGainers() {
                       <li class="page-item">
                         <a
                           class="page-link"
-                          onClick={() => handlePageChange(totalPages)}
+                          onClick={() => handlePageChange(totalPages === currentPage ? totalPages-1 : totalPages)}
                         >
-                          {totalPages}
+                          {totalPages === currentPage ? totalPages-1 : totalPages}
                         </a>
                       </li>
                       <li class="page-item">
-                        <a class="page-link" onClick={handleNext}>
+                        <a
+                          style={{ color: "black" }}
+                          class="page-link"
+                          onClick={handleNext}
+                        >
                           Next
                         </a>
                       </li>
                     </ul>
                     {/* <ul className="pagination">
-                  {pageNumbers.map((pageNumber) => (
-                    <li
-                      key={pageNumber}
-                      className={`page-item ${
-                        pageNumber === currentPage ? "active" : ""
-                      }`}
-                    >
-                      <button
-                        className="page-link"
-                        onClick={() => handlePageChange(pageNumber)}
-                      >
-                        {pageNumber}
-                      </button>
-                    </li>
-                  ))}
-                </ul> */}
+{pageNumbers.map((pageNumber) => (
+ <li
+   key={pageNumber}
+   className={`page-item ${
+     pageNumber === currentPage ? "active" : ""
+   }`}
+ >
+   <button
+     className="page-link"
+     onClick={() => handlePageChange(pageNumber)}
+   >
+     {pageNumber}
+   </button>
+ </li>
+))}
+</ul> */}
                   </nav>
+                )}
                 </div>
               </div>
             </div>

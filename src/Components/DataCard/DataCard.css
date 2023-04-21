@@ -3,7 +3,7 @@
   border-radius: 8px;
   width: 100%;
   max-width: 363px !important;
-  
+
 }
 
 .data-coin {
@@ -28,6 +28,7 @@
   font-weight: 500;
   font-size: 26px;
 }
+
 .card_grid {
   display: flex;
   gap: 10px;
@@ -44,6 +45,24 @@
   font-weight: 500;
 }
 
+.buy-btn {
+  color: #1BB274;
+  background: rgba(27, 178, 116, 0.1);
+  padding: 4px 22px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.nosignal-btn {
+  color: #FFB800;
+  background-color: rgba(255, 184, 0, 0.1);
+  padding: 4px 22px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
 .gain-btn {
   color: #1994a1;
   background-color: rgba(25, 148, 161, 0.1);
@@ -52,9 +71,9 @@
   cursor: pointer;
   font-weight: 500;
 }
-@media  (max-width:500px){
 
-}
+@media (max-width:500px) {}
+
 @media screen and (max-width: 375px) {
   .amount-percent {
     font-size: 12px;
@@ -76,11 +95,12 @@
   .data-coin-date {
     font-size: 10px;
   }
-  .data-card{
+
+  .data-card {
     max-width: 240px;
   }
 
-  
+
 }
 
 

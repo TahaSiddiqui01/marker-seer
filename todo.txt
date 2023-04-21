@@ -1,56 +1,74 @@
+Feedback after last commit:
 
-TODO: Regarding the influencer issue: When you click on NVDA and click on Influencers:
-The title is supposed to show Influencers: NVDA Nvdia (Data from the NVDA ticker)
-It is currently showing the value of the first row of the table.   ==========> DONE
+FIXME: Token is expiring after a while. The refresh token should keep refreshing the token as long as there is activity on the site. See screenshot.
 
-TODO: Regarding the pagination issue: If there is only a single page, the pagination should only show: Prev | 1 | Next (with next and previous disabled)
+2. Ticker search is querying for empty strings. Please put a validation here to make sure it doesn't make empty looookups. See screenshot.  ==========> DONE
 
-It is currently showing: Prev | 1 | 1 | 2 | ... | 1 | Next   ==========> DONE
+3. On the dashboard - can you change the icon when the percent is negative vs positive? See screenshot/mocks.  =======> DONE
 
-The API returns the number of pages - couldn't you estimate based on that?  =========> DONE
+4. On the dashboard, BUY should be green, SELL should be red, NO SIGNAL should be grey.
+See screenshot/mocks.  ==========> DONE
 
-TODO: Regarding the charts: You can get more data by increasing the value for the days parameter. The default value is 30. You can increase it up to 90. Let me know if that helps.  =======> DONE
+5. Next predicted price should show the price and the range. See screenshot and google doc.
+Note: It should be green if the next predicted price is higher than the market price and red if it is lower.  ==============> DONE
 
-TODO: It seems like the dashboards show "Oops nothing to show" whenever it is loading data. Can we change that to a more meaningful loading gif/icon?  ====> DONE
+6. Minor: Please remove the down arrow next to the username / image. See screenshot.  =======> DONE
 
-TODO: Influencers export to CSV:
-You just need to add type=csv
+7. Multiple API calls on top gainers page. See screenshot.  =====> DONE
 
-To get influencers for NVDA:
-GET 'http://www.marketseer.ai/seer/api/influencers?ticker=NVDA'
+8. Multiple API calls on dashboard page. See screenshot.  ==========> DONE
 
-To export to CSV influencers of NVDA:
-GET 'http://www.marketseer.ai/seer/api/influencers?ticker=NVDA&type=csv'
+9. On the insights tab, could you keep all the text values as black except for:  ======>
+Current signal: Green if BUY and red if SELL. Black if NO_SIGNAL  ======> DONE
+Next predicted signal: Green if BUY and red if SELL. Black if NO_SIGNAL  ========> DONE
+Next predicted price: Green if value is higher than market price and red if lower than market price. Black if same as markookups. See screenshot. =====> DONE
 
-See screenshot.  ===========> DONE
+3. On the dashboard - can you change the icon when the percent is negative vs positive? See screenshot/mocks.  =======> DONE
 
-TODO: Analyze page showing incorrect information.
-Ex: FREQ:
-"no_of_trades": 0 : UI shows No of signals: N/A
-"predicted_signal": "NO_SIGNAL" : UI shows Next predicted signal: N/A
+11. Clicking on the influencers of NVDA should show NVDA as the title. Not QTEC. See screenshot. QTEC is a row in the table.  ===========> DONE
 
-Ex: GOOG:
-"ai_confidence_index": "97.61904761904762" : UI shows AI confidence index: N/A
-"predicted_signal": "NO_SIGNAL", : UI shows Next predicted signal: 106.61
-"30_day_directional_accuracy_percent": "0" : UI shows Prediction accuracy: 108.24
+FIXME: UI is not getting disabled when subscription expires. See screenshot. Dashboard should be blurred out. All tabs except for settings should be disabled.
+Please don't make any API calls (except for /users) at this time as they will fail.
 
-Note: Next predicted signal is displayed twice.
+13. Can you remove the word "NAVIGATION" from the navigation bar?  =========> DONE
 
-Also Next predicted price is missing.
+FIXME: pagination
 
-There are a lot of errors here. Please verify that the data is correctly being displayed on the UI.
-
-============> DONE
-
-TODO: Regarding token usage:
-This was the first token retrieved from /tokens:
-eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxOTQ1MDYxLCJqdGkiOiI5NTczZThkNGMyZGM0ODkyOGIxNWQ0YWRlOTc4YWY0YyIsInVzZXJuYW1lIjoia2lyYW4ifQ.UAHQ_TR8tAwtczde3TuXZ-U1-OhbaocG5Hoksh41Z6E
-
-later i see a call to /refresh and you received:
-eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxOTQ1ODAxLCJqdGkiOiIzYTkxMTYzOWQwNTQ0NWNiODU4MzM5MjAwM2Q2MGI1ZSIsInVzZXJuYW1lIjoia2lyYW4ifQ.z07GeBXnVkNkbdbgpeK9NrjDg1N
-
-later i see all API calls going with a different token.
-Can you please verify this?
+Thank You
 
 
-TODO: I've also attached a few screenshot with too many API calls going out for each page.   ===========> DONE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              {
+                props?.signal === "SELL" ? <span className="sell-btn">{props?.signal}</span> : ""
+              }
+
+              {
+                props?.signal === "BUY" ? <span className="buy-btn">{props?.signal}</span> : ""
+              }
+
+              {
+                props?.signal === "NO_SIGNAL" ? <span className="nosignal-btn">{props?.signal}</span> : ""
+              }

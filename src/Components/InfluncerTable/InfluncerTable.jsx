@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import "./InfluncerTable.css";
 import MarketerContext from "../../Context/MarketerContext";
 import { useNavigate, useParams } from "react-router-dom";
+import FadeLoader from "react-spinners/FadeLoader";
 
 function InfluncerTable(props) {
   const Navigate = useNavigate();
@@ -21,7 +22,7 @@ function InfluncerTable(props) {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [props?.currentPage]);
 
   return (
     <>
@@ -59,7 +60,7 @@ function InfluncerTable(props) {
                       {parseFloat(data?.similarity).toFixed(2) + "%"}
                       {/* {Math.round(data?.similarity) + "%"} */}
                     </td>
-                    <td style={{ color: "#D42722" }} className="table-data">
+                    <td style={{ color: data?.signal == "SELL" ? "#D42722" : "#1994A1" }} className="table-data">
                       {data?.signal}
                     </td>
                   </tr>
@@ -79,9 +80,15 @@ function InfluncerTable(props) {
           </table>
         </div>
       ) : (
-        <h2 style={{ margin: "3rem", fontWeight: "600", fontSize: "20px" }}>
-          Oops! nothing to show
-        </h2>
+        // <h2 style={{ margin: "3rem", fontWeight: "600", fontSize: "20px" }}>
+
+        //   Data is loading...
+        // </h2>
+
+        <div className="d-flex justify-content-center align-items-center">
+          <FadeLoader color="#33a9c8" />
+        </div>
+
       )}
     </>
   );

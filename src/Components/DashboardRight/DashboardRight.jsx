@@ -61,7 +61,7 @@ function DashboardRight() {
             cc
           />
         </div>
-        <div className="navigation-text side_text"> NAVIGATIONS</div>
+        {/* <div className="navigation-text side_text"> NAVIGATIONS</div> */}
         <div
           onClick={() => {
             Navigate("/");

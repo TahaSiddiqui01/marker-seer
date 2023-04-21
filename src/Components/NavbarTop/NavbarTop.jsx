@@ -29,15 +29,18 @@ function NavbarTop() {
       setUserData(data?.data);
     });
   }, [])
-  
+
 
   const searchTicker = async (e) => {
     try {
       setMsg(e.target.value);
-      getFetchTicker(e.target.value.toUpperCase()).then((data) => {
-        // console.log("Searched Ticket: ", data?.data);
-        setsearchedTicket(data?.data);
-      });
+
+      if (e.target.value != "") {
+        getFetchTicker(e.target.value.toUpperCase()).then((data) => {
+          // console.log("Searched Ticket: ", data?.data);
+          setsearchedTicket(data?.data);
+        });
+      }
 
       if (e.target.value === "") {
         setShowInput(false);
@@ -82,9 +85,8 @@ function NavbarTop() {
             <img className="search-icon" src={SearchIcon} alt="" />
 
             <div
-              className={` ${
-                showInput ? "d-flex" : "d-none"
-              } autocomplete py-2 px-3`}
+              className={` ${showInput ? "d-flex" : "d-none"
+                } autocomplete py-2 px-3`}
               style={{ position: "relative" }}
             >
               <div className={` autocomplete-child `}>
@@ -121,34 +123,17 @@ function NavbarTop() {
           >
             {userData?.subscription?.description}
           </button>
-          <div className="dropdown">
-            <button
-              className="btn btn-secondary top dropdown-top dropdown-toggle"
+
+          <button
+              className=" d-flex justify-content-center align-items-center "
               type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
             >
               <img className="useImage" src={User} alt="" />
               {userData?.username}
             </button>
-            <ul className="dropdown-menu">
-              <li>
-                <a className="dropdown-item" href="#">
-                  Action
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Another action
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Something else here
-                </a>
-              </li>
-            </ul>
-          </div>
+          {/* <div className="dropdown">
+            
+          </div> */}
         </div>
       </div>
     </>

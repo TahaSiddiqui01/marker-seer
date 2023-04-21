@@ -87,7 +87,8 @@ function InfluncerRightCompo() {
                 Influencers
               </p>
               <span className="gain-btn influner-top-btn">
-                {influncerData?.length > 0 ? influncerData[0]?.ticker : ""}
+                {/* {influncerData?.length > 0 ? influncerData[0]?.ticker : ""} */}
+                {ticket}
               </span>
               <div className="d-flex influncer-coin-heading jusitfy-content-center align-items-center ">
                 <span
@@ -234,9 +235,9 @@ function InfluncerRightCompo() {
                       <li class="page-item">
                         <a
                           class="page-link"
-                          onClick={() => handlePageChange(totalPages)}
+                          onClick={() => handlePageChange(totalPages === currentPage ? totalPages-1 : totalPages)}
                         >
-                          {totalPages}
+                          {totalPages === currentPage ? totalPages-1 : totalPages}
                         </a>
                       </li>
                       <li class="page-item">

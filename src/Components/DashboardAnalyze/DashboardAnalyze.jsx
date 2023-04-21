@@ -159,7 +159,7 @@ function DashboardAnalyze() {
               </div>
               <div className="card_grid insightDataShow mt-4">
                 <Insights
-                  heading="Current signal"
+                  heading="Current Signal"
                   signalColor={"#EF4782"}
                   signal={analyzeData?.signal || "N/A"}
                   signalTextColor={"#E21C57"}
@@ -173,7 +173,7 @@ function DashboardAnalyze() {
                   }
                   // signal={"$" + Math.round(analyzeData?.close)}
                   signalTextColor={"#E21C57"}
-                  color="#E21C57"
+                  color="#324558"
                 />
                 <Insights
                   heading="30 Day Strategy Performancce"
@@ -186,7 +186,7 @@ function DashboardAnalyze() {
                     "N/A"
                   }
                   signalTextColor={"#E21C57"}
-                  color="#1BB274"
+                  color="#324558"
                 />
                 <Insights
                   heading="AI Confidence Index"
@@ -211,7 +211,7 @@ function DashboardAnalyze() {
                   signalColor={"#08CAD1"}
                   signal={analyzeData.predicted_signal ? analyzeData.predicted_signal : "N/A"}
                   signalTextColor={"#E21C57"}
-                  color="#1BB274"
+                  color={"#1BB274"}
                 />
                 <Insights
                   heading="Next Predicted Price"
@@ -219,12 +219,12 @@ function DashboardAnalyze() {
                   signal={
                     analyzeData.predicted_close
                       ? "$" +
-                        parseFloat(analyzeData?.predicted_close).toFixed(2)
+                        parseFloat(analyzeData?.predicted_close).toFixed(2) + ` (+/-${(parseFloat(analyzeData?.predicted_close) - parseFloat(analyzeData?.predicted_close_range_start)).toFixed(2)})`
                       : "N/A"
                   }
                   // signal={Math.round(analyzeData?.predicted_close)}
                   signalTextColor={"#E21C57"}
-                  color="#1BB274"
+                  color={ parseFloat(analyzeData?.predicted_close).toFixed(2) != parseFloat(analyzeData?.close).toFixed(2) ? parseFloat(analyzeData?.predicted_close).toFixed(2) > parseFloat(analyzeData?.close).toFixed(2) ? "#1BB274" : "#E21C57" : "#324558"}
                 />
                 <Insights
                   heading="30 Day Market Performance"
@@ -236,7 +236,7 @@ function DashboardAnalyze() {
                     // Math.round(analyzeData?.metadata?.market_performance) + "%"
                   }
                   signalTextColor={"#E21C57"}
-                  color="#1BB274"
+                  color="#324558"
                 />
                 <Insights
                   heading="Prediction Accuracy"
