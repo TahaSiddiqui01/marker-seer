@@ -14,6 +14,8 @@ function InfluncerTable(props) {
 
   const { getInfluncer } = useContext(MarketerContext);
   useEffect(() => {
+
+
     getInfluncer(ticket, props?.currentPage)
       .then((data) => {
         // console.log("Influncer data: ", data?.data);

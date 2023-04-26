@@ -1,40 +1,36 @@
-Feedback after last commit:
+TODO: Analyze page: Search and click not working  ==========> DONE
 
-FIXME: Token is expiring after a while. The refresh token should keep refreshing the token as long as there is activity on the site. See screenshot.
+TODO: Analyze page: Prediction accuracy value is incorrect.
 
-2. Ticker search is querying for empty strings. Please put a validation here to make sure it doesn't make empty looookups. See screenshot.  ==========> DONE
+It needs to be populated from indicators.30_day_directional_accuracy_percent.  =========> DONE
 
-3. On the dashboard - can you change the icon when the percent is negative vs positive? See screenshot/mocks.  =======> DONE
 
-4. On the dashboard, BUY should be green, SELL should be red, NO SIGNAL should be grey.
-See screenshot/mocks.  ==========> DONE
+TODO: The ticker has been fixed, but the description is still incorrect. =========> DONE
 
-5. Next predicted price should show the price and the range. See screenshot and google doc.
-Note: It should be green if the next predicted price is higher than the market price and red if it is lower.  ==============> DONE
+TODO: Still see the issue. See NOK ticker.
+SELL is green. Should be red. ==========> DONE
 
-6. Minor: Please remove the down arrow next to the username / image. See screenshot.  =======> DONE
+TODO: Pagination is still incorrect.
+Steps to reproduce: Click on Top gainers > Check on the last page (655)
 
-7. Multiple API calls on top gainers page. See screenshot.  =====> DONE
+I see 654, 655, 656 ... 655   ==================> DONE
 
-8. Multiple API calls on dashboard page. See screenshot.  ==========> DONE
 
-9. On the insights tab, could you keep all the text values as black except for:  ======>
-Current signal: Green if BUY and red if SELL. Black if NO_SIGNAL  ======> DONE
-Next predicted signal: Green if BUY and red if SELL. Black if NO_SIGNAL  ========> DONE
-Next predicted price: Green if value is higher than market price and red if lower than market price. Black if same as markookups. See screenshot. =====> DONE
 
-3. On the dashboard - can you change the icon when the percent is negative vs positive? See screenshot/mocks.  =======> DONE
+TODO: Token is expiring after a while. The refresh token should keep refreshing the token as long as there is activity on the site. See screenshot.
 
-11. Clicking on the influencers of NVDA should show NVDA as the title. Not QTEC. See screenshot. QTEC is a row in the table.  ===========> DONE
+TODO Multiple API calls on top gainers page. See screenshot.
 
-FIXME: UI is not getting disabled when subscription expires. See screenshot. Dashboard should be blurred out. All tabs except for settings should be disabled.
-Please don't make any API calls (except for /users) at this time as they will fail.
+TODO: Multiple API calls on dashboard page. See screenshot.
 
-13. Can you remove the word "NAVIGATION" from the navigation bar?  =========> DONE
 
-FIXME: pagination
+TODO: There seems to be an issue with the pagination if you go to the last page. See screenshot. =======> DONE
 
-Thank You
+
+TODO: UI is not getting disabled when subscription expires. See screenshot. Dashboard should be blurred out. All tabs except for settings should be disabled.
+Please don't make any API calls (except for /users) at this time as they will fail.  ===========> DONE
+
+TODO: 
 
 
 
@@ -49,26 +45,148 @@ Thank You
 
 
 
+===============================> Waste 
 
 
 
 
+{parseInt(totalPages) < 3 ? (
+                    <nav
+                      style={{ color: "#324558" }}
+                      aria-label="Page pagination-bottom navigation example my-5"
+                    >
+                      <ul style={{ gap: "10px" }} class="pagination">
+                        <li class="page-item">
+                          <a
+                            style={{ color: "black" }}
+                            class="page-link"
+                            onClick={handlePrevious}
+                          >
+                            Prev
+                          </a>
+                        </li>
 
+                        {mappingPages?.map((elem, index) => {
+                          return (
+                            <li class="page-item">
+                              <a
+                                class={` ${
+                                  currentPage === index + 1
+                                    ? "page-link color-white"
+                                    : "page-link deactive-link"
+                                }`}
+                                onClick={() => handlePageChange(index + 1)}
+                              >
+                                {index + 1}
+                              </a>
+                            </li>
+                          );
+                        })}
 
-
-
-
-
-
-
-              {
-                props?.signal === "SELL" ? <span className="sell-btn">{props?.signal}</span> : ""
-              }
-
-              {
-                props?.signal === "BUY" ? <span className="buy-btn">{props?.signal}</span> : ""
-              }
-
-              {
-                props?.signal === "NO_SIGNAL" ? <span className="nosignal-btn">{props?.signal}</span> : ""
-              }
+                        <li class="page-item">
+                          <a
+                            style={{ color: "black" }}
+                            class="page-link"
+                            onClick={handleNext}
+                          >
+                            Next
+                          </a>
+                        </li>
+                      </ul>
+                    </nav>
+                  ) : (
+                    <nav
+                      style={{ color: "#324558" }}
+                      aria-label="Page pagination-bottom navigation example my-5"
+                    >
+                      <ul style={{ gap: "10px" }} class="pagination">
+                        {}
+                        <li class="page-item">
+                          <a
+                            style={{ color: "black" }}
+                            class="page-link"
+                            onClick={handlePrevious}
+                          >
+                            Prev
+                          </a>
+                        </li>
+                        <li class="page-item">
+                          <a
+                            class="page-link color-white"
+                            onClick={() => handlePageChange(currentPage)}
+                          >
+                            {currentPage}
+                          </a>
+                        </li>
+                        <li class="page-item">
+                          <a
+                            class="page-link"
+                            onClick={() =>
+                              handlePageChange(
+                                currentPage >= totalPages ? 1 : currentPage + 1
+                              )
+                            }
+                          >
+                            {currentPage >= totalPages ? 1 : currentPage + 1}
+                          </a>
+                        </li>
+                        <li class="page-item">
+                          <a
+                            class="page-link"
+                            onClick={() =>
+                              handlePageChange(
+                                currentPage >= totalPages ? 2 : currentPage + 2
+                              )
+                            }
+                          >
+                            {currentPage >= totalPages ? 2 : currentPage + 2}
+                          </a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link">...</a>
+                        </li>
+                        <li class="page-item">
+                          <a
+                            class="page-link"
+                            onClick={() =>
+                              handlePageChange(
+                                totalPages === currentPage
+                                  ? totalPages - 1
+                                  : totalPages
+                              )
+                            }
+                          >
+                            {totalPages === currentPage
+                              ? totalPages - 1
+                              : totalPages}
+                          </a>
+                        </li>
+                        <li class="page-item">
+                          <a
+                            style={{ color: "black" }}
+                            class="page-link"
+                            onClick={handleNext}
+                          >
+                            Next
+                          </a>
+                        </li>
+                      </ul>
+                      {/* <ul className="pagination">
+{pageNumbers.map((pageNumber) => (
+ <li
+   key={pageNumber}
+   className={`page-item ${
+     pageNumber === currentPage ? "active" : ""
+   }`}
+ >
+   <button
+     className="page-link"
+     onClick={() => handlePageChange(pageNumber)}
+   >
+     {pageNumber}
+   </button>
+ </li>
+))}
+</ul> */}
+                    </nav>
+                  )}

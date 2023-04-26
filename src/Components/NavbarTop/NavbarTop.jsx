@@ -21,15 +21,20 @@ function NavbarTop() {
   const Navigate = useNavigate();
 
   useEffect(() => {
-    getUserData().then((data) => {
-      // console.log("UserData aaa===> ", data?.data);
-      if (!data?.data) {
-        Navigate("/login/Session Expired. Please login again.");
-      }
-      setUserData(data?.data);
-    });
-  }, [])
+    let token = localStorage.getItem("token");
 
+    if (token) {
+      getUserData().then((data) => {
+        // console.log("UserData aaa===> ", data?.data);
+        if (!data?.data) {
+          Navigate("/login/Session Expired. Please login again.");
+        }
+        setUserData(data?.data);
+      });
+    } else {
+      Navigate("/login");
+    }
+  }, []);
 
   const searchTicker = async (e) => {
     try {
@@ -85,15 +90,19 @@ function NavbarTop() {
             <img className="search-icon" src={SearchIcon} alt="" />
 
             <div
-              className={` ${showInput ? "d-flex" : "d-none"
-                } autocomplete py-2 px-3`}
+              className={` ${
+                showInput ? "d-flex" : "d-none"
+              } autocomplete py-2 px-3`}
               style={{ position: "relative" }}
             >
               <div className={` autocomplete-child `}>
                 {searchedTicket?.length > 0 ? (
                   searchedTicket?.map((elem) => {
                     return (
-                      <Link to={`/analyze/${elem?.ticker}`}>
+                      <Link
+                        to={`/analyze/${elem?.ticker}`}
+                        onClick={() => setShowInput(false)}
+                      >
                         <div className="d-flex highlight-search justify-content-beteween align-items-center">
                           <div>
                             <span className="auto-ticker">{elem?.ticker}</span>
@@ -125,12 +134,12 @@ function NavbarTop() {
           </button>
 
           <button
-              className=" d-flex justify-content-center align-items-center "
-              type="button"
-            >
-              <img className="useImage" src={User} alt="" />
-              {userData?.username}
-            </button>
+            className=" d-flex justify-content-center align-items-center "
+            type="button"
+          >
+            <img className="useImage" src={User} alt="" />
+            {userData?.username}
+          </button>
           {/* <div className="dropdown">
             
           </div> */}

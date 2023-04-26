@@ -6,11 +6,15 @@ import Csv from "../../assets/Export Icon.png";
 import "./InfluncerRightCompo.css";
 import InfluncerTable from "../InfluncerTable/InfluncerTable";
 import MarketerContext from "../../Context/MarketerContext";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { CSVLink } from "react-csv";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 
 function InfluncerRightCompo() {
-  const { ticket } = useParams();
+  const { ticket, exchange } = useParams();
+  const location = useLocation();
+
   const { getInfluncer, exportToCSV, expired } = useContext(MarketerContext);
   const [influncerData, setInfluncerData] = useState([]);
   const [CSVData, setCSVData] = useState([]);
@@ -23,7 +27,6 @@ function InfluncerRightCompo() {
   useEffect(() => {
     getInfluncer(ticket, 10)
       .then((data) => {
-        console.log("Influncer Top data: ", data?.data);
         setTotalPages(data?.data?.pages);
         setTotalItems(data?.data?.total);
         setInfluncerData(data?.data?.data);
@@ -95,7 +98,7 @@ function InfluncerRightCompo() {
                   style={{ color: "rgba(50, 69, 88, 0.7)" }}
                   className="interFamily mx-3 "
                 >
-                  {influncerData?.length > 0 ? influncerData[0]?.name : ""}
+                  {exchange}
                 </span>
                 <img src={Star} alt="star" />
               </div>
@@ -137,138 +140,14 @@ function InfluncerRightCompo() {
               <InfluncerTable currentPage={currentPage} />
 
               <div className="d-flex justify-content-center align-items-center my-5">
-                {parseInt(totalPages) < 3 ? (
-                  <nav
-                    style={{ color: "#324558" }}
-                    aria-label="Page pagination-bottom navigation example my-5"
-                  >
-                    <ul style={{ gap: "10px" }} class="pagination">
-                      <li class="page-item">
-                        <a
-                          style={{ color: "black" }}
-                          class="page-link"
-                          onClick={handlePrevious}
-                        >
-                          Prev
-                        </a>
-                      </li>
-
-                      {mappingPages?.map((elem, index) => {
-                        return (
-                          <li class="page-item">
-                            <a
-                              class={` ${
-                                currentPage === index + 1
-                                  ? "page-link color-white"
-                                  : "page-link deactive-link"
-                              }`}
-                              onClick={() => handlePageChange(index + 1)}
-                            >
-                              {index + 1}
-                            </a>
-                          </li>
-                        );
-                      })}
-
-                      <li class="page-item">
-                        <a
-                          style={{ color: "black" }}
-                          class="page-link"
-                          onClick={handleNext}
-                        >
-                          Next
-                        </a>
-                      </li>
-                    </ul>
-                  </nav>
-                ) : (
-                  <nav
-                    style={{ color: "#324558" }}
-                    aria-label="Page pagination-bottom navigation example my-5"
-                  >
-                    <ul style={{ gap: "10px" }} class="pagination">
-                      {}
-                      <li class="page-item">
-                        <a
-                          style={{ color: "black" }}
-                          class="page-link"
-                          onClick={handlePrevious}
-                        >
-                          Prev
-                        </a>
-                      </li>
-                      <li class="page-item">
-                        <a
-                          class="page-link color-white"
-                          onClick={() => handlePageChange(currentPage)}
-                        >
-                          {currentPage}
-                        </a>
-                      </li>
-                      <li class="page-item">
-                        <a
-                          class="page-link"
-                          onClick={() =>
-                            handlePageChange(
-                              currentPage >= totalPages ? 1 : currentPage + 1
-                            )
-                          }
-                        >
-                          {currentPage >= totalPages ? 1 : currentPage + 1}
-                        </a>
-                      </li>
-                      <li class="page-item">
-                        <a
-                          class="page-link"
-                          onClick={() =>
-                            handlePageChange(
-                              currentPage >= totalPages ? 2 : currentPage + 2
-                            )
-                          }
-                        >
-                          {currentPage >= totalPages ? 2 : currentPage + 2}
-                        </a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link">...</a>
-                      </li>
-                      <li class="page-item">
-                        <a
-                          class="page-link"
-                          onClick={() => handlePageChange(totalPages === currentPage ? totalPages-1 : totalPages)}
-                        >
-                          {totalPages === currentPage ? totalPages-1 : totalPages}
-                        </a>
-                      </li>
-                      <li class="page-item">
-                        <a
-                          style={{ color: "black" }}
-                          class="page-link"
-                          onClick={handleNext}
-                        >
-                          Next
-                        </a>
-                      </li>
-                    </ul>
-                    {/* <ul className="pagination">
-{pageNumbers.map((pageNumber) => (
- <li
-   key={pageNumber}
-   className={`page-item ${
-     pageNumber === currentPage ? "active" : ""
-   }`}
- >
-   <button
-     className="page-link"
-     onClick={() => handlePageChange(pageNumber)}
-   >
-     {pageNumber}
-   </button>
- </li>
-))}
-</ul> */}
-                  </nav>
-                )}
+                <Stack spacing={2}>
+                  <Pagination
+                    count={totalPages}
+                    variant="outlined"
+                    shape="rounded"
+                    onChange={(e, value)=> setCurrentPage(value)}
+                  />
+                </Stack>
               </div>
             </div>
           </>

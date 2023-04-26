@@ -15,6 +15,8 @@ import Logo2 from "../../assets/logo-2.png";
 import MarketerContext from "../../Context/MarketerContext";
 
 function DashboardRight() {
+  // Programming
+
   let Navigate = useNavigate();
 
   let location = useLocation();

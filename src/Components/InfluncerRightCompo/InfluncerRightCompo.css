@@ -58,12 +58,18 @@
 .page-link {
   border-radius: 10px !important;
   cursor: pointer;
-  color:black !important;
+  color: black !important;
 }
 
 .page-link:focus {
   background: none;
   box-shadow: none;
+}
+
+.css-19xm0h7-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+  background: #1994a1 !important;
+  color: white !important;
+  border: none !important;
 }
 
 @media screen and (max-width: 560px) {

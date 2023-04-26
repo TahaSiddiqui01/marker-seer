@@ -13,7 +13,7 @@ const override = {
 };
 
 function DashboardRightData() {
-  const { getFavourites, getUserData, setExpired, expired } =
+  const { getFavourites, getUserData, setExpiredFromOut, expired } =
     useContext(MarketerContext);
 
   const [favouriteData, setFavouriteData] = useState([]);
@@ -37,11 +37,13 @@ function DashboardRightData() {
 
   getUserData()
     .then((data) => {
-      let subscriptionData = Date.now(data?.data?.subscription_end_date);
-      let currentDate = Date.now();
+      let subscriptionData = new Date(data?.data?.subscription_end_date);
+      var currentDate = new Date();
+
+      console.log(currentDate > subscriptionData, data?.data?.subscription_end_date);
 
       if (currentDate > subscriptionData) {
-        setExpired(true);
+        setExpiredFromOut(true);
       }
     })
     .catch((error) => {

@@ -18,7 +18,7 @@ function Insights(props) {
           {
             props?.signal === "SELL" ?
               <p
-                style={{ color: "#1BB274", marginLeft: "1.90rem" }}
+                style={{ color: "#E21C57", marginLeft: "1.90rem" }}
                 className="signal-highlight robotoFamily  my-2"
               >
                 {props?.signal}
@@ -28,7 +28,7 @@ function Insights(props) {
           {
             props?.signal === "BUY" ?
               <p
-                style={{ color: "#E21C57", marginLeft: "1.90rem" }}
+                style={{ color: "#1BB274", marginLeft: "1.90rem" }}
                 className="signal-highlight robotoFamily  my-2"
               >
                 {props?.signal}

@@ -83,7 +83,7 @@ function App() {
             <Route path="/dash-placeholder" element={<DashHomePage />}></Route>
             <Route path="/analyze/:ticket" element={<DashAnalyze />}></Route>
             <Route
-              path="/influncer/:ticket"
+              path="/influncer/:ticket/:exchange"
               element={<InfluncerPage />}
             ></Route>
             <Route path="/top-gainer" element={<TopGainer />}></Route>

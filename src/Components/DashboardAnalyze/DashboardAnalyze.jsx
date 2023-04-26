@@ -9,8 +9,9 @@ import MarketerContext from "../../Context/MarketerContext";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import Unfavourite from "../../assets/Unfavourite.png";
+import ApexChart from "../ApexChart/ApexChart";
 
 function DashboardAnalyze() {
   const {
@@ -27,11 +28,18 @@ function DashboardAnalyze() {
   const [showChart, setShowChart] = useState(false);
   const [chartData, setChartData] = useState([]);
   const [isInFavourite, setIsInFavourite] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     getAnalyze(ticket, 90).then((data) => {
       // console.log("Analyze Data from page: ", data?.data?.metadata?.no_of_trades);
       setAnalyzeData(data?.data);
+
+      console.log(
+        "Prediction accuracy data: ",
+        data?.data?.indicators["30_day_directional_accuracy_percent"]
+      );
+
       let newDate = new Date(data?.data?.date);
       let utcDate = newDate.toUTCString().split(" ");
       let formatedDate = `As of ${utcDate[2]} ${utcDate[1]}, ${utcDate[3]}`;
@@ -50,7 +58,7 @@ function DashboardAnalyze() {
     setTimeout(() => {
       setShowChart(true);
     }, 5000);
-  }, []);
+  }, [location.pathname]);
 
   const addToFavourite = (ticker, exchange) => {
     addToFavourites(ticker, exchange)
@@ -193,7 +201,8 @@ function DashboardAnalyze() {
                   signalColor={"#9D94FF"}
                   signal={
                     analyzeData.ai_confidence_index
-                      ? parseFloat(analyzeData.ai_confidence_index).toFixed(2) + "%"
+                      ? parseFloat(analyzeData.ai_confidence_index).toFixed(2) +
+                        "%"
                       : "N/A"
                   }
                   signalTextColor={"#E21C57"}
@@ -202,14 +211,23 @@ function DashboardAnalyze() {
                 <Insights
                   heading="No of Signals"
                   signalColor={"#42D6A4"}
-                  signal={analyzeData?.metadata?.no_of_trades === 0 || analyzeData?.metadata?.no_of_trades ? analyzeData?.metadata?.no_of_trades : "N/A" }
+                  signal={
+                    analyzeData?.metadata?.no_of_trades === 0 ||
+                    analyzeData?.metadata?.no_of_trades
+                      ? analyzeData?.metadata?.no_of_trades
+                      : "N/A"
+                  }
                   signalTextColor={"#E21C57"}
                   color="#324558"
                 />
                 <Insights
                   heading="Next Predicted Signal"
                   signalColor={"#08CAD1"}
-                  signal={analyzeData.predicted_signal ? analyzeData.predicted_signal : "N/A"}
+                  signal={
+                    analyzeData.predicted_signal
+                      ? analyzeData.predicted_signal
+                      : "N/A"
+                  }
                   signalTextColor={"#E21C57"}
                   color={"#1BB274"}
                 />
@@ -219,12 +237,24 @@ function DashboardAnalyze() {
                   signal={
                     analyzeData.predicted_close
                       ? "$" +
-                        parseFloat(analyzeData?.predicted_close).toFixed(2) + ` (+/-${(parseFloat(analyzeData?.predicted_close) - parseFloat(analyzeData?.predicted_close_range_start)).toFixed(2)})`
+                        parseFloat(analyzeData?.predicted_close).toFixed(2) +
+                        ` (+/-${(
+                          parseFloat(analyzeData?.predicted_close) -
+                          parseFloat(analyzeData?.predicted_close_range_start)
+                        ).toFixed(2)})`
                       : "N/A"
                   }
                   // signal={Math.round(analyzeData?.predicted_close)}
                   signalTextColor={"#E21C57"}
-                  color={ parseFloat(analyzeData?.predicted_close).toFixed(2) != parseFloat(analyzeData?.close).toFixed(2) ? parseFloat(analyzeData?.predicted_close).toFixed(2) > parseFloat(analyzeData?.close).toFixed(2) ? "#1BB274" : "#E21C57" : "#324558"}
+                  color={
+                    parseFloat(analyzeData?.predicted_close).toFixed(2) !=
+                    parseFloat(analyzeData?.close).toFixed(2)
+                      ? parseFloat(analyzeData?.predicted_close).toFixed(2) >
+                        parseFloat(analyzeData?.close).toFixed(2)
+                        ? "#1BB274"
+                        : "#E21C57"
+                      : "#324558"
+                  }
                 />
                 <Insights
                   heading="30 Day Market Performance"
@@ -243,8 +273,11 @@ function DashboardAnalyze() {
                   signalColor={"#59ADF6"}
                   signal={
                     analyzeData.indicators
-                      ? parseFloat(analyzeData.indicators.ema_3).toFixed(2) +
-                        "%"
+                      ? parseFloat(
+                          analyzeData.indicators[
+                            "30_day_directional_accuracy_percent"
+                          ]
+                        ).toFixed(2) + "%"
                       : "N/A"
                   }
                   signalTextColor={"#E21C57"}
@@ -275,7 +308,10 @@ function DashboardAnalyze() {
                     onClick={
                       !analyzeData?.influencer_count
                         ? ""
-                        : () => Navigate(`/influncer/${ticket}`)
+                        : () =>
+                            Navigate(
+                              `/influncer/${ticket}/${analyzeData?.ticker?.name} - ${analyzeData?.ticker?.exchange}`
+                            )
                     }
                     className="insight-arrow-div"
                     style={{ backgroundColor: "#1994A1" }}
@@ -287,8 +323,12 @@ function DashboardAnalyze() {
             </div>
 
             {/* <div>{showChart ? <ChartCompo /> : ""}</div> */}
-            <div>
-              <ChartCompo chartData={chartData} />
+            {/* <div> */}
+            {/* <ChartCompo chartData={chartData} /> */}
+            {/* </div> */}
+
+            <div id="my-chart-container">
+              <ApexChart chartData={chartData} />
             </div>
           </>
         ) : (
