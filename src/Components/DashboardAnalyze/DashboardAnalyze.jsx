@@ -35,10 +35,7 @@ function DashboardAnalyze() {
       // console.log("Analyze Data from page: ", data?.data?.metadata?.no_of_trades);
       setAnalyzeData(data?.data);
 
-      console.log(
-        "Prediction accuracy data: ",
-        data?.data?.indicators["30_day_directional_accuracy_percent"]
-      );
+      console.log("Prediction accuracy data: ",);
 
       let newDate = new Date(data?.data?.date);
       let utcDate = newDate.toUTCString().split(" ");

@@ -3,13 +3,15 @@ import Chart from "react-apexcharts";
 
 function ApexChart(props) {
 
-    const [chartData, setChartData] = useState([])
+  
+
+  const [chartData, setChartData] = useState([]);
 
   const data = {
     options: {
       chart: {
         type: "candlestick",
-        height: 350,
+        height: 350
       },
       title: {
         text: "Signals",
@@ -25,7 +27,7 @@ function ApexChart(props) {
       },
     },
     series: [
-      {
+      { 
         data: [
           {
             x: new Date(1538778600000),
@@ -272,28 +274,34 @@ function ApexChart(props) {
     ],
   };
 
-
   useEffect(() => {
-    
-    
     const parseData = props?.chartData?.map((elem) => {
-        let dt = new Date(elem?.date);
-        elem.date = dt;
-        elem.low = elem?.close;
-        return elem;
-      });
-  
-      setChartData(parseData)
-  
-  }, [])
-  
+      let dt = new Date(elem?.date);
+      elem.date = dt;
+      elem.low = elem?.close;
+      return elem;
+    });
+
+
+    const mappedChartData = parseData.map((elem) => {
+      return {
+        x: elem.date,
+        y: [elem?.open, elem?.high, elem?.low, elem?.close],
+      };
+    });
+
+    let parseChartData = [{ data: mappedChartData }];
+
+    setChartData(parseChartData);
+
+  }, [props?.chartData]);
 
   return (
     <>
       <div id="chart">
         <Chart
           options={data.options}
-          series={data.series}
+          series={chartData}
           type="candlestick"
           height={480}
         />
