@@ -34,10 +34,10 @@ function ForgotRight() {
         });
         setError("");
       } else {
-        swal({
-          title: "Incorrect Credentials",
-          icon: "error",
-        });
+        // swal({
+        //   title: "Incorrect Credentials",
+        //   icon: "error",
+        // });
         setError("Incorrect Credentials");
       }
     });

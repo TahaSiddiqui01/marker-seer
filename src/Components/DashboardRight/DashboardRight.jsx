@@ -21,7 +21,7 @@ function DashboardRight() {
 
   let location = useLocation();
 
-  const { logoutTheUser } = useContext(MarketerContext);
+  const { logoutTheUser, setExpiredFromOut } = useContext(MarketerContext);
 
   const handlesidebar = () => {
     // console.log("click");
@@ -46,8 +46,10 @@ function DashboardRight() {
 
       localStorage.removeItem("token");
     });
+    setExpiredFromOut(false);
     localStorage.setItem("remember", false);
     Navigate("/login");
+
   };
 
   return (

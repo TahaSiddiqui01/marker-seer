@@ -303,6 +303,8 @@ function MarketerState(props) {
           },
         }
       );
+
+      console.log("Influncer API: ", response)
       
       return response;
     } catch (error) {

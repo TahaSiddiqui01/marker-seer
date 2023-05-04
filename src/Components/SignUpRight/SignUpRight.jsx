@@ -55,10 +55,10 @@ function SignUpRight() {
       } else {
         Navigate("/login");
         // console.log("data result: ", data?.result);
-        swal({
-          title: "successfully signup",
-          icon: "success",
-        });
+        // swal({
+        //   title: "successfully signup",
+        //   icon: "success",
+        // });
         setError("");
         setInputData({
           username: "",
@@ -169,7 +169,12 @@ function SignUpRight() {
               value={inputData?.referral}
               onChange={handleOnChange}
             />
-            <img style={{paddingTop:"8px"}} className="input-logo" src={Referral} alt="" />
+            <img
+              style={{ paddingTop: "8px" }}
+              className="input-logo"
+              src={Referral}
+              alt=""
+            />
           </div>
         </div>
 

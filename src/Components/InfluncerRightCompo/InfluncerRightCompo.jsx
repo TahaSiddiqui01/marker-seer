@@ -15,7 +15,8 @@ function InfluncerRightCompo() {
   const { ticket, exchange } = useParams();
   const location = useLocation();
 
-  const { getInfluncer, exportToCSV, expired } = useContext(MarketerContext);
+  const { getInfluncer, exportToCSV, expired, downloadCSV } =
+    useContext(MarketerContext);
   const [influncerData, setInfluncerData] = useState([]);
   const [CSVData, setCSVData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -40,14 +41,16 @@ function InfluncerRightCompo() {
       .catch((error) => {
         console.log(error);
       });
-
-    exportToCSV(ticket).then((data) => {
-      setCSVData(data?.data);
-    });
   }, []);
 
   const renderNavbar = useCallback(() => {
     return <NavbarTop />;
+  }, []);
+
+  useEffect(() => {
+    exportToCSV(ticket).then((data) => {
+      setCSVData(data?.data);
+    });
   }, []);
 
   const handlePageChange = (pageNumber) => {
@@ -145,7 +148,7 @@ function InfluncerRightCompo() {
                     count={totalPages}
                     variant="outlined"
                     shape="rounded"
-                    onChange={(e, value)=> setCurrentPage(value)}
+                    onChange={(e, value) => setCurrentPage(value)}
                   />
                 </Stack>
               </div>
