@@ -83,15 +83,16 @@ function MarketerState(props) {
 
   const getFavourites = async () => {
     try {
-      let token = localStorage.getItem("token");
-      let response = await axios.get(`${BASE_URL}/seer/api/favorites`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      return response;
+      if (!expired) {
+        let token = localStorage.getItem("token");
+        let response = await axios.get(`${BASE_URL}/seer/api/favorites`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        return response;
+      }
     } catch (error) {
       // console.log(error);
     }
@@ -101,18 +102,20 @@ function MarketerState(props) {
 
   const getFetchTicker = async (query) => {
     try {
-      let token = localStorage.getItem("token");
-      let response = await axios.get(
-        `${BASE_URL}/seer/api/tickers?query=${query} `,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      if (!expired) {
+        let token = localStorage.getItem("token");
+        let response = await axios.get(
+          `${BASE_URL}/seer/api/tickers?query=${query} `,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
-      return response;
+        return response;
+      }
     } catch (error) {
       // console.log("error: ", error);
     }
@@ -122,17 +125,19 @@ function MarketerState(props) {
 
   const getAnalyze = async (ticker, day) => {
     try {
-      let token = localStorage.getItem("token");
-      let response = await axios.get(
-        `${BASE_URL}/seer/api/tickerdetails?ticker=${ticker}&expand=true&days=${day}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      return response;
+      if (!expired) {
+        let token = localStorage.getItem("token");
+        let response = await axios.get(
+          `${BASE_URL}/seer/api/tickerdetails?ticker=${ticker}&expand=true&days=${day}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        return response;
+      }
     } catch (error) {
       // console.log(error);
     }
@@ -270,19 +275,20 @@ function MarketerState(props) {
 
   const getInfluncer = async (ticker, page) => {
     try {
-      let token = localStorage.getItem("token");
+      if (!expired) {
+        let token = localStorage.getItem("token");
 
-      let response = await axios.get(
-        `${BASE_URL}/seer/api/influencers?ticker=${ticker}&page=${page}&limit=10`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      return response;
+        let response = await axios.get(
+          `${BASE_URL}/seer/api/influencers?ticker=${ticker}&page=${page}&limit=10`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        return response;
+      }
     } catch (error) {
       // console.log(error);
     }
@@ -294,7 +300,6 @@ function MarketerState(props) {
     try {
       let token = localStorage.getItem("token");
       let response = await axios.get(
-        
         // `http://www.marketseer.ai/seer/api/influencers?ticker=NVDA&type=csv'`,
         `${BASE_URL}/seer/api/influencers?ticker=${ticker}&type=csv`,
         {
@@ -304,8 +309,8 @@ function MarketerState(props) {
         }
       );
 
-      console.log("Influncer API: ", response)
-      
+      console.log("Influncer API: ", response);
+
       return response;
     } catch (error) {
       // console.log(error);
@@ -406,18 +411,20 @@ function MarketerState(props) {
 
   const topGainer = async (page, limit) => {
     try {
-      setPageNo(page);
-      let response = await axios.get(
-        `${BASE_URL}/seer/api/reportdata?report=GENERAL&page=${page}&limit=${limit}
-      `,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+      if (!expired) {
+        setPageNo(page);
+        let response = await axios.get(
+          `${BASE_URL}/seer/api/reportdata?report=GENERAL&page=${page}&limit=${limit}
+          `,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
 
-      return response;
+        return response;
+      }
     } catch (error) {
       // console.log(error);
     }
