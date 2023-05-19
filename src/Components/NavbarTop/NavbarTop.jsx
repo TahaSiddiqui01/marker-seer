@@ -86,6 +86,7 @@ function NavbarTop() {
               type="text"
               onChange={searchTicker}
               value={msg}
+              style={{border:"none", outline:"none"}}
             />
             <img className="search-icon" src={SearchIcon} alt="" />
 

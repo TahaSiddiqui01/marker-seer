@@ -15,6 +15,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoginMsg from "./Components/Login/LoginMsg";
+import Test from "./Pages/Test";
 const BASE_URL = "http://www.marketseer.ai";
 
 function App() {
@@ -88,6 +89,7 @@ function App() {
             ></Route>
             <Route path="/top-gainer" element={<TopGainer />}></Route>
             <Route path="/setting" element={<SettingPage />}></Route>
+            <Route path="/test" element={<Test />}></Route>
             <Route
               path="/terms-condition"
               element={<TermsAndCondition />}
