@@ -1,6 +1,4 @@
 import CanvasJSReact from "@canvasjs/react-charts";
-import { useEffect } from "react";
-
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 

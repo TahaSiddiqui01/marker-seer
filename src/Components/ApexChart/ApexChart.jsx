@@ -321,11 +321,8 @@ function ApexChart(props) {
 
   return (
     <>
-      <>
         <CanvasJSChart options={options}
-        /* onRef = {ref => this.chart = ref} */
         />
-      </>
     </>
   )
 }

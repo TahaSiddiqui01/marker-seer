@@ -89,7 +89,7 @@ function App() {
             ></Route>
             <Route path="/top-gainer" element={<TopGainer />}></Route>
             <Route path="/setting" element={<SettingPage />}></Route>
-            <Route path="/test" element={<Test />}></Route>
+            {/* <Route path="/test" element={<Test />}></Route> */}
             <Route
               path="/terms-condition"
               element={<TermsAndCondition />}
