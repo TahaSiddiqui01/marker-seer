@@ -288,7 +288,7 @@ function ApexChart(props) {
     // }],
     axisX: {
       interval: 1,
-      valueFormatString: "MMM"
+      // valueFormatString: "MMM"
     },
     axisY: {
       prefix: "$",
