@@ -86,19 +86,19 @@ function DashboardRightData() {
                       );
                     })
                   ) : // <h2
-                  //   style={{
-                  //     margin: "3rem",
-                  //     fontWeight: "600",
-                  //     fontSize: "20px",
-                  //   }}
-                  // >
-                  //   Oops! nothing to show
-                  // </h2>
-                  isLoading ? (
-                    <FadeLoader cssOverride={override} color="#33a9c8" />
-                  ) : (
-                    ""
-                  )}
+                    //   style={{
+                    //     margin: "3rem",
+                    //     fontWeight: "600",
+                    //     fontSize: "20px",
+                    //   }}
+                    // >
+                    //   Oops! nothing to show
+                    // </h2>
+                    isLoading ? (
+                      <FadeLoader cssOverride={override} color="#33a9c8" />
+                    ) : (
+                      ""
+                    )}
                 </div>
               </div>
               <div className="dash-staff-favourites">
@@ -121,19 +121,19 @@ function DashboardRightData() {
                       );
                     })
                   ) : // <h2
-                  //   style={{
-                  //     margin: "3rem",
-                  //     fontWeight: "600",
-                  //     fontSize: "20px",
-                  //   }}
-                  // >
-                  //   Oops! nothing to show
-                  // </h2>
-                  isLoading ? (
-                    <FadeLoader cssOverride={override} color="#33a9c8" />
-                  ) : (
-                    ""
-                  )}
+                    //   style={{
+                    //     margin: "3rem",
+                    //     fontWeight: "600",
+                    //     fontSize: "20px",
+                    //   }}
+                    // >
+                    //   Oops! nothing to show
+                    // </h2>
+                    isLoading ? (
+                      <FadeLoader cssOverride={override} color="#33a9c8" />
+                    ) : (
+                      ""
+                    )}
                 </div>
               </div>
             </div>

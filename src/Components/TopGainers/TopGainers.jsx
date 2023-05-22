@@ -35,11 +35,17 @@ function TopGainers() {
   useEffect(() => {
     getData(currentPage, ITEMS_PER_PAGE);
 
+  }, []);
+
+
+  useEffect(() => {
+
     downloadCSV().then((data) => {
       // console.log("CSV data for download: ", data);
       setCsvFetchedData(data?.data?.data);
     });
-  }, []);
+  }, [pageNo])
+
 
   const getData = (page, limit) => {
     topGainer(page, limit)

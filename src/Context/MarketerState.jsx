@@ -177,25 +177,28 @@ function MarketerState(props) {
   const deleteFromFavourites = async (ticker, exchange) => {
     try {
       // console.log("Ticker: ", ticker, "Exchange: ", exchange);
+      if (!expired) {
 
-      let token = localStorage.getItem("token");
+        let token = localStorage.getItem("token");
 
-      const response = await axios.delete(
-        `${BASE_URL}/seer/api/favorites`,
-        {
-          ticker,
-          exchange,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+        const response = await axios.delete(
+          `${BASE_URL}/seer/api/favorites`,
+          {
+            ticker,
+            exchange,
           },
-        }
-      );
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
-      // console.log("DeleteFav Token: ", token);
-      return response;
+        // console.log("DeleteFav Token: ", token);
+        return response;
+      }
+
     } catch (error) {
       let token = localStorage.getItem("token");
       // console.log("DeleteFav Token: ", token);
@@ -298,20 +301,23 @@ function MarketerState(props) {
 
   const exportToCSV = async (ticker) => {
     try {
-      let token = localStorage.getItem("token");
-      let response = await axios.get(
-        // `http://www.marketseer.ai/seer/api/influencers?ticker=NVDA&type=csv'`,
-        `${BASE_URL}/seer/api/influencers?ticker=${ticker}&type=csv`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      if (!expired) {
 
-      console.log("Influncer API: ", response);
+        let token = localStorage.getItem("token");
+        let response = await axios.get(
+          // `http://www.marketseer.ai/seer/api/influencers?ticker=NVDA&type=csv'`,
+          `${BASE_URL}/seer/api/influencers?ticker=${ticker}&type=csv`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
-      return response;
+        console.log("Influncer API: ", response);
+
+        return response;
+      }
     } catch (error) {
       // console.log(error);
     }
@@ -321,16 +327,19 @@ function MarketerState(props) {
 
   const downloadCSV = async () => {
     try {
-      let response = await axios.get(
-        `${BASE_URL}/seer/api/reportdata?report=GENERAL&page=${pageNo}&limit=10&type=CSV`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+      if (!expired) {
+        let response = await axios.get(
+          `${BASE_URL}/seer/api/reportdata?report=GENERAL&page=${pageNo}&limit=10&type=CSV`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
 
-      return response;
+        return response;
+
+      }
     } catch (error) {
       // console.log(error);
     }
