@@ -329,7 +329,7 @@ function MarketerState(props) {
     try {
       if (!expired) {
         let response = await axios.get(
-          `${BASE_URL}/seer/api/reportdata?report=GENERAL&page=${pageNo}&limit=10&type=CSV`,
+          `${BASE_URL}/seer/api/reportdata?report=GENERAL&type=CSV`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,

@@ -10,6 +10,17 @@ import { useParams, useLocation } from "react-router-dom";
 import { CSVLink } from "react-csv";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import { FadeLoader } from "react-spinners";
+
+
+const BASE_URL = "http://www.marketseer.ai";
+
+const override = {
+  justifyContent: "center",
+  display: "flex",
+  alignItems: "center",
+};
+
 
 function InfluncerRightCompo() {
   const { ticket, exchange } = useParams();
@@ -24,6 +35,7 @@ function InfluncerRightCompo() {
   const [totalItems, setTotalItems] = useState(0);
   const ITEMS_PER_PAGE = 10; // set the number of items per page
   const [mappingPages, setMappingPages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     getInfluncer(ticket, 10)
@@ -47,11 +59,11 @@ function InfluncerRightCompo() {
     return <NavbarTop />;
   }, []);
 
-  useEffect(() => {
-    exportToCSV(ticket).then((data) => {
-      setCSVData(data?.data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   exportToCSV(ticket).then((data) => {
+  //     setCSVData(data?.data);
+  //   });
+  // }, []);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -69,6 +81,34 @@ function InfluncerRightCompo() {
       setCurrentPage(currentPage + 1);
     }
   };
+
+
+  const handleCSVClick = () => {
+    // Make the API request to retrieve CSV data from the server
+    setIsLoading(true)
+    fetch(`${BASE_URL}/seer/api/influencers?ticker=${ticket}&type=csv`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      }
+    })
+      .then(response => response.blob())
+      .then(blob => {
+        // Create a temporary anchor element to trigger the download
+        const url = window.URL.createObjectURL(new Blob([blob]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'top_gainers.csv');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setIsLoading(false)
+      })
+      .catch(error => {
+        setIsLoading(false)
+        console.error('Error exporting CSV:', error);
+      });
+  };
+
 
   return (
     <>
@@ -120,25 +160,17 @@ function InfluncerRightCompo() {
               />
               <img src={Search} alt="" />
             </div> */}
-
-                {CSVData?.length > 0 ? (
-                  <button
-                    style={{ margin: "24px" }}
+                {
+                  isLoading ? <span style={{ marginRight: "3rem" }}><FadeLoader cssOverride={override} color="#33a9c8" /></span> : <button
+                    style={{ margin: "24px" }} onClick={handleCSVClick}
                     className="csv-btn robotoFamily d-flex justify-content-center align-items-center py-1 px-3"
                   >
                     <img className="m-2" src={Csv} alt="csv" />
 
-                    <CSVLink data={CSVData}>Export to CSV</CSVLink>
+                    <span>Export to CSV</span>
                   </button>
-                ) : (
-                  <button
-                    style={{ margin: "24px" }}
-                    className="csv-btn robotoFamily d-flex justify-content-center align-items-center py-1 px-3"
-                  >
-                    <img className="m-2" src={Csv} alt="csv" />
-                    Export to CSV
-                  </button>
-                )}
+                }
+
               </div>
               <InfluncerTable currentPage={currentPage} />
 

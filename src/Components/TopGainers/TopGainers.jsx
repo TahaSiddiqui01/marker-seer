@@ -10,11 +10,21 @@ import MarketerContext from "../../Context/MarketerContext";
 import { CSVLink } from "react-csv";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import { FadeLoader } from "react-spinners";
+
+const BASE_URL = "http://www.marketseer.ai";
+
+const override = {
+  justifyContent: "center",
+  display: "flex",
+  alignItems: "center",
+};
 
 function TopGainers() {
   const { topGainer, downloadCSV, pageNo, expired } =
     useContext(MarketerContext);
   const [csvFetchedData, setCsvFetchedData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false)
 
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -38,13 +48,41 @@ function TopGainers() {
   }, []);
 
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    downloadCSV().then((data) => {
-      // console.log("CSV data for download: ", data);
-      setCsvFetchedData(data?.data?.data);
-    });
-  }, [pageNo])
+  //   downloadCSV().then((data) => {
+  //     // console.log("CSV data for download: ", data);
+  //     setCsvFetchedData(data?.data?.data);
+  //   });
+  // }, [])
+
+
+
+  const handleCSVClick = () => {
+    // Make the API request to retrieve CSV data from the server
+    setIsLoading(true)
+    fetch(`${BASE_URL}/seer/api/reportdata?report=GENERAL&type=csv`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      }
+    })
+      .then(response => response.blob())
+      .then(blob => {
+        // Create a temporary anchor element to trigger the download
+        const url = window.URL.createObjectURL(new Blob([blob]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'top_gainers.csv');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setIsLoading(false)
+      })
+      .catch(error => {
+        setIsLoading(false)
+        console.error('Error exporting CSV:', error);
+      });
+  };
 
 
   const getData = (page, limit) => {
@@ -114,13 +152,20 @@ function TopGainers() {
                 Top Gainers
               </p>
 
-              <button
-                style={{ margin: "24px", backgroundColor: "#FFFFFF" }}
-                className="csv-btn csv-wrap robotoFamily d-flex justify-content-center flex-wrap align-items-center py-1 px-3"
-              >
-                <img className="m-2" src={Csv} alt="csv" />
-                <CSVLink data={csvFetchedData}>Export to CSV</CSVLink>
-              </button>
+              {
+                !isLoading ?
+                  <button
+                    style={{ margin: "24px", backgroundColor: "#FFFFFF" }} onClick={handleCSVClick}
+                    className="csv-btn csv-wrap robotoFamily d-flex justify-content-center flex-wrap align-items-center py-1 px-3"
+                  >
+                    <img className="m-2" src={Csv} alt="csv" />
+
+                    <span>Export to CSV</span>
+
+
+                    {/* <CSVLink data={csvFetchedData}>Export to CSV</CSVLink> */}
+                  </button> : <span style={{marginRight:"3rem"}}><FadeLoader cssOverride={override} color="#33a9c8" /></span>
+              }
             </div>
 
             <div style={{ paddingLeft: "40px", paddingRight: "40px" }}>
