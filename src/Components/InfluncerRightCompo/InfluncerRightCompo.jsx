@@ -147,12 +147,8 @@ function InfluncerRightCompo() {
               </div>
             </div>
 
-            <div
-              style={{ paddingBottom: "2px" }}
-              className="table-parent influncer-table-parent pt-0"
-            >
-              <div className="table-search d-flex justify-content-end align-items-center flex-wrap">
-                {/* <div className="table-input">
+            <div className="table-search d-flex justify-content-end align-items-center flex-wrap">
+              {/* <div className="table-input">
               <input
                 className="table-input-tag"
                 placeholder="Search...."
@@ -160,18 +156,24 @@ function InfluncerRightCompo() {
               />
               <img src={Search} alt="" />
             </div> */}
-                {
-                  isLoading ? <span style={{ marginRight: "3rem" }}><FadeLoader cssOverride={override} color="#33a9c8" /></span> : <button
-                    style={{ margin: "24px" }} onClick={handleCSVClick}
-                    className="csv-btn robotoFamily d-flex justify-content-center align-items-center py-1 px-3"
-                  >
-                    <img className="m-2" src={Csv} alt="csv" />
+              {
+                isLoading ? <span style={{ marginRight: "3rem" }}><FadeLoader cssOverride={override} color="#33a9c8" /></span> : <button
+                  style={{ margin: "24px", marginTop:"0px" }} onClick={handleCSVClick}
+                  className="csv-btn robotoFamily d-flex justify-content-center align-items-center py-1 px-3"
+                >
+                  <img className="m-2" src={Csv} alt="csv" />
 
-                    <span>Export to CSV</span>
-                  </button>
-                }
+                  <span>Export to CSV</span>
+                </button>
+              }
 
-              </div>
+            </div>
+
+            <div
+              style={{ paddingBottom: "2px" }}
+              className="table-parent influncer-table-parent pt-0"
+            >
+
               <InfluncerTable currentPage={currentPage} />
 
               <div className="d-flex justify-content-center align-items-center my-5">

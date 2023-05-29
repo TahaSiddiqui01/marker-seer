@@ -30,7 +30,11 @@ function SignUpRight() {
   const [isShowMobile, setIsShowMobile] = useState(false);
 
   const handleSignup = () => {
-    //username, password, mobile, email, referral
+    //username, password, mobile, email, referral:
+
+
+    let checkBox = document.querySelector("#termsAndCondition");
+
 
     if (
       inputData?.username === "" ||
@@ -42,6 +46,13 @@ function SignUpRight() {
       setError("Input fields can't be empty");
       return;
     }
+
+
+    if(!checkBox.checked){
+      setError("Please accept terms and conditions");
+      return;
+    }
+
     SignUp(
       inputData?.username,
       inputData?.password,
@@ -147,18 +158,18 @@ function SignUpRight() {
             <input
               className="custom-input no-input shadow-[rgba(0, 0, 0, 0.25)] focus-visible:border-transparent"
               placeholder="Mobile"
-              type="password"
+              // type="password"
               name="mobile"
               value={inputData?.mobile}
               onChange={handleOnChange}
             />
             <img className="input-logo" src={Iphone} alt="" />
-            <img
+            {/* <img
               className="input-logo-right cursor-pointer"
               onClick={noShowHide}
               src={`${!isShowMobile ? Invisible : Eye}`}
               alt=""
-            />
+            /> */}
           </div>
           <div className="h-[79px]">
             <input
@@ -179,7 +190,7 @@ function SignUpRight() {
         </div>
 
         <p className="text-[#9F9F9F] px-2 my-2">
-          <input type="checkbox" /> <span>I read and agree to</span>
+          <input type="checkbox" id="termsAndCondition" /> <span>I read and agree to</span>
           <Link className="font-bold mx-2 text-[#1994a1]" to="/terms-condition">
             terms and conditions
           </Link>
