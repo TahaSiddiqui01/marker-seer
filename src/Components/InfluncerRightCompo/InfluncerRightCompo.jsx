@@ -121,34 +121,36 @@ function InfluncerRightCompo() {
 
         {!expired ? (
           <>
-            <div className="d-flex flex-wrap justify-content-start align-items-center">
-              <p
-                className="dashboard-title influncer-title interFamily py-0"
-                style={{
-                  borderRight: "1px solid #324558",
-                  paddingRight: "1.2rem",
-                  marginRight: "1.2rem",
-                }}
-              >
-                Influencers
-              </p>
-              <span className="gain-btn influner-top-btn">
-                {/* {influncerData?.length > 0 ? influncerData[0]?.ticker : ""} */}
-                {ticket}
-              </span>
-              <div className="d-flex influncer-coin-heading jusitfy-content-center align-items-center ">
-                <span
-                  style={{ color: "rgba(50, 69, 88, 0.7)" }}
-                  className="interFamily mx-3 "
+            <div className="d-flex flex-wrap justify-content-between align-items-center">
+              <div className="d-flex flex-wrap justify-content-start align-items-center">
+                <p
+                  className="dashboard-title influncer-title interFamily py-0"
+                  style={{
+                    borderRight: "1px solid #324558",
+                    paddingRight: "1.2rem",
+                    marginRight: "1.2rem",
+                  }}
                 >
-                  {exchange}
+                  Influencers
+                </p>
+                <span className="gain-btn influner-top-btn">
+                  {/* {influncerData?.length > 0 ? influncerData[0]?.ticker : ""} */}
+                  {ticket}
                 </span>
-                <img src={Star} alt="star" />
-              </div>
-            </div>
+                <div className="d-flex influncer-coin-heading jusitfy-content-center align-items-center ">
+                  <span
+                    style={{ color: "rgba(50, 69, 88, 0.7)" }}
+                    className="interFamily mx-3 "
+                  >
+                    {exchange}
+                  </span>
+                  <img src={Star} alt="star" />
+                </div>
 
-            <div className="table-search d-flex justify-content-end align-items-center flex-wrap">
-              {/* <div className="table-input">
+              </div>
+
+              <div className="table-search d-flex justify-content-end align-items-center flex-wrap">
+                {/* <div className="table-input">
               <input
                 className="table-input-tag"
                 placeholder="Search...."
@@ -156,16 +158,19 @@ function InfluncerRightCompo() {
               />
               <img src={Search} alt="" />
             </div> */}
-              {
-                isLoading ? <span style={{ marginRight: "3rem" }}><FadeLoader cssOverride={override} color="#33a9c8" /></span> : <button
-                  style={{ margin: "24px", marginTop:"0px" }} onClick={handleCSVClick}
-                  className="csv-btn robotoFamily d-flex justify-content-center align-items-center py-1 px-3"
-                >
-                  <img className="m-2" src={Csv} alt="csv" />
+                {
+                  isLoading ? <span style={{ marginRight: "3rem" }}><FadeLoader cssOverride={override} color="#33a9c8" /></span> : <button
+                    style={{ margin: "24px", backgroundColor:'white'}} onClick={handleCSVClick}
+                    className="csv-btn robotoFamily d-flex justify-content-center align-items-center py-1 px-3"
+                  >
+                    <img className="m-2" src={Csv} alt="csv" />
 
-                  <span>Export to CSV</span>
-                </button>
-              }
+                    <span>Export to CSV</span>
+                  </button>
+                }
+
+              </div>
+
 
             </div>
 
